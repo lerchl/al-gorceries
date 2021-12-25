@@ -1,0 +1,16 @@
+:root {
+    --background-color: rgb(50, 54, 66);
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    filter: brightness(0.5);
+}
