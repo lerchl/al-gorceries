@@ -1,5 +1,7 @@
 :root {
     --background-color: rgb(50, 54, 66);
+
+    --text-color: rgb(233, 233, 233);
 }
 
 body {
@@ -13,4 +15,36 @@ body {
 .navbar-toggler:focus {
     box-shadow: none;
     filter: brightness(0.5);
+}
+
+/* -TABLE---------------------- */
+
+.custom-table {
+    background-color: rgb(var(--bs-dark-rgb));
+    box-shadow: 5px 5px 15px 5px rgb(var(--bs-dark-rgb));
+}
+
+.custom-table > thead {
+    top: 10vh;
+    background-color: rgb(21, 23, 28);
+}
+
+.custom-table tr:last-child {
+    width: 1px;
+}
+
+.custom-table td, .custom-table th {
+    color: var(--text-color);
+}
+
+/* ---------------------------- */
+
+.content {
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 90vw;
+
+    color: var(--text-color);
 }
