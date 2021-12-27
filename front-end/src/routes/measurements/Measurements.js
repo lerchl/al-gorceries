@@ -1,7 +1,9 @@
-import Menubar from "../../Menubar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { BsPlusLg } from "react-icons/bs";
+import Menubar from "../../Menubar";
+import MeasurementDialog from "./MeasurementDialog";
 
 async function getMeasurements(setMeasurements) {
     console.log("Lade Maßeinheiten...");
@@ -16,6 +18,12 @@ function Measurements() {
         getMeasurements(setMeasurements);
     }, []);
 
+    const [showDialog, setShowDialog] = useState(false);
+    const handleClose = () => setShowDialog(false);
+    const handleOpen = () => {
+        setShowDialog(true);
+    };
+
     return (
         <>
             <Menubar />
@@ -25,16 +33,22 @@ function Measurements() {
                     <thead className="position-sticky">
                         <tr>
                             <th>Bezeichnung</th>
-                            <th></th>
+                            <th>
+                                <button onClick={handleOpen}
+                                        className="icon-button"
+                                        title="Neue Maßeinheit erstellen">
+                                    <BsPlusLg />
+                                </button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             measurements.map(measurement => {
                                 return (
-                                    <tr>
+                                    <tr key={measurement._id}>
                                         <td>{measurement.name}</td>
-                                        <td>Hier sind Buttons</td>
+                                        <td>Button</td>
                                     </tr>
                                 );
                             })
@@ -42,6 +56,7 @@ function Measurements() {
                     </tbody>
                 </Table>
             </div>
+            <MeasurementDialog showDialog={showDialog} handleClose={handleClose} getMeasurements={getMeasurements} setMeasurements={setMeasurements} />
         </>
     );
 }

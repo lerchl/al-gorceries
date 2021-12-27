@@ -1,21 +1,61 @@
 :root {
     --background-color: rgb(50, 54, 66);
+    --dialog-background-color: rgb(35, 39, 51);
 
     --text-color: rgb(233, 233, 233);
+
+    --dark: rgb(21, 23, 28);
+
+    --primary: rgb(111, 0, 185);
 }
 
 body {
     background-color: var(--background-color);
 }
 
-/* -MENUBAR-------------------- */
+/* -BUTTON-&-INPUT------------- */
 
-.navbar {
-    /* box-shadow: 0px 5px 5px 5px rgb(40, 44, 56); */
+.custom-button, input {
+    background-color: var(--dark);
+    color: var(--text-color);
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 10px;
 }
 
-.navbar-toggler {
+/* -BUTTON--------------------- */
+
+.custom-button {
+    font-weight: 500;
+}
+
+.custom-button.primary {
+    background-color: var(--primary);
+}
+
+.icon-button {
+    background-color: transparent;
     border: none;
+    filter: invert(1);
+}
+
+/* -INPUT---------------------- */
+
+input {
+    border: solid 1px var(--dark);
+}
+
+input:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* -MENUBAR-------------------- */
+
+.navbar-toggler {
+        border: none;
 }
 
 .navbar-toggler:focus {
@@ -32,15 +72,35 @@ body {
 
 .custom-table > thead {
     top: 7.6vh;
-    background-color: rgb(21, 23, 28);
+    background-color: var(--dark);
 }
 
-.custom-table tr:last-child {
+.custom-table th:last-child {
     width: 1px;
+    text-align: right;
 }
 
 .custom-table td, .custom-table th {
     color: var(--text-color);
+}
+
+/* -DIALOG--------------------- */
+
+.modal-content {
+    background-color: var(--dialog-background-color);
+    color: white;
+}
+
+.modal-footer, .modal-header {
+    border: none;
+}
+
+.modal-body > input {
+    width: 100%;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
 }
 
 /* ---------------------------- */
