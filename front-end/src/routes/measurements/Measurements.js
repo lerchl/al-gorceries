@@ -8,13 +8,15 @@ import { PlusLg, TrashFill } from "react-bootstrap-icons";
 async function getMeasurements(setMeasurements) {
     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements`;
     const res = await axios.get(url);
-    console.log(res.data);
     setMeasurements(res.data);
 }
 
-function deleteMeasurement(id) {
+function deleteMeasurement(id, setMeasurements) {
     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements/${id}`;
-    axios.delete(url).then(handle200Answer);
+    axios.delete(url).then(res => {
+        handle200Answer(res);
+        getMeasurements(setMeasurements);
+    });
 }
 
 const handle200Answer = res => {
@@ -61,7 +63,7 @@ function Measurements() {
                                     <tr key={measurement._id}>
                                         <td>{measurement.name}</td>
                                         <td>
-                                            <button onClick={() => deleteMeasurement(measurement._id)} className="icon-button">
+                                            <button onClick={() => deleteMeasurement(measurement._id, setMeasurements)} className="icon-button">
                                                 <TrashFill color="white" />
                                             </button>
                                         </td>

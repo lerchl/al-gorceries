@@ -26,12 +26,10 @@ function MeasurementDialog({showDialog, handleClose, getMeasurements, setMeasure
     }
 
     return (
-        <Modal
-            show={showDialog}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-        >
+        <Modal show={showDialog}
+               onHide={handleClose}
+               backdrop="static"
+               keyboard={false}>
             <Modal.Header closeButton>
                 <Modal.Title>Maßeinheit erstellen</Modal.Title>
             </Modal.Header>
