@@ -1,15 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { BsPlusLg } from "react-icons/bs";
 import Menubar from "../../Menubar";
 import MeasurementDialog from "./MeasurementDialog";
+import { PlusLg, TrashFill } from "react-bootstrap-icons";
 
 async function getMeasurements(setMeasurements) {
-    console.log("Lade Maßeinheiten...");
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements`);
+    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements`;
+    const res = await axios.get(url);
     console.log(res.data);
     setMeasurements(res.data);
+}
+
+function deleteMeasurement(id) {
+    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements/${id}`;
+    axios.delete(url).then(handle200Answer);
+}
+
+const handle200Answer = res => {
+    if (res.status !== 200) {
+        console.log(res);
+    }
 }
 
 function Measurements() {
@@ -24,6 +35,7 @@ function Measurements() {
         setShowDialog(true);
     };
 
+
     return (
         <>
             <Menubar />
@@ -37,7 +49,7 @@ function Measurements() {
                                 <button onClick={handleOpen}
                                         className="icon-button"
                                         title="Neue Maßeinheit erstellen">
-                                    <BsPlusLg />
+                                    <PlusLg color="white" />
                                 </button>
                             </th>
                         </tr>
@@ -48,7 +60,11 @@ function Measurements() {
                                 return (
                                     <tr key={measurement._id}>
                                         <td>{measurement.name}</td>
-                                        <td>Button</td>
+                                        <td>
+                                            <button onClick={() => deleteMeasurement(measurement._id)} className="icon-button">
+                                                <TrashFill color="white" />
+                                            </button>
+                                        </td>
                                     </tr>
                                 );
                             })

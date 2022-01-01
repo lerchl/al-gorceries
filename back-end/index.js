@@ -33,6 +33,12 @@ app.post("/measurements", (req, res) => {
     Measurements.create(measurement, (err, data) => handleCallback(res, err, data, 201));
 });
 
+app.delete("/measurements/:id", (req, res) => {
+    Measurements.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
 // Schüler
 
 // app.get("/students", (_req, res) => {
