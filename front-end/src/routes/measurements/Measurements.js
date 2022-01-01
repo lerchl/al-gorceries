@@ -1,28 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { PlusLg } from "react-bootstrap-icons";
 import Menubar from "../../Menubar";
-import MeasurementDialog from "./MeasurementDialog";
-import { PlusLg, TrashFill } from "react-bootstrap-icons";
+import AddMeasurementDialog from "./AddMeasurementDialog";
+import { MeasurementTableContent } from "./MeasurementTableContent";
 
 async function getMeasurements(setMeasurements) {
     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements`;
     const res = await axios.get(url);
     setMeasurements(res.data);
-}
-
-function deleteMeasurement(id, setMeasurements) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements/${id}`;
-    axios.delete(url).then(res => {
-        handle200Answer(res);
-        getMeasurements(setMeasurements);
-    });
-}
-
-const handle200Answer = res => {
-    if (res.status !== 200) {
-        console.log(res);
-    }
 }
 
 function Measurements() {
@@ -32,9 +19,13 @@ function Measurements() {
     }, []);
 
     const [showDialog, setShowDialog] = useState(false);
+    const [toEdit, setToEdit] = useState();
     const handleClose = () => setShowDialog(false);
-    const handleOpen = () => {
+    const handleOpen = (measurement) => {
         setShowDialog(true);
+        if (measurement) {
+            setToEdit(measurement);
+        }
     };
 
 
@@ -48,7 +39,7 @@ function Measurements() {
                         <tr>
                             <th>Bezeichnung</th>
                             <th>
-                                <button onClick={handleOpen}
+                                <button onClick={() => handleOpen(undefined)}
                                         className="icon-button"
                                         title="Neue Maßeinheit erstellen">
                                     <PlusLg color="white" />
@@ -57,24 +48,11 @@ function Measurements() {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            measurements.map(measurement => {
-                                return (
-                                    <tr key={measurement._id}>
-                                        <td>{measurement.name}</td>
-                                        <td>
-                                            <button onClick={() => deleteMeasurement(measurement._id, setMeasurements)} className="icon-button">
-                                                <TrashFill color="white" />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
+                        <MeasurementTableContent getMeasurements={getMeasurements} setMeasurements={setMeasurements} measurements={measurements} />
                     </tbody>
                 </Table>
             </div>
-            <MeasurementDialog showDialog={showDialog} handleClose={handleClose} getMeasurements={getMeasurements} setMeasurements={setMeasurements} />
+            <AddMeasurementDialog showDialog={showDialog} handleClose={handleClose} toEdit={toEdit} getMeasurements={getMeasurements} setMeasurements={setMeasurements} />
         </>
     );
 }

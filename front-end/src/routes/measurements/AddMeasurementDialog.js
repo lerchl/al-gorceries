@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-function MeasurementDialog({showDialog, handleClose, getMeasurements, setMeasurements}) {
+function AddMeasurementDialog({showDialog, handleClose, getMeasurements, setMeasurements}) {
     const [name, setName] = useState("");
 
     const onChangeName = event => {
@@ -44,4 +44,4 @@ function MeasurementDialog({showDialog, handleClose, getMeasurements, setMeasure
     );
 }
 
-export default MeasurementDialog;
+export default AddMeasurementDialog;

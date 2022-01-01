@@ -74,13 +74,17 @@ input:focus-visible {
     background-color: var(--dark);
 }
 
+.custom-table td, .custom-table th {
+    color: var(--text-color);
+}
+
 .custom-table th:last-child {
     width: 1px;
     text-align: right;
 }
 
-.custom-table td, .custom-table th {
-    color: var(--text-color);
+.custom-table td:last-child {
+    display: flex;
 }
 
 /* -DIALOG--------------------- */

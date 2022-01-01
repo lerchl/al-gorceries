@@ -33,6 +33,14 @@ app.post("/measurements", (req, res) => {
     Measurements.create(measurement, (err, data) => handleCallback(res, err, data, 201));
 });
 
+app.put("/measurements/:id", (req, res) => {
+    const updatedMeasurement = req.body;
+    Measurements.findByIdAndUpdate(req.params.id,
+            updatedMeasurement,
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
 app.delete("/measurements/:id", (req, res) => {
     Measurements.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
