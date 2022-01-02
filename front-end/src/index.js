@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import Index from './routes/Index';
+import { Ingridients } from './routes/ingridients/Ingridients';
 import Measurements from './routes/measurements/Measurements';
 
 ReactDOM.render(
@@ -10,6 +11,7 @@ ReactDOM.render(
         <Routes>
             <Route path="" element={<Index />} />
             <Route path="measurements" element={<Measurements />} />
+            <Route path="ingridients" element={<Ingridients />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')

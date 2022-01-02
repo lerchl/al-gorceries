@@ -9,6 +9,7 @@ function Menubar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/measurements">Maßeinheiten</Nav.Link>
+                        <Nav.Link href="/ingridients">Zutaten</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

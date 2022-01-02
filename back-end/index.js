@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Measurements = require("./entities/measurements");
+const Ingridients = require("./entities/ingridients");
 
 // config
 const app = express();
@@ -43,6 +44,30 @@ app.put("/measurements/:id", (req, res) => {
 
 app.delete("/measurements/:id", (req, res) => {
     Measurements.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
+// Zutaten
+app.get("/ingridients", (_req, res) => {
+    Ingridients.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+});
+
+app.post("/ingridients", (req, res) => {
+    const measurement = req.body;
+    Ingridients.create(measurement, (err, data) => handleCallback(res, err, data, 201));
+});
+
+app.put("/ingridients/:id", (req, res) => {
+    const updatedMeasurement = req.body;
+    Ingridients.findByIdAndUpdate(req.params.id,
+            updatedMeasurement,
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
+app.delete("/ingridients/:id", (req, res) => {
+    Ingridients.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
