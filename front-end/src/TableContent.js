@@ -1,11 +1,8 @@
-import { createContext, useContext } from "react";
-import { TableContentContext } from "./OverviewPage";
+import { createContext } from "react";
 
 export const EntityContext = createContext();
 
-export const TableContent = ({entityComponent}) => {
-    const {entities} = useContext(TableContentContext);
-
+export const TableContent = ({entities, entityComponent}) => {
     return (
         entities.map(entity => {
             return (

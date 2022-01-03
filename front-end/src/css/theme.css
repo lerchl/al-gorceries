@@ -70,7 +70,7 @@ input:focus-visible {
 }
 
 .custom-table > thead {
-    top: 7.6vh;
+    top: 56px;
     background-color: var(--dark);
 }
 

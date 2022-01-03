@@ -1,7 +1,9 @@
 import { OverviewPage } from "../../OverviewPage";
-import { TableContent } from "../../TableContent";
+import { AddIngridientDialog } from "./AddIngridientDialog";
 import { Ingridient } from "./Ingridient";
 
 export const Ingridients = () => {
-    return <OverviewPage headline={"Zutaten"} entityApiEndpoint={"ingridients"} tableContent={<TableContent entityComponent={<Ingridient />} />} />;
+    const columns = ["Name"];
+
+    return <OverviewPage headline="Zutaten" entityApiEndpoint="ingridients" columns={columns} entitiyComponent={<Ingridient />} addDialog={<AddIngridientDialog />} addDialogTitle={"Zutat hinzufügen"} />;
 }

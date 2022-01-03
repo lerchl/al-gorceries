@@ -1,8 +1,9 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { PlusLg } from "react-bootstrap-icons";
 import Menubar from "./Menubar";
+import { TableContent } from "./TableContent";
+import { TableHead } from "./TableHead";
 
 async function getEntities(entityApiEndpoint, setEntities) {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`);
@@ -11,14 +12,10 @@ async function getEntities(entityApiEndpoint, setEntities) {
 
 export const TableContentContext = createContext();
 
-export const OverviewPage = ({headline, entityApiEndpoint, tableContent}) => {
+export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, addDialogTitle}) => {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => getEntities(entityApiEndpoint, setEntities), []);
-
-    const [showAddDialog, setShowAddDialog] = useState(false);
-    const handleAddDialogClose = () => setShowAddDialog(false);
-    const handleAddDialogOpen = () => setShowAddDialog(true);
 
     return (
         <>
@@ -27,20 +24,17 @@ export const OverviewPage = ({headline, entityApiEndpoint, tableContent}) => {
                 <h1>{headline}</h1>
                 <Table className="custom-table">
                     <thead className="position-sticky">
-                        <tr>
-                            <th>Bezeichnung</th>
-                            <th>
-                                <button onClick={handleAddDialogOpen}
-                                        className="icon-button"
-                                        title="Neue Maßeinheit erstellen">
-                                    <PlusLg color="white" />
-                                </button>
-                            </th>
-                        </tr>
+                        <TableHead columns={columns}
+                                   openAddDialogButtonTitle={"Neue Zutat hinzufügen"}
+                                   addDialog={addDialog}
+                                   dialogTitle={addDialogTitle}
+                                   getEntities={getEntities}
+                                   setEntities={setEntities}
+                                   entityApiEndpoint={entityApiEndpoint} />
                     </thead>
                     <tbody>
                         <TableContentContext.Provider value={{getEntities: getEntities, setEntities: setEntities, entities: entities}}>
-                            {tableContent}
+                            <TableContent entities={entities} entityComponent={entitiyComponent} />
                         </TableContentContext.Provider>
                     </tbody>
                 </Table>
