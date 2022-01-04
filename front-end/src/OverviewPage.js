@@ -7,10 +7,17 @@ import { TableHead } from "./TableHead";
 
 export const TableContentContext = createContext();
 
-export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, addDialogTitle}) => {
+export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, addDialogTitle, editDialog, editDialogTitle}) => {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => getEntities(entityApiEndpoint, setEntities), []);
+
+    const context = {
+        entityApiEndpoint: entityApiEndpoint,
+        setEntities: setEntities,
+        editDialog: editDialog,
+        editDialogTitle: editDialogTitle
+    }
 
     return (
         <>
@@ -27,7 +34,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                                    entityApiEndpoint={entityApiEndpoint} />
                     </thead>
                     <tbody>
-                        <TableContentContext.Provider value={{setEntities: setEntities, entityApiEndpoint: entityApiEndpoint}}>
+                        <TableContentContext.Provider value={context}>
                             <TableContent entities={entities} entityComponent={entitiyComponent} />
                         </TableContentContext.Provider>
                     </tbody>

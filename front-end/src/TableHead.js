@@ -5,12 +5,12 @@ export const DialogContext = createContext();
 
 export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, dialogTitle, setEntities, entityApiEndpoint}) => {
     const [showAddDialog, setShowAddDialog] = useState(false);
-    const handleAddDialogClose = () => setShowAddDialog(false);
-    const handleAddDialogOpen = () => setShowAddDialog(true);
+    const closeAddDialog = () => setShowAddDialog(false);
+    const openAddDialog = () => setShowAddDialog(true);
 
     const context = {
         show: showAddDialog,
-        close: handleAddDialogClose,
+        close: closeAddDialog,
         setEntities: setEntities,
         entityApiEndpoint: entityApiEndpoint,
         dialogTitle: dialogTitle
@@ -24,7 +24,7 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, dialogT
                 })
             }
             <th>
-                <button onClick={handleAddDialogOpen}
+                <button onClick={openAddDialog}
                         className="icon-button"
                         title={openAddDialogButtonTitle}>
                     <PlusLg color="white" />

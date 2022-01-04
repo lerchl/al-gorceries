@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import { deleteEntity } from "../../ApiUtils";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 
+export const EditDialogContext = createContext();
+
 export const Ingridient = () => {
-    const {setEntities, entityApiEndpoint} = useContext(TableContentContext);
+    const {entityApiEndpoint, setEntities, editDialog} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
 
     const [showEditDialog, setShowEditDialog] = useState(false);
@@ -16,6 +18,11 @@ export const Ingridient = () => {
 
     const closeEditDialog = () => {
         setShowEditDialog(false);
+    }
+
+    const context = {
+        show: showEditDialog,
+        close: closeEditDialog,
     }
 
     return (
@@ -31,7 +38,9 @@ export const Ingridient = () => {
                     </button>
                 </td>
             </tr>
+            <EditDialogContext.Provider value={context}>
+                {editDialog}
+            </EditDialogContext.Provider>
         </>
     );
 }
-//<EditMeasurementDialog show={showEditDialog} closeDialog={closeEditDialog} getMeasurements={getMeasurements} setMeasurements={setMeasurements} measurement={measurement} />
