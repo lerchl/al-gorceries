@@ -3,7 +3,7 @@ import { PlusLg } from "react-bootstrap-icons";
 
 export const DialogContext = createContext();
 
-export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, dialogTitle, getEntities, setEntities, entityApiEndpoint}) => {
+export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, dialogTitle, setEntities, entityApiEndpoint}) => {
     const [showAddDialog, setShowAddDialog] = useState(false);
     const handleAddDialogClose = () => setShowAddDialog(false);
     const handleAddDialogOpen = () => setShowAddDialog(true);
@@ -11,7 +11,6 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, dialogT
     const context = {
         show: showAddDialog,
         close: handleAddDialogClose,
-        getEntities: getEntities,
         setEntities: setEntities,
         entityApiEndpoint: entityApiEndpoint,
         dialogTitle: dialogTitle

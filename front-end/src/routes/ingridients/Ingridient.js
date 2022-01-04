@@ -1,24 +1,11 @@
 import { useContext, useState } from "react";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
+import { deleteEntity } from "../../ApiUtils";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 
-// function deleteMeasurement(getMeasurements, setMeasurements, id) {
-//     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements/${id}`;
-//     axios.delete(url).then(res => {
-//         handle200Answer(res);
-//         getMeasurements(setMeasurements);
-//     });
-// }
-
-// function handle200Answer(res) {
-//     if (res.status !== 200) {
-//         console.log(res);
-//     }
-// }
-
 export const Ingridient = () => {
-    const {getEntities, setEntities} = useContext(TableContentContext);
+    const {setEntities, entityApiEndpoint} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
 
     const [showEditDialog, setShowEditDialog] = useState(false);
@@ -39,7 +26,7 @@ export const Ingridient = () => {
                     <button onClick={openEditDialog} className="icon-button">
                         <PencilFill color="white" />
                     </button>
-                    <button className="icon-button">
+                    <button onClick={() => deleteEntity(entityApiEndpoint, entity._id, setEntities)} className="icon-button">
                         <TrashFill color="white" />
                     </button>
                 </td>
