@@ -13,6 +13,18 @@ body {
     background-color: var(--background-color);
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /* -BUTTON-&-INPUT------------- */
 
 .custom-button, input {
@@ -49,6 +61,26 @@ input {
 input:focus-visible {
     outline: none;
     border-color: var(--primary);
+}
+
+/* -MUI INPUT------------------ */
+
+.MuiTextField-root {
+    background-color: var(--dark);
+    border-radius: 0.3rem;
+}
+
+.MuiTextField-root input, .MuiTextField-root textarea, .MuiTextField-root > label, .MuiTextField-root > div, .MuiInputAdornment-root > p {
+    color: var(--text-color);
+}
+
+.MuiTextField-root svg.MuiSvgIcon-root {
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
+}
+
+.number-input input {
+    text-align: right;
 }
 
 /* -MENUBAR-------------------- */
@@ -116,4 +148,20 @@ input:focus-visible {
     width: 90vw;
 
     color: var(--text-color);
+}
+
+.section {
+    border: 1px solid var(--primary);
+    border-radius: 0.3rem;
+}
+
+.dialog-row {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 10px;
+}
+
+.dialog-row > * {
+    padding: 0;
 }

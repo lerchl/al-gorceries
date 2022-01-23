@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Measurements = require("./entities/measurements");
 const Ingridients = require("./entities/ingridients");
+const Dishes = require("./entities/dishes");
 
 // config
 const app = express();
@@ -70,6 +71,16 @@ app.delete("/ingridients/:id", (req, res) => {
     Ingridients.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
+});
+
+// Gerichte
+app.get("/dishes", (_req, res) => {
+     Dishes.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+})
+
+app.post("/dishes", (req, res) => {
+    const dish = req.body;
+    Dishes.create(dish, (err, data) => handleCallback(res, err, data, 201));
 });
 
 // Schüler
