@@ -96,6 +96,18 @@ app.post("/dishes", (req, res) => {
     Dish.create(dish, (err, data) => handleCallback(res, err, data, 201));
 });
 
+app.delete("/dishes/:id", (req, res) => {
+    Dish.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (err, data) => {
+                if (err) {
+                    handleCallback(res, err, data, 200);
+                }
+            });
+
+    DishIngridient.deleteMany({ dish: req.params.id }, (err, data) => handleCallback(res, err, data, 200));
+});
+
 // Dish Ingridient
 app.get("/dishIngridients/:dishId", (req, res) => {
     DishIngridient.find({ dish: req.params.dishId }, (err, data) => handleCallback(res, err, data, 200)).populate("measurement").populate("ingridient");
