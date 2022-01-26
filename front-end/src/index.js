@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import { Dish } from './routes/dishes/Dish';
 import { Dishes } from './routes/dishes/Dishes';
 import Index from './routes/Index';
 import { Ingridients } from './routes/ingridients/Ingridients';
@@ -14,6 +15,7 @@ ReactDOM.render(
             <Route path="measurements" element={<Measurements />} />
             <Route path="ingridients" element={<Ingridients />} />
             <Route path="dishes" element={<Dishes />} />
+            <Route path="dishes/:id" element={<Dish />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')

@@ -12,7 +12,7 @@ export const Dishes = () => {
     return <OverviewPage headline="Gerichte"
                          entityApiEndpoint="dishes"
                          columns={columns}
-                         entitiyComponent={<Entity getColumns={getColumns} />}
+                         entitiyComponent={<Entity getColumns={getColumns} hasDetailPage={true} />}
                          addDialog={<AddDishDialog />} addDialogTitle="Gericht hinzufügen"
                          editDialogTitle="Gericht bearbeiten" />
 }

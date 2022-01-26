@@ -96,7 +96,7 @@ input:focus-visible {
 
 /* -TABLE---------------------- */
 
-.custom-table {
+.custom-table, .overlay, .dark-bg {
     background-color: rgb(var(--bs-dark-rgb));
     box-shadow: 5px 5px 15px 5px rgb(var(--bs-dark-rgb));
 }
@@ -150,9 +150,27 @@ input:focus-visible {
     color: var(--text-color);
 }
 
-.section {
-    border: 1px solid var(--primary);
+.overlay {
     border-radius: 0.3rem;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.third-width {
+    width: 33%;
 }
 
 .dialog-row {

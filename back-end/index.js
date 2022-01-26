@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Measurements = require("./entities/measurements");
-const Ingridients = require("./entities/ingridients");
-const Dishes = require("./entities/dishes");
+const Ingridient = require("./entities/ingridient");
+const Dish = require("./entities/dish");
+const DishIngridient = require("./entities/dishIngridient");
+const Measurement = require("./entities/measurement");
 
 // config
 const app = express();
@@ -25,92 +26,99 @@ app.get("/", (_req, res) => {
     res.status(200).send("Hello World!");
 });
 
-// Maßeinheiten
+// Measurement
 app.get("/measurements", (_req, res) => {
-    Measurements.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+    Measurement.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
 });
+
+app.get("/measurements/:id", (req, res) => {
+    Measurement.findById(req.params.id, (err, data) => handleCallback(res, err, data, 200));
+})
 
 app.post("/measurements", (req, res) => {
     const measurement = req.body;
-    Measurements.create(measurement, (err, data) => handleCallback(res, err, data, 201));
+    Measurement.create(measurement, (err, data) => handleCallback(res, err, data, 201));
 });
 
 app.put("/measurements/:id", (req, res) => {
     const updatedMeasurement = req.body;
-    Measurements.findByIdAndUpdate(req.params.id,
+    Measurement.findByIdAndUpdate(req.params.id,
             updatedMeasurement,
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/measurements/:id", (req, res) => {
-    Measurements.findOneAndDelete({ _id: req.params.id },
+    Measurement.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
-// Zutaten
+// Ingridients
 app.get("/ingridients", (_req, res) => {
-    Ingridients.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+    Ingridient.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
 });
+
+app.get("/ingridients/:id", (req, res) => {
+    Ingridient.findById(req.params.id, (err, data) => handleCallback(res, err, data, 200));
+})
 
 app.post("/ingridients", (req, res) => {
     const measurement = req.body;
-    Ingridients.create(measurement, (err, data) => handleCallback(res, err, data, 201));
+    Ingridient.create(measurement, (err, data) => handleCallback(res, err, data, 201));
 });
 
 app.put("/ingridients/:id", (req, res) => {
     const updatedMeasurement = req.body;
-    Ingridients.findByIdAndUpdate(req.params.id,
+    Ingridient.findByIdAndUpdate(req.params.id,
             updatedMeasurement,
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/ingridients/:id", (req, res) => {
-    Ingridients.findOneAndDelete({ _id: req.params.id },
+    Ingridient.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
-// Gerichte
+// Dish
 app.get("/dishes", (_req, res) => {
-     Dishes.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+     Dish.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+})
+
+app.get("/dishes/:id", (req, res) => {
+    Dish.findById(req.params.id, (err, data) => handleCallback(res, err, data, 200));
 })
 
 app.post("/dishes", (req, res) => {
     const dish = req.body;
-    Dishes.create(dish, (err, data) => handleCallback(res, err, data, 201));
+    Dish.create(dish, (err, data) => handleCallback(res, err, data, 201));
 });
 
-// Schüler
+// Dish Ingridient
+app.get("/dishIngridients/:dishId", (req, res) => {
+    DishIngridient.find({ dish: req.params.dishId }, (err, data) => handleCallback(res, err, data, 200)).populate("measurement").populate("ingridient");
+});
 
-// app.get("/students", (_req, res) => {
-//     Students.find((err, data) => handleCallback(res, err, data, 200)).sort({ lastName: "asc" });
-// });
+app.post("/dishIngridients", (req, res) => {
+    const dishIngridient = req.body;
+    DishIngridient.create(dishIngridient, (err, data) => handleCallback(res, err, data, 201));
+});
 
-// app.post("/students", (req, res) => {
-//     const student = req.body;
+app.put("/dishIngridients/:id", (req, res) => {
+    const updatedDishIngridient = req.body;
+    DishIngridient.findByIdAndUpdate(req.params.id,
+            updatedDishIngridient,
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
 
-//     Students.create(student, (err, data) => handleCallback(res, err, data, 201));
-// });
-
-// app.put("/students/:id", (req, res) => {
-//     const updatedStudent = req.body;
-
-//     Students.findByIdAndUpdate({ _id: req.params.id }, updatedStudent, { useFindAndModify: false }, (err, data) => handleCallback(res, err, data, 200));
-// });
-
-// app.delete("/students/:id", (req, res) => {
-//     Students.findOneAndDelete({ _id: req.params.id }, { useFindAndModify: false }, (err, data) => {
-//         if (err) {
-//             console.log(err);
-//             res.status(500).send(err);
-//         } else {
-//             Absences.deleteMany({ student: req.params.id }, (err, data) => handleCallback(res, err, data, 200));
-//         }
-//     });
-// });
+app.delete("/dishIngridients/:id", (req, res) => {
+    DishIngridient.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
 
 // callback
 function handleCallback(res, err, data, successCode) {
@@ -118,6 +126,7 @@ function handleCallback(res, err, data, successCode) {
         res.status(500).send(err);
         console.error(err);
     } else {
+        console.log("Sending:", data);
         res.status(successCode).send(data);
     }
 }

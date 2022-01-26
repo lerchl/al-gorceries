@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
-import { createEntity } from "../../ApiUtils";
+import { createEntityAndGetEntities } from "../../ApiUtils";
 import { DialogContext } from "../../TableHead";
 
 export const AddDishDialog = () => {
@@ -39,7 +39,7 @@ export const AddDishDialog = () => {
             "cost": cost,
             "dishIngridients": dishIngridients
         }
-        createEntity(entityApiEndpoint, dish, setEntities);
+        createEntityAndGetEntities(entityApiEndpoint, dish, setEntities);
         closeDialog();
     }
 

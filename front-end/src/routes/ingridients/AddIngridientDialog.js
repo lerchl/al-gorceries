@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { createEntity } from "../../ApiUtils";
+import { createEntityAndGetEntities } from "../../ApiUtils";
 import { DialogContext } from "../../TableHead";
 
 export const AddIngridientDialog = () => {
@@ -18,7 +18,7 @@ export const AddIngridientDialog = () => {
     }
 
     const saveEntity = () => {
-        createEntity(entityApiEndpoint, {"name": name}, setEntities);
+        createEntityAndGetEntities(entityApiEndpoint, {"name": name}, setEntities);
         closeDialog();
     }
 

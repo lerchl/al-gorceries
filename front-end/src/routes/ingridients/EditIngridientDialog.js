@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { updateEntity } from "../../ApiUtils";
+import { updateEntityAndGetEntities } from "../../ApiUtils";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 import { EditDialogContext } from "./Ingridient";
@@ -18,7 +18,7 @@ export const EditIngridientDialog = () => {
 
     const saveEntity = () => {
         entity.name = name;
-        updateEntity(entityApiEndpoint, entity, setEntities);
+        updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities);
         close();
     }
 

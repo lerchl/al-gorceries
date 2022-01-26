@@ -1,12 +1,13 @@
 import { createContext, useContext, useState } from "react";
-import { PencilFill, TrashFill } from "react-bootstrap-icons";
-import { deleteEntity } from "./ApiUtils";
+import { BoxArrowUpRight, PencilFill, TrashFill } from "react-bootstrap-icons";
+import { deleteEntityAndGetEntities } from "./ApiUtils";
 import { TableContentContext } from "./OverviewPage";
 import { EntityContext } from "./TableContent";
+import { Link } from "react-router-dom";
 
 export const EditDialogContext = createContext();
 
-export const Entity = ({getColumns}) => {
+export const Entity = ({getColumns, hasDetailPage}) => {
     const {entityApiEndpoint, setEntities, editDialog} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
 
@@ -34,10 +35,11 @@ export const Entity = ({getColumns}) => {
                     })
                 }
                 <td>
+                    { hasDetailPage && <Link to={entity._id}><BoxArrowUpRight color="white" /></Link> }
                     <button onClick={openEditDialog} className="icon-button">
                         <PencilFill color="white" />
                     </button>
-                    <button onClick={() => deleteEntity(entityApiEndpoint, entity._id, setEntities)} className="icon-button">
+                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button">
                         <TrashFill color="white" />
                     </button>
                 </td>
