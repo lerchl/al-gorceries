@@ -16,9 +16,14 @@ export const EditMeasurementDialog = ({show, closeDialog, getMeasurements, setMe
         closeDialog();
     }
 
+    const close = () => {
+        setName(measurement.name);
+        closeDialog();
+    }
+
     return (
         <Modal show={show}
-               onHide={closeDialog}
+               onHide={close}
                backdrop="static"
                keyboard={false}>
             <Modal.Header closeButton>
@@ -29,7 +34,7 @@ export const EditMeasurementDialog = ({show, closeDialog, getMeasurements, setMe
             </Modal.Body>
             <Modal.Footer>
                 <button type="button" onClick={saveMeasurement} className="custom-button primary">Speichern</button>
-                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
+                <button type="button" onClick={close} className="custom-button">Schließen</button>
             </Modal.Footer>
         </Modal>
     );
