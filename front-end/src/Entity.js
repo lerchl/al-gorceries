@@ -4,6 +4,7 @@ import { deleteEntityAndGetEntities } from "./ApiUtils";
 import { TableContentContext } from "./OverviewPage";
 import { EntityContext } from "./TableContent";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 
 export const EditDialogContext = createContext();
 
@@ -31,7 +32,7 @@ export const Entity = ({getColumns, hasDetailPage}) => {
             <tr key={entity._id}>
                 {
                     getColumns(entity).map(column => {
-                        return <td key={column}>{column}</td>;
+                        return <td key={v4()}>{column}</td>;
                     })
                 }
                 <td>

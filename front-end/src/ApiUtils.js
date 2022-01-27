@@ -57,7 +57,6 @@ export function createEntity(entityApiEndpoint, entity) {
  */
 export function createEntityAndGetEntities(entityApiEndpoint, entity, setEntities) {
     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`;
-    console.log(url);
     axios.post(url, entity).then(res => {
         handleAnswer(res, 201);
         getEntities(entityApiEndpoint, setEntities);

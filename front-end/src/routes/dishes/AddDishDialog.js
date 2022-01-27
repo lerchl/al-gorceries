@@ -10,10 +10,10 @@ export const AddDishDialog = () => {
     const {show, close, setEntities, entityApiEndpoint, dialogTitle} = useContext(DialogContext);
 
     const [name, setName] = useState("");
-    const [source, setSource] = useState(null);
+    const [source, setSource] = useState("");
     const [sourceInformation, setSourceInformation] = useState("");
-    const [prepTime, setPrepTime] = useState(0);
-    const [cost, setCost] = useState(0);
+    const [prepTime, setPrepTime] = useState("");
+    const [cost, setCost] = useState("");
     const [dishIngridients, setDishIngrdients] = useState([]);
 
     const onChange = (event, set) => {
@@ -50,10 +50,10 @@ export const AddDishDialog = () => {
             </Modal.Header>
             <Modal.Body>
                 <div className="row dialog-row">
-                    <TextField label="Name" onChange={event => onChange(event, setName)} />
+                    <TextField value={name} label="Name" onChange={event => onChange(event, setName)} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField label="Quelle" onChange={event => onChange(event, setSource)} select sx={{width: "47.5%"}}>
+                    <TextField value={source} label="Quelle" onChange={event => onChange(event, setSource)} select sx={{width: "47.5%"}}>
                         <MenuItem value="HelloFresh">HelloFresh</MenuItem>
                         <MenuItem value="YouTube">YouTube</MenuItem>
                         <MenuItem value="Buch">Buch</MenuItem>
@@ -61,10 +61,10 @@ export const AddDishDialog = () => {
                     <TextField label="Quellzusatz" onChange={event => onChange(event, setSourceInformation)} sx={{width: "47.5%"}} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField label="Zubereitungszeit" onChange={event => onChange(event, setPrepTime)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
+                    <TextField value={prepTime} label="Zubereitungszeit" onChange={event => onChange(event, setPrepTime)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField label="Kosten" onChange={event => onChange(event, setCost)} type="number" className="number-input" InputProps={{endAdornment: <CurrencyEuro color="white" />}} />
+                    <TextField value={cost} label="Kosten" onChange={event => onChange(event, setCost)} type="number" className="number-input" InputProps={{endAdornment: <CurrencyEuro color="white" />}} />
                 </div>
             </Modal.Body>
             <Modal.Footer>
