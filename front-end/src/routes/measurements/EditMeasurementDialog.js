@@ -16,10 +16,6 @@ export const EditMeasurementDialog = ({show, closeDialog, getMeasurements, setMe
         closeDialog();
     }
 
-    const onChangeName = event => {
-        setName(event.target.value);
-    }
-
     return (
         <Modal show={show}
                onHide={closeDialog}
@@ -29,7 +25,7 @@ export const EditMeasurementDialog = ({show, closeDialog, getMeasurements, setMe
                 <Modal.Title>Maßeinheit bearbeiten</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <input value={name} onChange={onChangeName} placeholder="Bezeichnung" />
+                <input value={name} onChange={e => setName(e.target.value)} placeholder="Bezeichnung" />
             </Modal.Body>
             <Modal.Footer>
                 <button type="button" onClick={saveMeasurement} className="custom-button primary">Speichern</button>

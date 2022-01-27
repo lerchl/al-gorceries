@@ -16,6 +16,11 @@ export const EditIngridientDialog = () => {
         setName(event.target.value);
     }
 
+    const closeDialog  = () => {
+        setName(entity.name)
+        close();
+    }
+
     const saveEntity = () => {
         entity.name = name;
         updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities);
@@ -24,7 +29,7 @@ export const EditIngridientDialog = () => {
 
     return (
         <Modal show={show}
-               onHide={close}
+               onHide={closeDialog}
                backdrop="static"
                keyboard={false}>
             <Modal.Header closeButton>
@@ -35,7 +40,7 @@ export const EditIngridientDialog = () => {
             </Modal.Body>
             <Modal.Footer>
                 <button type="button" onClick={saveEntity} className="custom-button primary">Speichern</button>
-                <button type="button" onClick={close} className="custom-button">Schließen</button>
+                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
             </Modal.Footer>
         </Modal>
     );

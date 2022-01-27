@@ -96,6 +96,14 @@ app.post("/dishes", (req, res) => {
     Dish.create(dish, (err, data) => handleCallback(res, err, data, 201));
 });
 
+app.put("/dishes/:id", (req, res) => {
+    const updatedDish = req.body;
+    Dish.findByIdAndUpdate(req.params.id,
+            updatedDish,
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
 app.delete("/dishes/:id", (req, res) => {
     Dish.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
