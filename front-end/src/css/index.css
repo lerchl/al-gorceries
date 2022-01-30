@@ -1,0 +1,23 @@
+.week {
+    display: flex;
+}
+
+.week > * {
+    margin-right: 10px;
+}
+
+.selectable > h2 {
+    transition: color 0.25s ease-in-out;
+}
+
+.selectable > div {
+    transition: background-color 0.25s ease-in-out;
+}
+
+.selected > h2 {
+    color: rgb(65, 144, 65);
+}
+
+.selected > div {
+    background-color: rgb(65, 144, 65);
+}

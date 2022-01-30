@@ -5,8 +5,10 @@
     --text-color: rgb(233, 233, 233);
 
     --dark: rgb(21, 23, 28);
+    --dark-hover: gray;
 
     --primary: rgb(111, 0, 185);
+    --primary-hover: rgb(191, 119, 238);
 }
 
 body {
@@ -43,8 +45,20 @@ input[type=number] {
     font-weight: 500;
 }
 
+.custom-button:hover, .custom-button:active, .custom-button:focus, .custom-button:active:focus {
+    background-color: var(--dark-hover);
+    border-color: none;
+    box-shadow: none;
+}
+
 .custom-button.primary {
     background-color: var(--primary);
+}
+
+.custom-button.primary:hover, .custom-button.primary:active, .custom-button.primary:focus, .custom-button.primary:active:focus {
+    background-color: var(--primary-hover);
+    border-color: none;
+    box-shadow: none;
 }
 
 .icon-button {
@@ -156,9 +170,24 @@ input:focus-visible {
     margin-bottom: 20px;
 }
 
-.space-between {
+.space-between, .right, .center {
     display: flex;
+}
+
+.space-between {
     justify-content: space-between;
+}
+
+.right {
+    justify-content: right;
+}
+
+.center {
+    justify-content: center;
+}
+
+.mr-2 {
+    margin-right: 0.5rem !important;
 }
 
 .bold {

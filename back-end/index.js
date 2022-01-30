@@ -5,6 +5,7 @@ const Ingridient = require("./entities/ingridient");
 const Dish = require("./entities/dish");
 const DishIngridient = require("./entities/dishIngridient");
 const Measurement = require("./entities/measurement");
+const DishList = require("./entities/dishList");
 
 // config
 const app = express();
@@ -136,6 +137,44 @@ app.put("/dishIngridients/:id", (req, res) => {
 
 app.delete("/dishIngridients/:id", (req, res) => {
     DishIngridient.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
+// Dish List
+function handleDishListGetCallback(res, err, data) {
+    if (err) {
+        res.status(500).send(err);
+        console.log(err);
+    } else if (!data) {
+        console.log("No dish list was found");
+        res.status(204).send();
+    } else {
+        console.log("Sending:", data);
+        res.status(200).send(data);
+    }
+}
+
+app.get("/dishList/:year/:week", (req, res) => {
+    DishList.findOne({ year: req.params.year, week: req.params.week },
+            (err, data) => handleDishListGetCallback(res, err, data))
+            .populate("dishes").populate("selectedDishes");
+})
+
+app.get("/dishList/:id", (req, res) => {
+    DishList.findOne({ _id: req.params.id }, (err, data) => handleCallback(res, err, data, 200))
+            .populate("dishes").populate("selectedDishes");
+})
+
+app.post("/dishList", (req, res) => {
+    const dishList = req.body;
+    DishList.create(dishList, (err, data) => handleCallback(res, err, data, 201));
+});
+
+app.put("/dishList/:id", (req, res) => {
+    const updatedDishList = req.body;
+    DishList.findByIdAndUpdate(req.params.id,
+            updatedDishList,
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });

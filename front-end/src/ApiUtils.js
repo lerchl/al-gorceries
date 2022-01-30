@@ -4,6 +4,9 @@ export const MEASUREMENTS = "measurements";
 export const INGRIDIENTS = "ingridients";
 export const DISHES = "dishes";
 export const DISH_INGRIDIENTS = "dishIngridients";
+export const DISH_LIST = "dishList";
+
+export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/`;
 
 /**
  * Sends a request for fetching an entity via its id.
@@ -76,6 +79,20 @@ export function createEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, s
         handleAnswer(res, 201);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);
     });
+}
+
+/**
+ * Sends a request for updating an entity and then fetching it.
+ * @param {string} entityApiEndpoint api endpoint of the entity
+ * @param {*} entity the entity to be updated
+ * @param {Function} setEntity setter for the stateful value
+ */
+export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
+    let url = `${API_URL}${entityApiEndpoint}/${entity._id}`;
+    axios.put(url, entity).then(res => {
+        handleAnswer(res, 200);
+        getEntity(entityApiEndpoint, setEntity, entity._id);
+    })
 }
 
 /**
