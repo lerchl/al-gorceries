@@ -52,7 +52,7 @@ export const Index = () => {
                     </Row>
                 </Container>
                 <Divider className="mb-3 mt-3" />
-                { dishList && <DishesOfDishList dishList={dishList} setDishList={setDishList} /> }
+                { dishList ? <DishesOfDishList dishList={dishList} setDishList={setDishList} /> : <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p> }
             </div>
         </>
     );
