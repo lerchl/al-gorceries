@@ -44,12 +44,11 @@ export async function getEntitiesWithParam(entityApiEndpoint, setEntities, param
  * Sends a request for creating an entity.
  * @param {string} entityApiEndpoint api endpoint of the entity
  * @param {*} entity the entity to be created
+ * @returns {Promise<AxiosResponse<any, any>>} promise with response
  */
 export function createEntity(entityApiEndpoint, entity) {
     let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`;
-    axios.post(url, entity).then(res => {
-        handleAnswer(res, 201);
-    });
+    return axios.post(url, entity);
 }
 
 /**
@@ -158,7 +157,7 @@ export function deleteEntityAndGetEntities(entityApiEndpoint, id, setEntities) {
  * @param {*} res the answer
  * @param {Number} expectedCode the expected http code
  */
-function handleAnswer(res, expectedCode) {
+export function handleAnswer(res, expectedCode) {
     if (res.status !== expectedCode) {
         console.log(res);
     }
