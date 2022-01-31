@@ -37,10 +37,10 @@ export const Entity = ({getColumns, hasDetailPage}) => {
                 }
                 <td>
                     { hasDetailPage && <Link to={entity._id}><BoxArrowUpRight color="white" /></Link> }
-                    <button onClick={openEditDialog} className="icon-button">
+                    <button onClick={openEditDialog} className="icon-button ml-2">
                         <PencilFill color="white" />
                     </button>
-                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button">
+                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button ml-2">
                         <TrashFill color="white" />
                     </button>
                 </td>

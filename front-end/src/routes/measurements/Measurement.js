@@ -36,7 +36,7 @@ export const Measurement = ({getMeasurements, setMeasurements, measurement}) => 
                     <button onClick={openEditDialog} className="icon-button">
                         <PencilFill color="white" />
                     </button>
-                    <button onClick={() => deleteMeasurement(getMeasurements, setMeasurements, measurement._id)} className="icon-button">
+                    <button onClick={() => deleteMeasurement(getMeasurements, setMeasurements, measurement._id)} className="icon-button ml-2">
                         <TrashFill color="white" />
                     </button>
                 </td>

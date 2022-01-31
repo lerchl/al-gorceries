@@ -33,7 +33,7 @@ export const Ingridient = () => {
                     <button onClick={openEditDialog} className="icon-button">
                         <PencilFill color="white" />
                     </button>
-                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button">
+                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button ml-2">
                         <TrashFill color="white" />
                     </button>
                 </td>
