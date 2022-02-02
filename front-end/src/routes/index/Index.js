@@ -70,7 +70,7 @@ export const Index = () => {
                         <Col lg={4} className="space-between">
                             <ButtonGroup>
                                 <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-1)}><ChevronLeft /></Button>
-                                <Button className="custom-button">KW{formatWeekNumber(getWeekNumber(date))}</Button>
+                                <Button className="custom-button custom-button-no-hover">KW{formatWeekNumber(getWeekNumber(date))}</Button>
                                 <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(1)}><ChevronRight /></Button>
                             </ButtonGroup>
                             { navigationButton() }

@@ -17,7 +17,7 @@ export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, las
                 <Col sm={4}>{dishIngridient.ingridient.name}</Col>
                 <Col sm={2} style={{ textAlign: "right" }}>
                     <button className="icon-button" onClick={() => setShowEditDialog(true)}><PencilFill color="white" /></button>
-                    <button className="icon-button" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGRIDIENTS, dishIngridient._id, setDishIngridients, dishId)}><TrashFill color="white" /></button>
+                    <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGRIDIENTS, dishIngridient._id, setDishIngridients, dishId)}><TrashFill color="white" /></button>
                 </Col>
             </Row>
             <EditDishIngridientDialog show={showEditDialog}

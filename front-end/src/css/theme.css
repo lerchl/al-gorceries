@@ -45,8 +45,16 @@ input[type=number] {
     font-weight: 500;
 }
 
-.custom-button:hover, .custom-button:active, .custom-button:focus, .custom-button:active:focus {
+
+.custom-button:hover {
     background-color: var(--dark-hover);
+}
+
+.custom-button:active, .custom-button:focus, .custom-button:active:focus {
+    background-color: var(--dark);
+}
+
+.custom-button:hover, .custom-button:active, .custom-button:focus, .custom-button:active:focus {
     border-color: none;
     box-shadow: none;
 }
@@ -55,10 +63,21 @@ input[type=number] {
     background-color: var(--primary);
 }
 
-.custom-button.primary:hover, .custom-button.primary:active, .custom-button.primary:focus, .custom-button.primary:active:focus {
+.custom-button.primary:hover {
     background-color: var(--primary-hover);
+}
+
+.custom-button.primary:active, .custom-button.primary:focus, .custom-button.primary:active:focus {
+    background-color: var(--primary);
+}
+
+.custom-button.primary:hover, .custom-button.primary:active, .custom-button.primary:focus, .custom-button.primary:active:focus {
     border-color: none;
     box-shadow: none;
+}
+
+.custom-button-no-hover:hover {
+    background-color: var(--dark);
 }
 
 .icon-button {
