@@ -10,6 +10,7 @@ import { formatWeekNumber, getWeekNumber } from "../../DateUtils";
 import Menubar from '../../Menubar';
 import { DishesOfDishList } from "./DishesOfDishList";
 import { GenerateDishListButton } from "./GenerateDishListButton";
+import { ShoppingList } from "./ShoppingList";
 
 async function getDishList(date, setDishList) {
     const res = await axios.get(API_URL + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
@@ -22,14 +23,39 @@ async function getDishList(date, setDishList) {
 
 export const Index = () => {
 
+    const [viewDishSelection, setViewDishSelection] = useState(true);
+
     const [date, setDate] = useState(new Date());
     const [dishList, setDishList] = useState();
 
     useEffect(() => getDishList(date, setDishList), []);
 
-    function changeWeek(days) {
-        setDate(new Date(date.setDate(date.getDate() + days)));
+    function changeWeek(weeks) {
+        setDate(new Date(date.setDate(date.getDate() + 7 * weeks)));
         getDishList(date, setDishList);
+        setViewDishSelection(true);
+    }
+
+    function navigationButton() {
+        if (!dishList) {
+            return <GenerateDishListButton date={date} getDishList={getDishList} setDishList={setDishList} />;
+        } else if (viewDishSelection) {
+            return <button onClick={() => setViewDishSelection(false)} className="custom-button primary ml-2" style={{ width: "100%" }}>Einkaufsliste</button>;
+        } else {
+            return <button onClick={() => setViewDishSelection(true)} className="custom-button primary ml-2" style={{ width: "100%" }}>Gerichteauswahl</button>;
+        }
+    }
+
+    function content() {
+        if (viewDishSelection) {
+            if (dishList) {
+                return <DishesOfDishList dishList={dishList} setDishList={setDishList} />;
+            } else {
+                return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
+            }
+        } else {
+            return <ShoppingList dishes={dishList.selectedDishes} />;
+        }
     }
 
     return (
@@ -43,16 +69,16 @@ export const Index = () => {
                         </Col>
                         <Col lg={4} className="space-between">
                             <ButtonGroup>
-                                <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-7)}><ChevronLeft /></Button>
+                                <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-1)}><ChevronLeft /></Button>
                                 <Button className="custom-button">KW{formatWeekNumber(getWeekNumber(date))}</Button>
-                                <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(7)}><ChevronRight /></Button>
+                                <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(1)}><ChevronRight /></Button>
                             </ButtonGroup>
-                            { !dishList && <GenerateDishListButton date={date} getDishList={getDishList} setDishList={setDishList} /> }
+                            { navigationButton() }
                         </Col>
                     </Row>
                 </Container>
                 <Divider className="mb-3 mt-3" />
-                { dishList ? <DishesOfDishList dishList={dishList} setDishList={setDishList} /> : <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p> }
+                { content() }
             </div>
         </>
     );

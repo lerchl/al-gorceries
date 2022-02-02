@@ -6,7 +6,8 @@ const dishSchema = mongoose.Schema({
     sourceInformation: String,
     prepTime: Number,
     cost: Number,
-    recipe: String
+    recipe: String,
+    dishIngridients: [{ type: mongoose.Schema.Types.ObjectId, ref: "dish_ingridient" }]
 });
 
 const Dish = mongoose.model("dish", dishSchema);

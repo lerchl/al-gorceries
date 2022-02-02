@@ -35,9 +35,11 @@ export async function getEntities(entityApiEndpoint, setEntities) {
  * @param {Function} setEntities setter for the stateful value
  * @param {*} param the parameter
  */
-export async function getEntitiesWithParam(entityApiEndpoint, setEntities, param) {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${param}`);
-    setEntities(res.data);
+export function getEntitiesWithParam(entityApiEndpoint, setEntities, param) {
+    axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${param}`).then(res => {
+        handleAnswer(res, 200);
+        setEntities(res.data);
+    });
 }
 
 /**
