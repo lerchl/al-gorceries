@@ -113,6 +113,14 @@ input:focus-visible {
     filter: invert(100%);
 }
 
+div.Mui-focused > fieldset {
+    border-color: var(--primary) !important;
+}
+
+label.Mui-focused {
+    color: var(--primary) !important;
+}
+
 .number-input input {
     text-align: right;
 }

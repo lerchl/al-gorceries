@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
@@ -34,7 +35,9 @@ function AddMeasurementDialog({showDialog, handleClose, getMeasurements, setMeas
                 <Modal.Title>Maßeinheit erstellen</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <input value={name} onChange={onChangeName} placeholder="Bezeichnung" />
+                <div className="row dialog-row">
+                    <TextField value={name} label="Bezeichnung" onChange={onChangeName} />
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <button type="button" onClick={createMeasurement} className="custom-button primary">Hinzufügen</button>

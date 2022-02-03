@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { createEntityAndGetEntities } from "../../ApiUtils";
@@ -31,7 +32,9 @@ export const AddIngridientDialog = () => {
                 <Modal.Title>{dialogTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <input value={name} onChange={onChangeName} placeholder="Name" />
+                <div className="row dialog-row">
+                    <TextField value={name} label="Name" onChange={onChangeName} />
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <button type="button" onClick={saveEntity} className="custom-button primary">Hinzufügen</button>
