@@ -54,7 +54,11 @@ export const Index = () => {
                 return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
             }
         } else {
-            return <ShoppingList dishes={dishList.selectedDishes} />;
+            if (dishList.selectedDishes.length === 0) {
+                return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
+            } else {
+                return <ShoppingList dishes={dishList.selectedDishes} />;
+            }
         }
     }
 
