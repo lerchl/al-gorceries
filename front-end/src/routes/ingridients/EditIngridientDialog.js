@@ -1,13 +1,14 @@
 import { TextField } from "@mui/material";
 import { useContext, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
+import ModalHeader from "react-bootstrap/esm/ModalHeader";
 import { updateEntityAndGetEntities } from "../../ApiUtils";
+import { EditDialogContext } from "../../Entity";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
-import { EditDialogContext } from "./Ingridient";
 
 export const EditIngridientDialog = () => {
-    const {entityApiEndpoint, setEntities, editDialogTitle} = useContext(TableContentContext);
+    const {entityApiEndpoint, setEntities} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
     const {show, close} = useContext(EditDialogContext);
 
@@ -25,7 +26,7 @@ export const EditIngridientDialog = () => {
     const saveEntity = () => {
         entity.name = name;
         updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities);
-        close();
+        closeDialog();
     }
 
     return (
@@ -33,18 +34,18 @@ export const EditIngridientDialog = () => {
                onHide={closeDialog}
                backdrop="static"
                keyboard={false}>
-            <Modal.Header closeButton>
-                <Modal.Title>{editDialogTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <ModalHeader closeButton>
+                <Modal.Title>Zutat bearbeiten</Modal.Title>
+            </ModalHeader>
+            <ModalBody>
                 <div className="row dialog-row">
                     <TextField value={name} label="Name" onChange={onChangeName} />
                 </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <button type="button" onClick={saveEntity} className="custom-button primary">Speichern</button>
-                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
-            </Modal.Footer>
+            </ModalBody>
+            <ModalFooter>
+                <button onClick={saveEntity} className="custom-button primary">Speichern</button>
+                <button onClick={closeDialog} className="custom-button">Schließen</button>
+            </ModalFooter>
         </Modal>
     );
 }

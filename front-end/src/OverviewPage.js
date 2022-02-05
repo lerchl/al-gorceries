@@ -1,13 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { getEntities } from "./ApiUtils";
-import Menubar from "./Menubar";
 import { TableContent } from "./TableContent";
 import { TableHead } from "./TableHead";
 
 export const TableContentContext = createContext();
 
-export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, addDialogTitle, editDialog, editDialogTitle}) => {
+export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, openAddDialogButtonHover, editDialog}) => {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => getEntities(entityApiEndpoint, setEntities), []);
@@ -15,8 +14,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
     const context = {
         entityApiEndpoint: entityApiEndpoint,
         setEntities: setEntities,
-        editDialog: editDialog,
-        editDialogTitle: editDialogTitle
+        editDialog: editDialog
     }
 
     return (
@@ -25,9 +23,8 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
             <Table className="custom-table">
                 <thead className="position-sticky">
                     <TableHead columns={columns}
-                                openAddDialogButtonTitle={"Neue Zutat hinzufügen"}
+                                openAddDialogButtonTitle={openAddDialogButtonHover}
                                 addDialog={addDialog}
-                                dialogTitle={addDialogTitle}
                                 setEntities={setEntities}
                                 entityApiEndpoint={entityApiEndpoint} />
                 </thead>

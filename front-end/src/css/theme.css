@@ -157,6 +157,7 @@ label.Mui-focused {
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 0;
+    min-width: 250px;
 }
 
 .custom-table th:last-child {

@@ -4,10 +4,10 @@ import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
 import { createEntityAndGetEntities } from "../../ApiUtils";
-import { DialogContext } from "../../TableHead";
+import { AddEntityDialogContext } from "../../TableHead";
 
 export const AddDishDialog = () => {
-    const {show, close, setEntities, entityApiEndpoint, dialogTitle} = useContext(DialogContext);
+    const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
 
     const [name, setName] = useState("");
     const [source, setSource] = useState("");

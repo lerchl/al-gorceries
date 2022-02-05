@@ -1,50 +1,45 @@
 import { TextField } from "@mui/material";
-import axios from "axios";
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
+import { createEntityAndGetEntities } from "../../ApiUtils";
+import { AddEntityDialogContext } from "../../TableHead";
 
-function AddMeasurementDialog({showDialog, handleClose, getMeasurements, setMeasurements}) {
+export const AddMeasurementDialog = () => {
+    const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
+
     const [name, setName] = useState("");
 
     const onChangeName = event => {
         setName(event.target.value);
     }
 
-    const createMeasurement = () => {
-        let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements`;
-        axios.post(url, {"name": name}).then(res => {
-            if (res.status !== 201) {
-                console.log(res);
-            }
-            getMeasurements(setMeasurements);
-        });
+    const closeDialog = () => {
+        setName("");
         close();
     }
 
-    const close = () => {
-        setName("");
-        handleClose();
+    const saveEntity = () => {
+        createEntityAndGetEntities(entityApiEndpoint, { "name": name }, setEntities);
+        closeDialog();
     }
 
     return (
-        <Modal show={showDialog}
-               onHide={handleClose}
+        <Modal show={show}
+               onHide={closeDialog}
                backdrop="static"
                keyboard={false}>
             <Modal.Header closeButton>
-                <Modal.Title>Maßeinheit erstellen</Modal.Title>
+                <ModalTitle>Maßeinheit erstellen</ModalTitle>
             </Modal.Header>
-            <Modal.Body>
+            <ModalBody>
                 <div className="row dialog-row">
                     <TextField value={name} label="Bezeichnung" onChange={onChangeName} />
                 </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <button type="button" onClick={createMeasurement} className="custom-button primary">Hinzufügen</button>
-                <button type="button" onClick={close} className="custom-button">Schließen</button>
-            </Modal.Footer>
+            </ModalBody>
+            <ModalFooter>
+                <button onClick={saveEntity} className="custom-button primary">Hinzufügen</button>
+                <button onClick={closeDialog} className="custom-button">Schließen</button>
+            </ModalFooter>
         </Modal>
     );
 }
-
-export default AddMeasurementDialog;

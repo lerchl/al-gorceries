@@ -1,44 +1,51 @@
 import { TextField } from "@mui/material";
-import axios from "axios";
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
+import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import { updateEntityAndGetEntities } from "../../ApiUtils";
+import { EditDialogContext } from "../../Entity";
+import { TableContentContext } from "../../OverviewPage";
+import { EntityContext } from "../../TableContent";
 
-export const EditMeasurementDialog = ({show, closeDialog, getMeasurements, setMeasurements, measurement}) => {
-    const [name, setName] = useState(measurement.name);
+export const EditMeasurementDialog = () => {
+    const {entityApiEndpoint, setEntities} = useContext(TableContentContext);
+    const entity = useContext(EntityContext);
+    const {show, close} = useContext(EditDialogContext);
 
-    const saveMeasurement = () => {
-        let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/measurements/${measurement._id}`;
-        axios.put(url, {"name": name}).then(res => {
-            if (res.status !== 200) {
-                console.log(res);
-            }
-            getMeasurements(setMeasurements);
-        });
-        closeDialog();
+    const [name, setName] = useState(entity.name);
+
+    const onChangeName = event => {
+        setName(event.target.value);
     }
 
-    const close = () => {
-        setName(measurement.name);
+    const closeDialog = () => {
+        setName(entity.name);
+        close();
+    }
+
+    const saveEntity = () => {
+        entity.name = name;
+        updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities);
         closeDialog();
     }
 
     return (
         <Modal show={show}
-               onHide={close}
+               onHide={closeDialog}
                backdrop="static"
                keyboard={false}>
-            <Modal.Header closeButton>
+            <ModalHeader closeButton>
                 <Modal.Title>Maßeinheit bearbeiten</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            </ModalHeader>
+            <ModalBody>
                 <div className="row dialog-row">
-                    <TextField value={name} label="Bezeichnung" onChange={e => setName(e.target.value)} />
+                    <TextField value={name} label="Bezeichnung" onChange={onChangeName} />
                 </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <button type="button" onClick={saveMeasurement} className="custom-button primary">Speichern</button>
-                <button type="button" onClick={close} className="custom-button">Schließen</button>
-            </Modal.Footer>
+            </ModalBody>
+            <ModalFooter>
+                <button onClick={saveEntity} className="custom-button primary">Speichern</button>
+                <button onClick={closeDialog} className="custom-button">Schließen</button>
+            </ModalFooter>
         </Modal>
     );
 }

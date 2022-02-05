@@ -1,15 +1,17 @@
+import { Entity } from "../../Entity";
 import { OverviewPage } from "../../OverviewPage";
 import { AddIngridientDialog } from "./AddIngridientDialog";
 import { EditIngridientDialog } from "./EditIngridientDialog";
-import { Ingridient } from "./Ingridient";
 
 export const Ingridients = () => {
     const columns = ["Name"];
+    const getColumns = ingridient => [ingridient.name];
 
     return <OverviewPage headline="Zutaten" 
                          entityApiEndpoint="ingridients" 
                          columns={columns}
-                         entitiyComponent={<Ingridient />}
-                         addDialog={<AddIngridientDialog />} addDialogTitle="Zutat hinzufügen"
-                         editDialog={<EditIngridientDialog />} editDialogTitle="Zutat bearbeiten" />;
+                         entitiyComponent={<Entity getColumns={getColumns} />}
+                         addDialog={<AddIngridientDialog />}
+                         openAddDialogButtonHover={"Neue Zutat hinzufügen"}
+                         editDialog={<EditIngridientDialog />} />;
 }

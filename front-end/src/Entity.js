@@ -8,7 +8,7 @@ import { v4 } from "uuid";
 
 export const EditDialogContext = createContext();
 
-export const Entity = ({getColumns, hasDetailPage}) => {
+export const Entity = ({getColumns, hasDetailPage = false}) => {
     const {entityApiEndpoint, setEntities, editDialog} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
 

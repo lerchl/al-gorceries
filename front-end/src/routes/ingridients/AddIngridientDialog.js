@@ -1,11 +1,11 @@
 import { TextField } from "@mui/material";
 import { useContext, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { createEntityAndGetEntities } from "../../ApiUtils";
-import { DialogContext } from "../../TableHead";
+import { AddEntityDialogContext } from "../../TableHead";
 
 export const AddIngridientDialog = () => {
-    const {show, close, setEntities, entityApiEndpoint, dialogTitle} = useContext(DialogContext);
+    const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
 
     const [name, setName] = useState("");
 
@@ -19,27 +19,27 @@ export const AddIngridientDialog = () => {
     }
 
     const saveEntity = () => {
-        createEntityAndGetEntities(entityApiEndpoint, {"name": name}, setEntities);
+        createEntityAndGetEntities(entityApiEndpoint, { "name": name }, setEntities);
         closeDialog();
     }
 
     return (
         <Modal show={show}
-               backdrop="static"
                onHide={closeDialog}
+               backdrop="static"
                keyboard={false}>
             <Modal.Header closeButton>
-                <Modal.Title>{dialogTitle}</Modal.Title>
+                <ModalTitle>Zutat erstellen</ModalTitle>
             </Modal.Header>
-            <Modal.Body>
+            <ModalBody>
                 <div className="row dialog-row">
                     <TextField value={name} label="Name" onChange={onChangeName} />
                 </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <button type="button" onClick={saveEntity} className="custom-button primary">Hinzufügen</button>
-                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
-            </Modal.Footer>
+            </ModalBody>
+            <ModalFooter>
+                <button onClick={saveEntity} className="custom-button primary">Hinzufügen</button>
+                <button onClick={closeDialog} className="custom-button">Schließen</button>
+            </ModalFooter>
         </Modal>
     );
 }

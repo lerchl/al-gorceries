@@ -8,7 +8,7 @@ import { Dish } from './routes/dishes/Dish';
 import { Dishes } from './routes/dishes/Dishes';
 import { Index } from './routes/index/Index';
 import { Ingridients } from './routes/ingridients/Ingridients';
-import Measurements from './routes/measurements/Measurements';
+import { Measurements } from "./routes/measurements/Measurements";
 import { Guard } from "./security/Guard";
 import { keycloak } from './security/Keycloak';
 
