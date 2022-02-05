@@ -63,27 +63,24 @@ export const Index = () => {
     }
 
     return (
-        <>
-            <Menubar />
-            <div className="content">
-                <Container fluid>
-                    <Row>
-                        <Col lg={8}>
-                            <h1>Gerichte diese Woche</h1>
-                        </Col>
-                        <Col lg={4} className="space-between">
-                            <ButtonGroup>
-                                <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-1)}><ChevronLeft /></Button>
-                                <Button className="custom-button custom-button-no-hover">KW{formatWeekNumber(getWeekNumber(date))}</Button>
-                                <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(1)}><ChevronRight /></Button>
-                            </ButtonGroup>
-                            { navigationButton() }
-                        </Col>
-                    </Row>
-                </Container>
-                <Divider className="mb-3 mt-3" />
-                { content() }
-            </div>
-        </>
+        <div className="content">
+            <Container fluid>
+                <Row>
+                    <Col lg={8}>
+                        <h1>Gerichte diese Woche</h1>
+                    </Col>
+                    <Col lg={4} className="space-between">
+                        <ButtonGroup>
+                            <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-1)}><ChevronLeft /></Button>
+                            <Button className="custom-button custom-button-no-hover">KW{formatWeekNumber(getWeekNumber(date))}</Button>
+                            <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(1)}><ChevronRight /></Button>
+                        </ButtonGroup>
+                        { navigationButton() }
+                    </Col>
+                </Row>
+            </Container>
+            <Divider className="mb-3 mt-3" />
+            { content() }
+        </div>
     );
 }

@@ -20,27 +20,24 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
     }
 
     return (
-        <>
-            <Menubar />
-            <div className="content">
-                <h1>{headline}</h1>
-                <Table className="custom-table">
-                    <thead className="position-sticky">
-                        <TableHead columns={columns}
-                                   openAddDialogButtonTitle={"Neue Zutat hinzufügen"}
-                                   addDialog={addDialog}
-                                   dialogTitle={addDialogTitle}
-                                   setEntities={setEntities}
-                                   entityApiEndpoint={entityApiEndpoint} />
-                    </thead>
-                    <tbody>
-                        <TableContentContext.Provider value={context}>
-                            <TableContent entities={entities} entityComponent={entitiyComponent} />
-                        </TableContentContext.Provider>
-                    </tbody>
-                </Table>
-            </div>
-        </>
+        <div className="content">
+            <h1>{headline}</h1>
+            <Table className="custom-table">
+                <thead className="position-sticky">
+                    <TableHead columns={columns}
+                                openAddDialogButtonTitle={"Neue Zutat hinzufügen"}
+                                addDialog={addDialog}
+                                dialogTitle={addDialogTitle}
+                                setEntities={setEntities}
+                                entityApiEndpoint={entityApiEndpoint} />
+                </thead>
+                <tbody>
+                    <TableContentContext.Provider value={context}>
+                        <TableContent entities={entities} entityComponent={entitiyComponent} />
+                    </TableContentContext.Provider>
+                </tbody>
+            </Table>
+        </div>
     );
 
 }

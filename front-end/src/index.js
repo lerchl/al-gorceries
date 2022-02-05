@@ -1,23 +1,33 @@
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Menubar from "./Menubar";
 import reportWebVitals from './reportWebVitals';
 import { Dish } from './routes/dishes/Dish';
 import { Dishes } from './routes/dishes/Dishes';
 import { Index } from './routes/index/Index';
 import { Ingridients } from './routes/ingridients/Ingridients';
 import Measurements from './routes/measurements/Measurements';
+import { Guard } from "./security/Guard";
+import { keycloak } from './security/Keycloak';
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="" element={<Index />} />
-            <Route path="measurements" element={<Measurements />} />
-            <Route path="ingridients" element={<Ingridients />} />
-            <Route path="dishes" element={<Dishes />} />
-            <Route path="dishes/:id" element={<Dish />} />
-        </Routes>
-    </BrowserRouter>,
+    <>
+        <Menubar />
+        <ReactKeycloakProvider authClient={keycloak}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="" element={<Guard><Index /></Guard>} />
+                    <Route path="measurements" element={<Guard><Measurements /></Guard>} />
+                    <Route path="ingridients" element={<Guard><Ingridients /></Guard>} />
+                    <Route path="dishes" element={<Guard><Dishes /></Guard>} />
+                    <Route path="dishes/:id" element={<Guard><Dish /></Guard>} />
+                </Routes>
+            </BrowserRouter>
+        </ReactKeycloakProvider>
+    </>
+    ,
     document.getElementById('root')
 );
 
