@@ -1,9 +1,8 @@
-import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { PlusLg } from "react-bootstrap-icons";
 import { DISH_INGRIDIENTS, getEntities, getEntitiesWithParam, INGRIDIENTS, MEASUREMENTS } from "../../ApiUtils";
 import { AddDishIngridientDialog } from "./AddDishIngridientDialog";
-import { DishIngridient } from "./DishIngridient";
+import { DishIngridientsContainer } from "./DishIngridientsContainer";
 
 export const DishIngridients = ({ dishId }) => {
 
@@ -25,13 +24,9 @@ export const DishIngridients = ({ dishId }) => {
                     <PlusLg color="white" size={30} />
                 </button>
             </div>
-            <Container fluid="lg" className="overlay">
-                {
-                    dishIngridients.map((dishIngridient, i) => {
-                        return <DishIngridient key={dishIngridient._id} dishIngridient={dishIngridient} setDishIngridients={setDishIngridients} dishId={dishId} last={i + 1 === dishIngridients.length} measurements={measurements} ingridients={ingridients} />;
-                    })
-                }
-            </Container>
+            <DishIngridientsContainer dishId={dishId} dishIngridients={dishIngridients}
+                    setDishIngridients={setDishIngridients}
+                    ingridients={ingridients} measurements={measurements} />
             <AddDishIngridientDialog show={showAddDishIngridientDialog} close={() => setShowAddDishIngridientDialog(false)} dishId={dishId} setDishIngridients={setDishIngridients} measurements={measurements} ingridients={ingridients} />
         </>
     );
