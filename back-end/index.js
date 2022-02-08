@@ -6,11 +6,14 @@ const Dish = require("./entities/dish");
 const DishIngridient = require("./entities/dishIngridient");
 const Measurement = require("./entities/measurement");
 const DishList = require("./entities/dishList");
+const dotenv = require("dotenv");
 
 // config
+dotenv.config();
+
 const app = express();
-const port = 2000;
-const url = "mongodb+srv://test:test@development.czo47.mongodb.net/al-gorceries?retryWrites=true&w=majority";
+const port = process.env.PORT;
+const url = process.env.MONGO_DB_STRING;
 
 // middleware
 app.use(express.json());
