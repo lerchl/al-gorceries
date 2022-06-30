@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Menubar from "./Menubar";
-import reportWebVitals from './reportWebVitals';
 import { Dish } from './routes/dishes/Dish';
 import { Dishes } from './routes/dishes/Dishes';
 import { Index } from './routes/index/Index';
@@ -26,12 +25,11 @@ ReactDOM.render(
                 </Routes>
             </BrowserRouter>
         </ReactKeycloakProvider>
-    </>
-    ,
-    document.getElementById('root')
+    </>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();

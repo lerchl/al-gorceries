@@ -5,6 +5,7 @@ import { DISHES, getEntity } from "../../ApiUtils";
 import Menubar from "../../Menubar";
 import { DishInfos } from "./DishInfos";
 import { DishIngridients } from './DishIngridients';
+import { Steps } from "./steps/Steps";
 
 export const Dish = () => {
 
@@ -28,6 +29,7 @@ export const Dish = () => {
                             {/* Base data */}
                             <h2>Infos</h2>
                             <DishInfos dish={dish} />
+                            <Steps />
                         </Col>
 
                         <Col lg={6}>
