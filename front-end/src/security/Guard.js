@@ -1,19 +1,24 @@
-import { Backdrop, CircularProgress } from "@mui/material";
-import { useKeycloak } from "@react-keycloak/web";
+import { createContext, useState } from "react";
+import { LoginDialog } from "../routes/login/LoginDialog";
+
+export const LoginDialogContext = createContext();
 
 export const Guard = ({ children }) => {
 
-    const { initialized, keycloak } = useKeycloak();
+    // TODO: useEffect mit Abfrage, ob der User eingeloggt ist und abhängig davon den Dialog anzeigen oder nicht
 
-    if (!initialized) {
-        return (
-            <Backdrop open={true} sx={{ color: "var(--primary)" }}>
-                <CircularProgress color="inherit" />
-            </Backdrop>
-        );
+    const [show, setShow] = useState(true);
+
+    const close = () => {
+        setShow(false);
     }
 
-    return keycloak.authenticated ? children : <NotLoggedIn keycloak={keycloak} />;
+    return (
+        <>
+            <LoginDialog show={show} close={close} />
+            {children}
+        </>
+    );
 };
 
 const NotLoggedIn = ({ keycloak }) => {

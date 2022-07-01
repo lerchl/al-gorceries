@@ -9,6 +9,8 @@
 
     --primary: rgb(111, 0, 185);
     --primary-hover: rgb(191, 119, 238);
+
+    --error: red;
 }
 
 body {
@@ -25,6 +27,17 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* -LINKS---------------------- */
+
+a, a:hover, a:visited {
+    color: var(--text-color);
+}
+
+.register-login-link {
+    position: absolute;
+    left: 25px;
 }
 
 /* -BUTTON-&-INPUT------------- */
@@ -251,4 +264,8 @@ label.Mui-focused {
 
 .dialog-row > * {
     padding: 0;
+}
+
+.error {
+    color: var(--error);
 }

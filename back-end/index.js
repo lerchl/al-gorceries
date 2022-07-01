@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const password = require("password-hash-and-salt");
 const Ingridient = require("./entities/ingridient");
 const Dish = require("./entities/dish");
 const DishIngridient = require("./entities/dishIngridient");
@@ -16,8 +17,15 @@ const port = process.env.PORT;
 const url = process.env.MONGO_DB_STRING;
 
 // middleware
+const log = (req, _res, next) => {
+    console.log(`${new Date().toISOString()}: ${req.method} request for ${req.url}`);
+    next();
+}
+
 app.use(express.json());
 app.use(cors());
+
+app.use(log);
 
 // db config
 mongoose.connect(url, {
@@ -28,6 +36,19 @@ mongoose.connect(url, {
 // endpoints
 app.get("/", (_req, res) => {
     res.status(200).send("Hello World!");
+});
+
+// Authentication
+app.post("/login", (req, res) => {
+    password("Start123$").hash((err, hash) => {
+        password(req.body.password).verifyAgainst(hash, (err, verified) => {
+            if (req.body.email === "test" && verified) {
+                res.status(200).send();
+            } else {
+                res.status(400).send();
+            }
+        });
+    });
 });
 
 // Measurement
@@ -148,12 +169,12 @@ app.delete("/dishIngridients/:id", (req, res) => {
 function handleDishListGetCallback(res, err, data) {
     if (err) {
         res.status(500).send(err);
-        console.log(err);
+        // console.log(err);
     } else if (!data) {
-        console.log("No dish list was found");
+        // console.log("No dish list was found");
         res.status(204).send();
     } else {
-        console.log("Sending:", data);
+        // console.log("Sending:", data);
         res.status(200).send(data);
     }
 }
@@ -188,7 +209,7 @@ function handleCallback(res, err, data, successCode) {
         res.status(500).send(err);
         console.error(err);
     } else {
-        console.log("Sending:", data);
+        // console.log("Sending:", data);
         res.status(successCode).send(data);
     }
 }
