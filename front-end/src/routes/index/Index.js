@@ -7,7 +7,6 @@ import { API_URL, DISH_LIST } from "../../ApiUtils";
 import "../../css/index.css";
 import "../../css/theme.css";
 import { formatWeekNumber, getWeekNumber } from "../../DateUtils";
-import Menubar from '../../Menubar';
 import { DishesOfDishList } from "./DishesOfDishList";
 import { GenerateDishListButton } from "./GenerateDishListButton";
 import { ShoppingList } from "./ShoppingList";

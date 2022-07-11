@@ -41,7 +41,7 @@ export const LoginDialog = ({show, close}) => {
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <a class="register-login-link" href="/register">Noch nicht registriert?</a>
+                <a class="register-login-link" href="/registration">Noch nicht registriert?</a>
                 <button type="button" onClick={login} className="custom-button primary">Einloggen</button>
             </Modal.Footer>
         </Modal>

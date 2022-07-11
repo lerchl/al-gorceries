@@ -8,6 +8,7 @@ const DishIngridient = require("./entities/dishIngridient");
 const Measurement = require("./entities/measurement");
 const DishList = require("./entities/dishList");
 const dotenv = require("dotenv");
+const User = require("./entities/user");
 
 // config
 dotenv.config();
@@ -40,14 +41,30 @@ app.get("/", (_req, res) => {
 
 // Authentication
 app.post("/login", (req, res) => {
-    password("Start123$").hash((err, hash) => {
-        password(req.body.password).verifyAgainst(hash, (err, verified) => {
+    password("Start123$").hash((_hashErr, hash) => {
+        password(req.body.password).verifyAgainst(hash, (_verifyErr, verified) => {
             if (req.body.email === "test" && verified) {
                 res.status(200).send();
             } else {
                 res.status(400).send();
             }
         });
+    });
+});
+
+app.post("/registration", (req, res) => {
+    const email = req.body.email;
+    User.findOne({email: email}, (_findErr, user) => {
+        if (user) {
+            res.status(400).send("Ein Nutzer mit dieser E-Mail existiert bereits.");
+        } else {
+            console.log(req.body);
+            if (req.body.password === req.body.passwordRepeat) {
+                password(req.body.password).hash((_err, hash) => {
+                    User.create({ email: email, password: hash }, (err, data) => handleCallback(res, err, data, 201));
+                });
+            }
+        }
     });
 });
 

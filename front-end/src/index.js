@@ -7,6 +7,7 @@ import { Dishes } from './routes/dishes/Dishes';
 import { Index } from './routes/index/Index';
 import { Ingridients } from './routes/ingridients/Ingridients';
 import { Measurements } from "./routes/measurements/Measurements";
+import { Registration } from './routes/registration/Registration';
 import { Guard } from "./security/Guard";
 
 ReactDOM.render(
@@ -14,6 +15,10 @@ ReactDOM.render(
         <Menubar />
         <BrowserRouter>
             <Routes>
+                {/* NOT GUARDED */}
+                <Route path="registration" element={<Registration />} />
+
+                {/* GUARDED */}
                 <Route path="" element={<Guard><Index /></Guard>} />
                 <Route path="measurements" element={<Guard><Measurements /></Guard>} />
                 <Route path="ingridients" element={<Guard><Ingridients /></Guard>} />
