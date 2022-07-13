@@ -1,14 +1,18 @@
 const express = require("express");
+const jwt = require("express-jwt");
+const jsonwebtoken = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const password = require("password-hash-and-salt");
+
 const Ingridient = require("./entities/ingridient");
 const Dish = require("./entities/dish");
 const DishIngridient = require("./entities/dishIngridient");
 const Measurement = require("./entities/measurement");
 const DishList = require("./entities/dishList");
-const dotenv = require("dotenv");
 const User = require("./entities/user");
+
+const dotenv = require("dotenv");
 
 // config
 dotenv.config();
@@ -40,25 +44,12 @@ app.get("/", (_req, res) => {
 });
 
 // Authentication
-app.post("/login", (req, res) => {
-    password("Start123$").hash((_hashErr, hash) => {
-        password(req.body.password).verifyAgainst(hash, (_verifyErr, verified) => {
-            if (req.body.email === "test" && verified) {
-                res.status(200).send();
-            } else {
-                res.status(400).send();
-            }
-        });
-    });
-});
-
 app.post("/registration", (req, res) => {
     const email = req.body.email;
-    User.findOne({email: email}, (_findErr, user) => {
+    User.findOne({ email: email }, (_findErr, user) => {
         if (user) {
             res.status(400).send("Ein Nutzer mit dieser E-Mail existiert bereits.");
         } else {
-            console.log(req.body);
             if (req.body.password === req.body.passwordRepeat) {
                 password(req.body.password).hash((_err, hash) => {
                     User.create({ email: email, password: hash }, (err, data) => handleCallback(res, err, data, 201));
@@ -66,6 +57,32 @@ app.post("/registration", (req, res) => {
             }
         }
     });
+});
+
+app.post("/login", (req, res) => {
+    const email = req.body.email;
+
+    User.findOne({ email: email }, (_findErr, user) => {
+        if (user) {
+            password(req.body.password).verifyAgainst(user.password, (_verifyErr, verified) => {
+                if (verified) {
+                    res.status(200).send({ token: jsonwebtoken.sign({ user }, process.env.JWT_SECRET, { expiresIn: "3h" }) });
+                } else {
+                    res.status(400).send();
+                }
+            });
+        } else {
+            res.status(400).send();
+        }
+    });
+});
+
+app.use((req, res, next) => {
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, decoded) => {
+        // Fehler, wenn kein Token übergeben wird.
+        // Keine Ahnung was passiert, wenn ein Token übergeben wird, dieser aber nicht richtig ist.
+    });
+    next();
 });
 
 // Measurement

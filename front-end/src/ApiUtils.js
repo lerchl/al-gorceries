@@ -1,5 +1,19 @@
 import axios from "axios";
 
+axios.interceptors.request.use(config => {
+    const { origin } = new URL(config.url);
+    const token = localStorage.getItem("token");
+
+    if (!origin.includes(LOGIN) && !origin.includes(REGISTRATION)) {
+        config.headers.authorization = token;
+    }
+
+    return config;
+}, error => Promise.reject(error));
+
+const LOGIN = "login";
+const REGISTRATION = "registration";
+
 export const MEASUREMENTS = "measurements";
 export const INGRIDIENTS = "ingridients";
 export const DISHES = "dishes";
