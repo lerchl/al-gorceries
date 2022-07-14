@@ -20,7 +20,8 @@ export const DISHES = "dishes";
 export const DISH_INGRIDIENTS = "dishIngridients";
 export const DISH_LIST = "dishList";
 
-export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/`;
+// export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/`;
+export const API_URL = "";
 
 /**
  * Sends a request for fetching an entity via its id.

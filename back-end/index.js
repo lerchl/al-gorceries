@@ -3,6 +3,7 @@ const jwt = require("express-jwt");
 const jsonwebtoken = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const password = require("password-hash-and-salt");
 
 const Ingridient = require("./entities/ingridient");
@@ -29,6 +30,7 @@ const log = (req, _res, next) => {
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use(log);
 
@@ -46,6 +48,7 @@ app.get("/", (_req, res) => {
 // Authentication
 app.post("/registration", (req, res) => {
     const email = req.body.email;
+
     User.findOne({ email: email }, (_findErr, user) => {
         if (user) {
             res.status(400).send("Ein Nutzer mit dieser E-Mail existiert bereits.");
@@ -66,7 +69,9 @@ app.post("/login", (req, res) => {
         if (user) {
             password(req.body.password).verifyAgainst(user.password, (_verifyErr, verified) => {
                 if (verified) {
-                    res.status(200).send({ token: jsonwebtoken.sign({ user }, process.env.JWT_SECRET, { expiresIn: "3h" }) });
+                    const token = jsonwebtoken.sign({ user }, process.env.JWT_SECRET, { expiresIn: "3h" });
+                    res.cookie("token", token, { httpOnly: true });
+                    res.status(200).send({ token });
                 } else {
                     res.status(400).send();
                 }
@@ -77,12 +82,25 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.use((req, res, next) => {
-    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, decoded) => {
-        // Fehler, wenn kein Token übergeben wird.
-        // Keine Ahnung was passiert, wenn ein Token übergeben wird, dieser aber nicht richtig ist.
+app.get("/loggedIn", (req, res) => {
+    console.log(req.cookies);
+    jsonwebtoken.verify(req.cookies.token, process.env.JWT_SECRET, (err, _decoded) => {
+        if (err) {
+            res.status(400).send("No");
+        } else {
+            res.status(200).send("Yes");
+        }
     });
-    next();
+});
+
+app.use((req, res, next) => {
+    jsonwebtoken.verify(req.cookies.authorization, process.env.JWT_SECRET, (err, _decoded) => {
+        if (err) {
+            res.status(400).send();
+        } else {
+            next();
+        }
+    });
 });
 
 // Measurement

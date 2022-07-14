@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-export const LoginDialog = ({show, close}) => {
+export const LoginDialog = ({show, close, setLoggedIn}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showError, setShowError] = useState(false);
@@ -16,6 +16,7 @@ export const LoginDialog = ({show, close}) => {
         const data = { email: email, password: password }
         axios.post(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/login`, data).then(res => {
             localStorage.setItem("token", res.data.token);
+            setLoggedIn(true);
             close();
         }).catch(_err => {
             setPassword("");
