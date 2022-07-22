@@ -15,8 +15,6 @@ export const LoginDialog = ({show, close, setLoggedIn}) => {
     const login = () => {
         const data = { email: email, password: password }
         axios.post(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/login`, data).then(res => {
-            localStorage.setItem("token", res.data.token);
-            setLoggedIn(true);
             close();
         }).catch(_err => {
             setPassword("");

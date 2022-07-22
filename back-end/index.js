@@ -47,12 +47,16 @@ app.get("/", (_req, res) => {
 
 // Authentication
 app.post("/registration", (req, res) => {
+    console.log(req.body);
+
     const email = req.body.email;
 
     User.findOne({ email: email }, (_findErr, user) => {
+        console.log(user);
         if (user) {
             res.status(400).send("Ein Nutzer mit dieser E-Mail existiert bereits.");
         } else {
+            console.log(req.body.password === req.body.passwordRepeat);
             if (req.body.password === req.body.passwordRepeat) {
                 password(req.body.password).hash((_err, hash) => {
                     User.create({ email: email, password: hash }, (err, data) => handleCallback(res, err, data, 201));
@@ -70,8 +74,8 @@ app.post("/login", (req, res) => {
             password(req.body.password).verifyAgainst(user.password, (_verifyErr, verified) => {
                 if (verified) {
                     const token = jsonwebtoken.sign({ user }, process.env.JWT_SECRET, { expiresIn: "3h" });
-                    res.cookie("token", token, { httpOnly: true });
-                    res.status(200).send({ token });
+                    res.cookie("jwt", token, { httpOnly: true });
+                    res.status(200).send();
                 } else {
                     res.status(400).send();
                 }
@@ -94,7 +98,10 @@ app.get("/loggedIn", (req, res) => {
 });
 
 app.use((req, res, next) => {
+    console.log(req.cookies);
     jsonwebtoken.verify(req.cookies.authorization, process.env.JWT_SECRET, (err, _decoded) => {
+        // console.log(err);
+        // console.log(_decoded);
         if (err) {
             res.status(400).send();
         } else {
