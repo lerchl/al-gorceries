@@ -269,3 +269,15 @@ label.Mui-focused {
 .error {
     color: var(--error);
 }
+
+.loading-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-container > span {
+    color: var(--primary-hover);
+}

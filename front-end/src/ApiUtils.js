@@ -1,27 +1,12 @@
 import axios from "axios";
 
-axios.interceptors.request.use(config => {
-    const { origin } = new URL(config.url);
-    const token = localStorage.getItem("token");
-
-    if (!origin.includes(LOGIN) && !origin.includes(REGISTRATION)) {
-        config.headers.authorization = token;
-    }
-
-    return config;
-}, error => Promise.reject(error));
-
-const LOGIN = "login";
-const REGISTRATION = "registration";
-
 export const MEASUREMENTS = "measurements";
 export const INGRIDIENTS = "ingridients";
 export const DISHES = "dishes";
 export const DISH_INGRIDIENTS = "dishIngridients";
 export const DISH_LIST = "dishList";
 
-// export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/`;
-export const API_URL = "localhost:3000/";
+export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
 
 /**
  * Sends a request for fetching an entity via its id.
@@ -30,7 +15,7 @@ export const API_URL = "localhost:3000/";
  * @param {Number} id id of the entitiy to fetch
  */
 export async function getEntity(entityApiEndpoint, setEntity, id) {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${id}`)
+    const res = await axios.get(`${API_URL}/${entityApiEndpoint}/${id}`)
     setEntity(res.data);
 }
 
@@ -40,7 +25,7 @@ export async function getEntity(entityApiEndpoint, setEntity, id) {
  * @param {Function} setEntities setter for the stateful value
  */
 export async function getEntities(entityApiEndpoint, setEntities) {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`);
+    const res = await axios.get(`${API_URL}/${entityApiEndpoint}`);
     setEntities(res.data);
 }
 
@@ -51,7 +36,7 @@ export async function getEntities(entityApiEndpoint, setEntities) {
  * @param {*} param the parameter
  */
 export function getEntitiesWithParam(entityApiEndpoint, setEntities, param) {
-    axios.get(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${param}`).then(res => {
+    axios.get(`${API_URL}/${entityApiEndpoint}/${param}`).then(res => {
         handleAnswer(res, 200);
         setEntities(res.data);
     });
@@ -64,7 +49,7 @@ export function getEntitiesWithParam(entityApiEndpoint, setEntities, param) {
  * @returns {Promise<AxiosResponse<any, any>>} promise with response
  */
 export function createEntity(entityApiEndpoint, entity) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     return axios.post(url, entity);
 }
 
@@ -75,7 +60,7 @@ export function createEntity(entityApiEndpoint, entity) {
  * @param {Function} setEntities setter for the stateful value
  */
 export function createEntityAndGetEntities(entityApiEndpoint, entity, setEntities) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     axios.post(url, entity).then(res => {
         handleAnswer(res, 201);
         getEntities(entityApiEndpoint, setEntities);
@@ -90,7 +75,7 @@ export function createEntityAndGetEntities(entityApiEndpoint, entity, setEntitie
  * @param {*} param the parameter
  */
 export function createEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, setEntities, param) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     axios.post(url, entity).then(res => {
         handleAnswer(res, 201);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);
@@ -104,7 +89,7 @@ export function createEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, s
  * @param {Function} setEntity setter for the stateful value
  */
 export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
-    let url = `${API_URL}${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntity(entityApiEndpoint, setEntity, entity._id);
@@ -118,7 +103,7 @@ export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
  * @param {Function} setEntities setter for the stateful value
  */
 export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntities(entityApiEndpoint, setEntities);
@@ -133,7 +118,7 @@ export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntitie
  * @param {*} param the parameter
  */
 export function updateEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, setEntities, param) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);
@@ -147,7 +132,7 @@ export function updateEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, s
  * @param {Function} setEntities setter for the stateful value
  */
 export function deleteEntityAndGetEntities(entityApiEndpoint, id, setEntities) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${id}`;
     axios.delete(url).then(res => {
         handleAnswer(res, 200);
         getEntities(entityApiEndpoint, setEntities);
@@ -162,7 +147,7 @@ export function deleteEntityAndGetEntities(entityApiEndpoint, id, setEntities) {
  * @param {*} param the parameter
  */
  export function deleteEntityAndGetEntitiesWithParam(entityApiEndpoint, id, setEntities, param) {
-    let url = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/${entityApiEndpoint}/${id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${id}`;
     axios.delete(url).then(res => {
         handleAnswer(res, 200);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-export const LoginDialog = ({show, close, setLoggedIn}) => {
+export const LoginDialog = ({show, close}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showError, setShowError] = useState(false);
@@ -41,7 +41,7 @@ export const LoginDialog = ({show, close, setLoggedIn}) => {
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <a class="register-login-link" href="/registration">Noch nicht registriert?</a>
+                <a className="register-login-link" href="/registration">Noch nicht registriert?</a>
                 <button type="button" onClick={login} className="custom-button primary">Einloggen</button>
             </Modal.Footer>
         </Modal>

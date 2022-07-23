@@ -12,7 +12,7 @@ import { GenerateDishListButton } from "./GenerateDishListButton";
 import { ShoppingList } from "./ShoppingList";
 
 async function getDishList(date, setDishList) {
-    const res = await axios.get(API_URL + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
+    const res = await axios.get(API_URL + "/" + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
     if (res.status === 204) {
         setDishList();
     } else {
