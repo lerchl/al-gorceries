@@ -92,6 +92,11 @@ app.get("/loggedIn", (req, res) => {
     });
 });
 
+app.post("/logout", (_req, res) => {
+    res.clearCookie("jwt");
+    res.status(200).send();
+});
+
 app.use((req, res, next) => {
     jsonwebtoken.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, _decoded) => {
         if (err) {

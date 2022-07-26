@@ -1,10 +1,8 @@
+import { CircularProgress } from "@mui/material";
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "../ApiUtils";
 import { LoginDialog } from "../routes/login/LoginDialog";
-import { CircularProgress } from "@mui/material";
-
-export const LoginDialogContext = createContext();
 
 export const Guard = ({ children }) => {
 
@@ -26,7 +24,7 @@ export const Guard = ({ children }) => {
         <>
             { loading ? <div className="loading-container"><CircularProgress /></div> : <></> }
             { loggedIn ? children : <></> }
-            <LoginDialog show={show} close={() => setShow(false)} />
+            <LoginDialog show={show} close={() => setShow(false)} setLoggedIn={setLoggedIn} />
         </>
     );
 };
