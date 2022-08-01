@@ -25,6 +25,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                     <TableHead columns={columns}
                                 openAddDialogButtonTitle={openAddDialogButtonHover}
                                 addDialog={addDialog}
+                                entities={entities}
                                 setEntities={setEntities}
                                 entityApiEndpoint={entityApiEndpoint} />
                 </thead>
