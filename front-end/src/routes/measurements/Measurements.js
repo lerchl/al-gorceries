@@ -5,7 +5,7 @@ import { AddMeasurementDialog } from "./AddMeasurementDialog";
 import { EditMeasurementDialog } from "./EditMeasurementDialog";
 
 export const Measurements = () => {
-    const columns = ["Bezeichnung"];
+    const columns = ["name"];
     const getColumns = measurement => [measurement.name];
 
     return <OverviewPage headline={"Maßeinheiten"}

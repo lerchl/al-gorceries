@@ -29,7 +29,6 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                                 addDialog={addDialog}
                                 entities={entities}
                                 setEntities={setEntities}
-                                filteredAndSorted={filteredAndSorted}
                                 setFilteredAndSorted={setFilteredAndSorted}
                                 entityApiEndpoint={entityApiEndpoint} />
                 </thead>

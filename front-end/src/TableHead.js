@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 
 export const AddEntityDialogContext = createContext();
 
-export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entities, setEntities, filteredAndSorted, setFilteredAndSorted, entityApiEndpoint}) => {
+export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entities, setEntities, setFilteredAndSorted, entityApiEndpoint}) => {
 
-    const { t, _i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const [showAddDialog, setShowAddDialog] = useState(false);
 
@@ -23,7 +23,7 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entitie
 
     const filter = (event, column) => {
         if (event.target.value === "") {
-            setFilteredAndSorted([...entities].filter(entity => entity[column]));
+            setFilteredAndSorted([...entities]);
         } else {
             setFilteredAndSorted([...entities].filter(entity => entity[column].includes(event.target.value)));
         }
@@ -33,7 +33,14 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entitie
         <tr>
             {
                 columns.map(column => {
-                    return <th key={column}><div><span>{t(column)}</span><TextField onChange={event => filter(event, column)} /></div></th>;
+                    return (
+                        <th key={column}>
+                            <div>
+                                <span>{t(column)}</span>
+                                { column === "name" ? <TextField onChange={event => filter(event, column)} /> : <></> }
+                            </div>
+                        </th>
+                    );
                 })
             }
             <th>

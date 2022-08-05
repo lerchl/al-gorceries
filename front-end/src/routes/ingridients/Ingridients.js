@@ -4,7 +4,7 @@ import { AddIngridientDialog } from "./AddIngridientDialog";
 import { EditIngridientDialog } from "./EditIngridientDialog";
 
 export const Ingridients = () => {
-    const columns = ["Name"];
+    const columns = ["name"];
     const getColumns = ingridient => [ingridient.name];
 
     return <OverviewPage headline="Zutaten" 
