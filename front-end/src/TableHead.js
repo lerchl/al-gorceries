@@ -1,10 +1,16 @@
+import { TextField } from "@mui/material";
 import { createContext, useState } from "react";
 import { PlusLg } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 
 export const AddEntityDialogContext = createContext();
 
-export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entities, setEntities, entityApiEndpoint}) => {
+export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entities, setEntities, filteredAndSorted, setFilteredAndSorted, entityApiEndpoint}) => {
+
+    const { t, _i18n } = useTranslation();
+
     const [showAddDialog, setShowAddDialog] = useState(false);
+
     const closeAddDialog = () => setShowAddDialog(false);
     const openAddDialog = () => setShowAddDialog(true);
 
@@ -15,36 +21,32 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entitie
         entityApiEndpoint: entityApiEndpoint
     };
 
-    const sort = column => {
-        if (entities.length === 0) {
-            return entities;
+    const filter = (event, column) => {
+        if (event.target.value === "") {
+            setFilteredAndSorted([...entities].filter(entity => entity[column]));
+        } else {
+            setFilteredAndSorted([...entities].filter(entity => entity[column].includes(event.target.value)));
         }
-
-        // + 1 as every entity has its id as their first property
-        const index = columns.indexOf(column) + 1;
-        const property = Object.keys(entities[0])[index];
-        setEntities([...entities].sort((a, b) => a[property] < b[property]));
-        console.log(entities);
-        // entities[0] = {};
-        // return entities;
     }
 
     return (
         <tr>
             {
                 columns.map(column => {
-                    return <th key={column} onClick={() => sort(column)}>{column}</th>;
+                    return <th key={column}><div><span>{t(column)}</span><TextField onChange={event => filter(event, column)} /></div></th>;
                 })
             }
             <th>
-                <button onClick={openAddDialog}
-                        className="icon-button"
-                        title={openAddDialogButtonTitle}>
-                    <PlusLg color="white" />
-                </button>
-                <AddEntityDialogContext.Provider value={context}>
-                    {addDialog}
-                </AddEntityDialogContext.Provider>
+                <div>
+                    <button onClick={openAddDialog}
+                            className="icon-button"
+                            title={openAddDialogButtonTitle}>
+                        <PlusLg color="white" />
+                    </button>
+                    <AddEntityDialogContext.Provider value={context}>
+                        {addDialog}
+                    </AddEntityDialogContext.Provider>
+                </div>
             </th>
         </tr>
     );

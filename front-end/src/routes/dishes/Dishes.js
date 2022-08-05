@@ -9,7 +9,7 @@ export const Dishes = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
     const isMobile = width <= 768;
-    const columns = ["Name"]
+    const columns = ["name"]
 
     useEffect(() => {
         window.addEventListener('resize', handleWindowSizeChange);
@@ -23,7 +23,7 @@ export const Dishes = () => {
     }
 
     if (!isMobile) {
-        columns.push("Quelle", "Zubereitungszeit", "Kosten");
+        columns.push("source", "prepTime", "cost");
     }
 
     const getColumns = dish => {

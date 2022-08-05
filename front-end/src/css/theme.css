@@ -173,6 +173,26 @@ label.Mui-focused {
     min-width: 250px;
 }
 
+.custom-table th > div {
+    display: flex;
+    align-items: baseline;
+}
+
+.custom-table th > div > span {
+    margin-right: 20px;
+}
+
+.custom-table th > div > .MuiTextField-root {
+    width: 100%;
+    background: rgb(var(--bs-dark-rgb));
+    -webkit-transition: background-image 1s ease-in-out;
+    transition: background-image 1s ease-in-out;
+}
+
+.custom-table th > div .Mui-focused {
+    background-image: linear-gradient(0deg, var(--primary) 0%, rgb(var(--bs-dark-rgb)) 25%);
+}
+
 .custom-table th:last-child {
     width: 1px;
     text-align: right;

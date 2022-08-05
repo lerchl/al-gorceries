@@ -8,8 +8,10 @@ export const TableContentContext = createContext();
 
 export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, openAddDialogButtonHover, editDialog}) => {
     const [entities, setEntities] = useState([]);
+    const [filteredAndSorted, setFilteredAndSorted] = useState([]);
 
     useEffect(() => getEntities(entityApiEndpoint, setEntities), []);
+    useEffect(() => setFilteredAndSorted(entities), [entities]);
 
     const context = {
         entityApiEndpoint: entityApiEndpoint,
@@ -27,11 +29,13 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                                 addDialog={addDialog}
                                 entities={entities}
                                 setEntities={setEntities}
+                                filteredAndSorted={filteredAndSorted}
+                                setFilteredAndSorted={setFilteredAndSorted}
                                 entityApiEndpoint={entityApiEndpoint} />
                 </thead>
                 <tbody>
                     <TableContentContext.Provider value={context}>
-                        <TableContent entities={entities} entityComponent={entitiyComponent} />
+                        <TableContent entities={filteredAndSorted} entityComponent={entitiyComponent} />
                     </TableContentContext.Provider>
                 </tbody>
             </Table>
