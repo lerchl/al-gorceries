@@ -27,7 +27,6 @@ ReactDOM.render(
                 <Route path="dishes/:id" element={<Guard><Dish /></Guard>} />
             </Routes>
         </BrowserRouter>
-    </Suspense>
-    ,
+    </Suspense>,
     document.getElementById('root')
 );
