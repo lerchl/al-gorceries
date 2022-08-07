@@ -175,7 +175,6 @@ label.Mui-focused {
 
 .custom-table th > div {
     display: flex;
-    align-items: baseline;
 }
 
 .custom-table th > div > span {
@@ -187,8 +186,13 @@ label.Mui-focused {
     background: rgb(var(--bs-dark-rgb));
 }
 
+.custom-table th > div > .MuiTextField-root > .MuiOutlinedInput-root:hover > fieldset {
+    border: none;
+}
+
 .custom-table th > div > .MuiTextField-root input {
     padding: 8px;
+    height: 0.5rem;
 }
 
 .custom-table th > div .Mui-focused > fieldset {
@@ -197,7 +201,10 @@ label.Mui-focused {
 
 .custom-table th:last-child {
     width: 1px;
-    text-align: right;
+}
+
+.custom-table th:last-child > div {
+    justify-content: center;
 }
 
 .custom-table td:last-child {

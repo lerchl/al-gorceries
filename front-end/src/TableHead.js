@@ -37,7 +37,7 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entitie
                         <th key={column}>
                             <div>
                                 <span>{t(column)}</span>
-                                { column === "name" ? <TextField onChange={event => filter(event, column)} /> : <></> }
+                                { column === "name" ? <TextField onChange={event => filter(event, column)} placeholder="Filter..." /> : <></> }
                             </div>
                         </th>
                     );
