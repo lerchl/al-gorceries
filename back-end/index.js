@@ -14,6 +14,7 @@ const DishList = require("./entities/dishList");
 const User = require("./entities/user");
 
 const dotenv = require("dotenv");
+const DishStep = require("./entities/dishStep");
 
 // config
 dotenv.config();
@@ -219,6 +220,12 @@ app.delete("/dishIngridients/:id", (req, res) => {
     DishIngridient.findOneAndDelete({ _id: req.params.id },
             { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
+});
+
+// Dish Step
+app.post("/dishStep", (req, res) => {
+    const dishStep = req.body;
+    DishStep.create(dishStep, (err, data) => handleCallback(res, err, data, 201));
 });
 
 // Dish List

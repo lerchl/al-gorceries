@@ -20,6 +20,7 @@ export const Steps = ({ dishId }) => {
                 </button>
             </div>
             <StepsContainer  />
+            
         </>
     );
 }
