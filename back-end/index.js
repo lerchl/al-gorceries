@@ -225,7 +225,10 @@ app.delete("/dishIngridients/:id", (req, res) => {
 // Dish Step
 app.post("/dishSteps", (req, res) => {
     const dishStep = req.body;
-    DishStep.create(dishStep, (err, data) => handleCallback(res, err, data, 201));
+    DishStep.find({ dish: dishStep.dish }, (_err, steps) => {
+        dishStep.index = steps.length;
+        DishStep.create(dishStep, (err, data) => handleCallback(res, err, data, 201));
+    });
 });
 
 // Dish List
