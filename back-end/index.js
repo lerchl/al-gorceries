@@ -223,6 +223,13 @@ app.delete("/dishIngridients/:id", (req, res) => {
 });
 
 // Dish Step
+app.get("/dishSteps/:dishId", (req, res) => {
+    DishStep.find(
+        { dish: req.params.dishId },
+        (err, data) => handleCallback(res, err, data, 200)).sort({ index: "asc" }
+    );
+});
+
 app.post("/dishSteps", (req, res) => {
     const dishStep = req.body;
     DishStep.find({ dish: dishStep.dish }, (_err, steps) => {

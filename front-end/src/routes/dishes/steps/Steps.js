@@ -20,7 +20,7 @@ export const Steps = ({ dishId }) => {
                     <PlusLg color="white" size={30} />
                 </button>
             </div>
-            <StepsContainer />
+            <StepsContainer dishId={dishId} steps={steps} setSteps={setSteps} />
             <AddStepDialog show={showDialog} close={() => setShowDialog(false)} dishId={dishId} setSteps={setSteps} />
         </>
     );

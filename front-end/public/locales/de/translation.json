@@ -21,7 +21,8 @@
                 "edit": {
                     "title": "Schritt bearbeiten"
                 }
-            }
+            },
+            "empty": "Noch keine Schritte hinzugefügt..."
         }
     }
 }
