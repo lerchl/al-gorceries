@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PlusLg } from "react-bootstrap-icons";
 import { DISH_STEPS, getEntitiesWithParam } from "../../../ApiUtils";
+import { AddStepDialog } from "./AddStepDialog";
 import { StepsContainer } from "./StepsContainer";
 
 export const Steps = ({ dishId }) => {
@@ -19,8 +20,8 @@ export const Steps = ({ dishId }) => {
                     <PlusLg color="white" size={30} />
                 </button>
             </div>
-            <StepsContainer  />
-            
+            <StepsContainer />
+            <AddStepDialog show={showDialog} close={() => setShowDialog(false)} dishId={dishId} setSteps={setSteps} />
         </>
     );
 }

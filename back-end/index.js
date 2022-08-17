@@ -223,7 +223,7 @@ app.delete("/dishIngridients/:id", (req, res) => {
 });
 
 // Dish Step
-app.post("/dishStep", (req, res) => {
+app.post("/dishSteps", (req, res) => {
     const dishStep = req.body;
     DishStep.create(dishStep, (err, data) => handleCallback(res, err, data, 201));
 });

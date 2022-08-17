@@ -29,7 +29,7 @@ export const Dish = () => {
                             {/* Base data */}
                             <h2>Infos</h2>
                             <DishInfos dish={dish} />
-                            <Steps />
+                            <Steps dishId={id} />
                         </Col>
 
                         <Col lg={6}>

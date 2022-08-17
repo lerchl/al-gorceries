@@ -2,5 +2,26 @@
     "name": "Name",
     "source": "Quelle",
     "prepTime": "Zubereitungszeit",
-    "cost": "Kosten"
+    "cost": "Kosten",
+    "base": {
+        "action": {
+            "add": "Hinzufügen",
+            "close": "Schließen"
+        }
+    },
+    "dish": {
+        "step": {
+            "attribute": {
+                "content": "Inhalt"
+            },
+            "dialog": {
+                "add": {
+                    "title": "Schritt hinzufügen"
+                },
+                "edit": {
+                    "title": "Schritt bearbeiten"
+                }
+            }
+        }
+    }
 }

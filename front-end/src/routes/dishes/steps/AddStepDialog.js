@@ -26,16 +26,16 @@ export const AddStepDialog = ({show, close, dishId, setSteps}) => {
     return (
         <Modal show={show} backdrop="static" onHide={closeDialog} keyboard={false}>
             <Modal.Header closeButton>
-                <Modal.Title>{t("dishStep.dialog.add.title")}</Modal.Title>
+                <Modal.Title>{t("dish.step.dialog.add.title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row dialog-row">
-                    <TextField label={t("step.attribute.content")} value={content} onChange={e => setContent(e.target.value)} />
+                    <TextField label={t("dish.step.attribute.content")} value={content} onChange={e => setContent(e.target.value)} />
                 </div>
             </Modal.Body>
             <Modal.Footer>
                 <button onClick={addStep} className="custom-button primary">{t("base.action.add")}</button>
-                <button onClick={closeDialog} className="custom-button">{t("base.action.add")}</button>
+                <button onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </Modal.Footer>
         </Modal>
     );
