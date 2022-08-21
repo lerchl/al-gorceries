@@ -126,13 +126,11 @@ app.put("/measurements/:id", (req, res) => {
     const updatedMeasurement = req.body;
     Measurement.findByIdAndUpdate(req.params.id,
             updatedMeasurement,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/measurements/:id", (req, res) => {
     Measurement.findOneAndDelete({ _id: req.params.id },
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
@@ -154,13 +152,11 @@ app.put("/ingridients/:id", (req, res) => {
     const updatedMeasurement = req.body;
     Ingridient.findByIdAndUpdate(req.params.id,
             updatedMeasurement,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/ingridients/:id", (req, res) => {
     Ingridient.findOneAndDelete({ _id: req.params.id },
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
@@ -182,13 +178,11 @@ app.put("/dishes/:id", (req, res) => {
     const updatedDish = req.body;
     Dish.findByIdAndUpdate(req.params.id,
             updatedDish,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/dishes/:id", (req, res) => {
     Dish.findOneAndDelete({ _id: req.params.id },
-            { useFindAndModify: false },
             (err, data) => {
                 if (err) {
                     handleCallback(res, err, data, 200);
@@ -212,13 +206,11 @@ app.put("/dishIngridients/:id", (req, res) => {
     const updatedDishIngridient = req.body;
     DishIngridient.findByIdAndUpdate(req.params.id,
             updatedDishIngridient,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
 app.delete("/dishIngridients/:id", (req, res) => {
     DishIngridient.findOneAndDelete({ _id: req.params.id },
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
@@ -242,13 +234,33 @@ app.put("/dishSteps/:id", (req, res) => {
     const updatedDishStep = req.body;
     DishStep.findByIdAndUpdate({ _id: req.params.id },
             updatedDishStep,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
+app.put("/dishSteps/moveUp/:id", (req, res) => moveDishStep(req, res, 1));
+
+app.put("/dishSteps/moveDown/:id", (req, res) => moveDishStep(req, res, -1));
+
+/**
+ * Moves a Dish Step
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Number} indexChange how to index of the other dish step has to be changed
+ */
+function moveDishStep(req, res, indexChange) {
+    const movedDishStep = req.body;
+    DishStep.findOneAndUpdate({ dish: movedDishStep.dish, index: movedDishStep.index }, { $inc: { index: indexChange } }, (otherDishStepErr, _data) => {
+        if (!otherDishStepErr) {
+            DishStep.findByIdAndUpdate(movedDishStep._id, movedDishStep, (err, data) => handleCallback(res, err, data, 200));
+        } else {
+            res.status(500).send(otherDishStepErr);
+            console.error(otherDishStepErr);
+        }
+    });
+}
+
 app.delete("/dishSteps/:id", (req, res) => {
     DishStep.findOneAndDelete({ _id: req.params.id },
-            { useFindAndModify: false },
             (_deleteErr, deleted) => {
                 DishStep.updateMany({ dish: deleted.dish, index: { $gt: deleted.index } },
                         { $inc: { index: -1 } },
@@ -292,7 +304,6 @@ app.put("/dishList/:id", (req, res) => {
     const updatedDishList = req.body;
     DishList.findByIdAndUpdate(req.params.id,
             updatedDishList,
-            { useFindAndModify: false },
             (err, data) => handleCallback(res, err, data, 200));
 });
 
@@ -302,7 +313,6 @@ function handleCallback(res, err, data, successCode) {
         res.status(500).send(err);
         console.error(err);
     } else {
-        // console.log("Sending:", data);
         res.status(successCode).send(data);
     }
 }
