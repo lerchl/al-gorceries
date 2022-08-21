@@ -241,9 +241,21 @@ app.post("/dishSteps", (req, res) => {
 app.put("/dishSteps/:id", (req, res) => {
     const updatedDishStep = req.body;
     DishStep.findByIdAndUpdate({ _id: req.params.id },
-        updatedDishStep,
-        { useFindAndModify: false },
-        (err, data) => handleCallback(res, err, data, 200));
+            updatedDishStep,
+            { useFindAndModify: false },
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
+app.delete("/dishSteps/:id", (req, res) => {
+    DishStep.findOneAndDelete({ _id: req.params.id },
+            { useFindAndModify: false },
+            (_deleteErr, deleted) => {
+                DishStep.updateMany({ dish: deleted.dish, index: { $gt: deleted.index } },
+                        { $inc: { index: -1 } },
+                        (err, _data) => {
+                    handleCallback(res, err, deleted, 200);
+                });
+            });
 });
 
 // Dish List
