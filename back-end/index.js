@@ -238,6 +238,14 @@ app.post("/dishSteps", (req, res) => {
     });
 });
 
+app.put("/dishSteps/:id", (req, res) => {
+    const updatedDishStep = req.body;
+    DishStep.findByIdAndUpdate({ _id: req.params.id },
+        updatedDishStep,
+        { useFindAndModify: false },
+        (err, data) => handleCallback(res, err, data, 200));
+});
+
 // Dish List
 function handleDishListGetCallback(res, err, data) {
     if (err) {
