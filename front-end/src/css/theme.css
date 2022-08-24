@@ -1,6 +1,7 @@
 :root {
     --background-color: rgb(50, 54, 66);
     --dialog-background-color: rgb(35, 39, 51);
+    --popup-background-color: rgb(24, 26, 34);
 
     --text-color: rgb(233, 233, 233);
 
@@ -136,6 +137,17 @@ label.Mui-focused {
 
 .number-input input {
     text-align: right;
+}
+
+/* -MUI AUTOCOMPLETE----------- */
+
+.MuiAutocomplete-listbox {
+    background-color: var(--popup-background-color);
+    color: var(--text-color);
+}
+
+.MuiAutocomplete-option.Mui-focused {
+    background-color: var(--primary) !important;
 }
 
 /* -MENUBAR-------------------- */

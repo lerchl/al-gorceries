@@ -1,9 +1,12 @@
-import { MenuItem, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { useState } from "react";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { createEntityAndGetEntitiesWithParam, DISH_INGRIDIENTS } from "../../ApiUtils";
 
 export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients, measurements, ingridients}) => {
+
+    const { t } = useTranslation();
 
     const [factor, setFactor] = useState("");
     const [measurementId, setMeasurementId] = useState("");
@@ -30,34 +33,45 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
     return (
         <Modal show={show} backdrop="static" onHide={closeDialog} keyboard={false}>
             <Modal.Header closeButton>
-                <Modal.Title>Zutat hinzufügen</Modal.Title>
+                <Modal.Title>{t("dish.ingridient.dialog.add.title")}</Modal.Title>
             </Modal.Header>
             <ModalBody>
                 <div className="row dialog-row">
-                    <TextField label="Faktor" value={factor} onChange={e => setFactor(e.target.value)} type="number" className="number-input" inputProps={{ inputMode: "numeric" }} autoComplete="off" />
+                    <TextField label="Faktor"
+                               value={factor}
+                               onChange={e => setFactor(e.target.value)}
+                               type="number"
+                               className="number-input"
+                               inputProps={{ inputMode: "numeric" }}
+                               autoComplete="off" />
                 </div>
                 <div className="row dialog-row">
-                    <TextField label="Maßeinheit" value={measurementId} onChange={e => setMeasurementId(e.target.value)} select>
-                        {
-                            measurements.map(m => {
-                                return <MenuItem key={m._id} value={m._id}>{m.name}</MenuItem>
-                            })
-                        }
-                    </TextField>
+                    <Autocomplete options={measurements}
+                                  getOptionLabel={m => m.name}
+                                  onChange={(_event, value) => setMeasurementId(value?._id)}
+                                  disablePortal
+                                  renderInput={params => <TextField {...params} label={t("measurement.name")} />}
+                                  openText={t("base.action.open")}
+                                  closeText={t("base.action.close")}
+                                  noOptionsText={t("measurement.noOptions")}
+                                  clearIcon={<></>} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField label="Zutat" value={ingridientId} onChange={e => setIngridientId(e.target.value)} select>
-                        {
-                            ingridients.map(i => {
-                                return <MenuItem key={i._id} value={i._id}>{i.name}</MenuItem>
-                            })
-                        }
-                    </TextField>
+                    <Autocomplete options={ingridients}
+                                  getOptionLabel={i => i.name}
+                                  onChange={(_event, value) => setIngridientId(value?._id)}
+                                  disablePortal
+                                  renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
+                                  openText={t("base.action.open")}
+                                  closeText={t("base.action.close")}
+                                  noOptionsText={t("ingridient.noOptions")}
+                                  clearIcon={<></>}
+                                  onOpen={() => console.log("offen")} />
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" onClick={addDishIngridient} className="custom-button primary">Hinzufügen</button>
-                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
+                <button type="button" onClick={addDishIngridient} className="custom-button primary">{t("base.action.add")}</button>
+                <button type="button" onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </ModalFooter>
         </Modal>
     );

@@ -6,10 +6,21 @@
     "base": {
         "action": {
             "add": "Hinzufügen",
-            "close": "Schließen"
+            "close": "Schließen",
+            "open": "Öffnen"
         }
     },
     "dish": {
+        "ingridient": {
+            "dialog": {
+                "add": {
+                    "title": "Zutat hinzufügen"
+                },
+                "edit": {
+                    "title": "Zutat bearbeiten"
+                }
+            }
+        },
         "step": {
             "attribute": {
                 "content": "Inhalt"
@@ -24,5 +35,13 @@
             },
             "empty": "Noch keine Schritte hinzugefügt..."
         }
+    },
+    "ingridient": {
+        "name": "Zutat",
+        "noOptions": "Keine Zutaten vorhanden"
+    },
+    "measurement": {
+        "name": "Maßeinheit",
+        "noOptions": "Keine Maßeinheiten vorhanden"
     }
 }
