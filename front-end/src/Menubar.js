@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { API_URL } from "./ApiUtils";
 
 function Menubar() {
 
+    const { t } = useTranslation();
     const [loggedIn, setLoggedIn] = useState(false);
 
     async function isLoggedIn() {
@@ -24,9 +26,10 @@ function Menubar() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/dishes">Gerichte</Nav.Link>
-                        <Nav.Link href="/ingridients">Zutaten</Nav.Link>
-                        <Nav.Link href="/measurements">Maßeinheiten</Nav.Link>
+                        <Nav.Link href="/dishes">{t("dish.headline")}</Nav.Link>
+                        <Nav.Link href="/ingridients">{t("ingridient.headline")}</Nav.Link>
+                        <Nav.Link href="/measurements">{t("measurement.headline")}</Nav.Link>
+                        <Nav.Link href="/seasons">{t("season.headline")}</Nav.Link>
                         { loggedIn ? <button type="button" onClick={logout} className="custom-button secondary">Logout</button> : <></> } 
                     </Nav>
                 </Navbar.Collapse>

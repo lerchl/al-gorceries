@@ -3,6 +3,8 @@
     "source": "Quelle",
     "prepTime": "Zubereitungszeit",
     "cost": "Kosten",
+    "begin": "Anfang",
+    "end": "Ende",
     "base": {
         "action": {
             "add": "Hinzufügen",
@@ -11,6 +13,7 @@
         }
     },
     "dish": {
+        "headline": "Gerichte",
         "ingridient": {
             "dialog": {
                 "add": {
@@ -37,11 +40,16 @@
         }
     },
     "ingridient": {
+        "headline": "Zutaten",
         "name": "Zutat",
         "noOptions": "Keine Zutaten vorhanden"
     },
     "measurement": {
+        "headline": "Maßeinheiten",
         "name": "Maßeinheit",
         "noOptions": "Keine Maßeinheiten vorhanden"
+    },
+    "season": {
+        "headline": "Seasons"
     }
 }
