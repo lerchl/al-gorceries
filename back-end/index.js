@@ -12,6 +12,7 @@ const DishIngridient = require("./entities/dishIngridient");
 const Measurement = require("./entities/measurement");
 const DishList = require("./entities/dishList");
 const User = require("./entities/user");
+const Season = require("./entities/season");
 
 const dotenv = require("dotenv");
 const DishStep = require("./entities/dishStep");
@@ -162,7 +163,7 @@ app.delete("/ingridients/:id", (req, res) => {
 
 // Dish
 app.get("/dishes", (_req, res) => {
-     Dish.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+    Dish.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
 })
 
 app.get("/dishes/:id", (req, res) => {
@@ -307,7 +308,19 @@ app.put("/dishList/:id", (req, res) => {
             (err, data) => handleCallback(res, err, data, 200));
 });
 
-// callback
+// Season
+
+app.get("/seasons", (_req, res) => {
+    Season.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+});
+
+app.post("/seasons", (req, res) => {
+    const season = req.body;
+    Season.create(season, (err, data) => handleCallback(res, err, data, 201));
+});
+
+// Callback
+
 function handleCallback(res, err, data, successCode) {
     if (err) {
         res.status(500).send(err);
@@ -317,7 +330,8 @@ function handleCallback(res, err, data, successCode) {
     }
 }
 
-// listener
+// Listener
+
 app.listen(port, () => {
     console.log("Server running on port " + port);
 });

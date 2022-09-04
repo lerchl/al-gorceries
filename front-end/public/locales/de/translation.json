@@ -50,6 +50,19 @@
         "noOptions": "Keine Maßeinheiten vorhanden"
     },
     "season": {
-        "headline": "Seasons"
+        "headline": "Saison",
+        "attribute": {
+            "name": "Name",
+            "begin": "Anfang",
+            "end": "Ende"
+        },
+        "dialog": {
+            "add": {
+                "title": "Saison hinzufügen"
+            },
+            "edit": {
+                "title": "Saison bearbeiten"
+            }
+        }
     }
 }
