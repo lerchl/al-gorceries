@@ -319,6 +319,13 @@ app.post("/seasons", (req, res) => {
     Season.create(season, (err, data) => handleCallback(res, err, data, 201));
 });
 
+app.put("/seasons/:id", (req, res) => {
+    const updatedSeason = req.body;
+    Season.findByIdAndUpdate(req.params.id,
+            updatedSeason,
+            (err, data) => handleCallback(res, err, data, 200));
+});
+
 // Callback
 
 function handleCallback(res, err, data, successCode) {

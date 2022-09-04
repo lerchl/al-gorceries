@@ -9,7 +9,8 @@
         "action": {
             "add": "Hinzufügen",
             "close": "Schließen",
-            "open": "Öffnen"
+            "open": "Öffnen",
+            "save": "Speichern"
         }
     },
     "dish": {
@@ -50,7 +51,10 @@
         "noOptions": "Keine Maßeinheiten vorhanden"
     },
     "season": {
-        "headline": "Saison",
+        "action": {
+            "add": "Saison hinzufügen",
+            "edit": "Saison bearbeiten"
+        },
         "attribute": {
             "name": "Name",
             "begin": "Anfang",
@@ -63,6 +67,7 @@
             "edit": {
                 "title": "Saison bearbeiten"
             }
-        }
+        },
+        "headline": "Saison"
     }
 }
