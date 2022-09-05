@@ -326,6 +326,21 @@ app.put("/seasons/:id", (req, res) => {
             (err, data) => handleCallback(res, err, data, 200));
 });
 
+app.delete("/seasons/:id", (req, res) => {
+    const id = req.params.id;
+    Season.findByIdAndDelete(id, (err, data) => {
+        if (err) {
+            handleCallback(res, err, data, 200);
+            return;
+        }
+
+        // Delete reference from dishes
+        Dish.updateMany({ seasons: { $in: [id] } },
+                { $pullAll: { seasons: [{ _id: id }] } },
+                (err, data) => handleCallback(res, err, data, 200));
+    });
+});
+
 // Callback
 
 function handleCallback(res, err, data, successCode) {
