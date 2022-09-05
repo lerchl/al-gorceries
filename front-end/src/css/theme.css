@@ -146,8 +146,27 @@ label.Mui-focused {
     color: var(--text-color);
 }
 
-.MuiAutocomplete-option.Mui-focused {
+.MuiAutocomplete-option[aria-selected="true"] {
     background-color: var(--primary) !important;
+}
+
+.MuiAutocomplete-option.Mui-focused {
+    background-color: var(--primary-hover) !important;
+}
+
+/* -CHIP----------------------- */
+
+.MuiChip-root {
+    background-color: var(--primary) !important;
+}
+
+.MuiChip-root > span {
+    color: var(--text-color);
+}
+
+.MuiChip-root > svg {
+    filter: none !important;
+    color: var(--dark) !important;
 }
 
 /* -MENUBAR-------------------- */

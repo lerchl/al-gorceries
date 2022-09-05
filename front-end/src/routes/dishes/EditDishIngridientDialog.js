@@ -70,8 +70,8 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" onClick={saveDishIngridient} className="custom-button primary">Speichern</button>
-                <button type="button" onClick={closeDialog} className="custom-button">Schließen</button>
+                <button type="button" onClick={saveDishIngridient} className="custom-button primary">{t("base.action.save")}</button>
+                <button type="button" onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </ModalFooter>
         </Modal>
     );

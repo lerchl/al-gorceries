@@ -163,7 +163,7 @@ app.delete("/ingridients/:id", (req, res) => {
 
 // Dish
 app.get("/dishes", (_req, res) => {
-    Dish.find((err, data) => handleCallback(res, err, data, 200)).sort({ name: "asc" });
+    Dish.find((err, data) => handleCallback(res, err, data, 200)).populate("seasons").sort({ name: "asc" });
 })
 
 app.get("/dishes/:id", (req, res) => {

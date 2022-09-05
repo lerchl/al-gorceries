@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Entity } from "../../Entity"
 import { OverviewPage } from "../../OverviewPage"
 import { AddDishDialog } from "./AddDishDialog"
 import { EditDishDialog } from "./EditDishDialog"
 
 export const Dishes = () => {
+
+    const { t } = useTranslation();
 
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -23,14 +26,14 @@ export const Dishes = () => {
     }
 
     if (!isMobile) {
-        columns.push("source", "prepTime", "cost");
+        columns.push("source", "prepTime", "cost", "seasons");
     }
 
     const getColumns = dish => {
         if (isMobile) {
             return [dish.name];
         } else {
-            return [dish.name, dish.source, dish.prepTime + " Minuten", dish.cost + "€"];
+            return [dish.name, dish.source, dish.prepTime + " Minuten", dish.cost + "€", dish.seasons.map(s => s.name).join(", ")];
         }
     }
 
@@ -39,6 +42,6 @@ export const Dishes = () => {
             columns={columns}
             entitiyComponent={<Entity getColumns={getColumns} hasDetailPage={true} />}
             addDialog={<AddDishDialog />}
-            openAddDialogButtonHover={"Neues Gericht hinzufügen"}
+            openAddDialogButtonHover={t("dish.dialog.add.buttonHover")}
             editDialog={<EditDishDialog />} />
 }

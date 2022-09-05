@@ -7,7 +7,8 @@ const dishSchema = mongoose.Schema({
     prepTime: Number,
     cost: Number,
     recipe: String,
-    dishIngridients: [{ type: mongoose.Schema.Types.ObjectId, ref: "dish_ingridient" }]
+    dishIngridients: [{ type: mongoose.Schema.Types.ObjectId, ref: "dish_ingridient" }],
+    seasons: [{ type: mongoose.Schema.Types.ObjectId, ref: "season" }]
 });
 
 const Dish = mongoose.model("dish", dishSchema);

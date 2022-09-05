@@ -5,6 +5,8 @@
     "cost": "Kosten",
     "begin": "Anfang",
     "end": "Ende",
+    "seasons": "Saisons",
+
     "base": {
         "action": {
             "add": "Hinzufügen",
@@ -14,6 +16,23 @@
         }
     },
     "dish": {
+        "attribute": {
+            "name": "Name",
+            "source": "Quelle",
+            "sourceInformation": "Quellzusatz",
+            "prepTime": "Zubereitungszeit",
+            "cost": "Kosten",
+            "seasons": "Saisons"
+        },
+        "dialog": {
+            "add": {
+                "title": "Gericht hinzufügen",
+                "buttonHover": "Neues Gericht hinzufügen"
+            },
+            "edit": {
+                "title": "Gericht bearbeiten"
+            }
+        },
         "headline": "Gerichte",
         "ingridient": {
             "dialog": {
@@ -68,6 +87,7 @@
                 "title": "Saison bearbeiten"
             }
         },
-        "headline": "Saison"
+        "headline": "Saison",
+        "noOptions": "Keine Saisons vorhanden"
     }
 }

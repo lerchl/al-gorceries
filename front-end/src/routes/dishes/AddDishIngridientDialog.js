@@ -65,8 +65,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                                   openText={t("base.action.open")}
                                   closeText={t("base.action.close")}
                                   noOptionsText={t("ingridient.noOptions")}
-                                  clearIcon={<></>}
-                                  onOpen={() => console.log("offen")} />
+                                  clearIcon={<></>} />
                 </div>
             </ModalBody>
             <ModalFooter>
