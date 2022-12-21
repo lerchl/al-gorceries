@@ -26,6 +26,9 @@ export const EditDishDialog = () => {
     const [cost, setCost] = useState(entity.cost);
     const [seasons, setSeasons] = useState(entity.seasons);
 
+    /**
+     * TODO: Every edit dialog loads all seasons. This should only be done once.
+     */
     useEffect(() => getEntities(SEASONS, setSeasonOptions), []);
 
     const closeDialog = () => {
