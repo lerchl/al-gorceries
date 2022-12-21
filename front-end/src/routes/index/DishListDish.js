@@ -1,3 +1,4 @@
+import React from 'react';
 import { DISH_LIST, updateEntityAndGetEntity } from "../../ApiUtils";
 import { DishInfos } from "../dishes/DishInfos";
 

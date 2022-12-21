@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.2",
   "private": true,
-  "proxy": "http://192.168.0.94:2000",
+  "proxy": "http://localhost:2000",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -26,7 +26,7 @@
     "react-i18next": "^11.18.3",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^5.0.0",
+    "react-scripts": "5.0.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.2"
   },

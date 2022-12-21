@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { React, createContext, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { getEntities } from "./ApiUtils";
 import { TableContent } from "./TableContent";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { DISH_INGRIDIENTS, getEntitiesWithParam } from "../../ApiUtils";
 import { ShoppingListItem } from "./ShoppingListItem";
 

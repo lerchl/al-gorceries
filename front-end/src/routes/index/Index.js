@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import { API_URL, DISH_LIST } from "../../ApiUtils";

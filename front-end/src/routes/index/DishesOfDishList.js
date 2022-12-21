@@ -1,3 +1,4 @@
+import React from "react";
 import { DishListDish } from "./DishListDish";
 
 export const DishesOfDishList = ({ dishList, setDishList }) => {

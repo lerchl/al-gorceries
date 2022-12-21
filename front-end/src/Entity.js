@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { React, createContext, useContext, useState } from "react";
 import { BoxArrowUpRight, PencilFill, TrashFill } from "react-bootstrap-icons";
 import { deleteEntityAndGetEntities } from "./ApiUtils";
 import { TableContentContext } from "./OverviewPage";

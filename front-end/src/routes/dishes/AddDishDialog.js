@@ -1,6 +1,6 @@
 import { Autocomplete, InputAdornment, MenuItem } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useContext, useEffect, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";

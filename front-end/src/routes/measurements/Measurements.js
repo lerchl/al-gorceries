@@ -1,3 +1,4 @@
+import React from "react";
 import { MEASUREMENTS } from "../../ApiUtils";
 import { Entity } from "../../Entity";
 import { OverviewPage } from "../../OverviewPage";

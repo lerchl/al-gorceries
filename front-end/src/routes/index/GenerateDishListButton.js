@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { createEntity, DISHES, DISH_LIST, getEntities, handleAnswer } from "../../ApiUtils";
 import { getWeekNumber } from "../../DateUtils";
 
