@@ -1,15 +1,15 @@
 import { Autocomplete, InputAdornment, MenuItem } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { React, useContext, useEffect, useState } from "react";
+import { React, useContext, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
-import { getEntities, SEASONS, updateEntityAndGetEntities } from "../../ApiUtils";
+import { updateEntityAndGetEntities } from "../../ApiUtils";
 import { EditDialogContext } from "../../Entity";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 
-export const EditDishDialog = () => {
+export const EditDishDialog = ({ seasonOptions }) => {
 
     const { t } = useTranslation();
 
@@ -17,19 +17,12 @@ export const EditDishDialog = () => {
     const entity = useContext(EntityContext);
     const {show, close} = useContext(EditDialogContext);
 
-    const [seasonOptions, setSeasonOptions] = useState([]);
-
     const [name, setName] = useState(entity.name);
     const [source, setSource] = useState(entity.source);
     const [sourceInformation, setSourceInformation] = useState(entity.sourceInformation);
     const [prepTime, setPrepTime] = useState(entity.prepTime);
     const [cost, setCost] = useState(entity.cost);
     const [seasons, setSeasons] = useState(entity.seasons);
-
-    /**
-     * TODO: Every edit dialog loads all seasons. This should only be done once.
-     */
-    useEffect(() => getEntities(SEASONS, setSeasonOptions), []);
 
     const closeDialog = () => {
         setName(entity.name);
