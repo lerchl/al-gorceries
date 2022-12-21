@@ -12,12 +12,38 @@ export const GenerateDishListButton = ({ date, getDishList, setDishList }) => {
         const dishList = {
             year: date.getFullYear(),
             week: getWeekNumber(date),
-            dishes: dishes.sort((_a, _b) => 0.5 - Math.random()).slice(0, 5)
+            dishes: dishes.filter(bySeason).sort((_a, _b) => 0.5 - Math.random()).slice(0, 40)
         }
         createEntity(DISH_LIST, dishList).then(res => {
             handleAnswer(res, 201);
-            getDishList(date, setDishList);
+            getDishList(date, setDishList); 
         });
+    }
+
+    const bySeason = dish => {
+        const today = new Date();
+
+        return dish.seasons.map(seasonToBeginAndAnd).every(([begin, end]) => {
+            console.log(begin <= today && today <= end);
+            return begin <= today && today <= end;
+        });
+    }
+
+    const seasonToBeginAndAnd = season => {
+        let begin = new Date();
+        let end = new Date();
+
+        begin.setDate(season.beginDay);
+        begin.setMonth(season.beginMonth);
+
+        end.setDate(season.endDay);
+        end.setMonth(season.endMonth);
+
+        if (begin > end) {
+            end.setYear(end.getFullYear() + 1);
+        }
+
+        return [begin, end];
     }
 
     return (
