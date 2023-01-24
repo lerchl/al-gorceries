@@ -7,10 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 /**
- * {@link Entity} representing an ingridient.
+ * {@link Entity} representing a unit of measurement.
  */
-@Entity(name = "algo_ingridient")
-public class Ingridient {
+@Entity(name = "algo_unit_of_measurement")
+public class UnitOfMeasurement {
 
     @Id
     @Column
