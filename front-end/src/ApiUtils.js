@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const MEASUREMENTS = "measurements";
-export const INGRIDIENTS = "ingridients";
+export const MEASUREMENTS = "unitsOfMeasurement";
+export const INGRIDIENTS = "ingredients";
 export const DISHES = "dishes";
 export const DISH_INGRIDIENTS = "dishIngridients";
 export const DISH_STEPS = "dishSteps";

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -17,6 +18,7 @@ import jakarta.persistence.OneToMany;
 public class Dish {
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private UUID id;
 
@@ -33,7 +35,7 @@ public class Dish {
     private double cost;
 
     @OneToMany(mappedBy = "dish")
-    private Set<DishIngridient> dishIngridients;
+    private Set<DishIngredient> dishIngredients;
 
     @ManyToMany
     @JoinTable(name = "algo_dish_season")
@@ -83,12 +85,12 @@ public class Dish {
         this.cost = cost;
     }
 
-    public Set<DishIngridient> getDishIngridients() {
-        return dishIngridients;
+    public Set<DishIngredient> getDishIngredients() {
+        return dishIngredients;
     }
 
-    public void setDishIngridients(Set<DishIngridient> dishIngridients) {
-        this.dishIngridients = dishIngridients;
+    public void setDishIngredients(Set<DishIngredient> dishIngredients) {
+        this.dishIngredients = dishIngredients;
     }
 
     public Set<Season> getSeasons() {

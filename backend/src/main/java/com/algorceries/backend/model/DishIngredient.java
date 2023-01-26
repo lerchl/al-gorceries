@@ -4,18 +4,20 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 /**
- * {@link Entity} representing a dish ingridient.
- * Connects {@link Dish}, {@link Ingridient} and {@link UnitOfMeasurement}.
+ * {@link Entity} representing a dish ingredient.
+ * Connects {@link Dish}, {@link Ingredient} and {@link UnitOfMeasurement}.
  */
-@Entity(name = "algo_dish_ingridient")
-public class DishIngridient {
+@Entity(name = "algo_dish_ingredient")
+public class DishIngredient {
 
     @Id
+    @GeneratedValue
     @Column
     private UUID id;
 
@@ -24,8 +26,8 @@ public class DishIngridient {
     private Dish dish;
 
     @ManyToOne
-    @JoinColumn(name = "ingridient_id")
-    private Ingridient ingridient;
+    @JoinColumn(name = "ingredient_id")
+    private Ingredient ingredient;
 
     @ManyToOne
     @JoinColumn(name = "unit_of_measurement_id")
@@ -50,12 +52,12 @@ public class DishIngridient {
         this.dish = dish;
     }
 
-    public Ingridient getIngridient() {
-        return ingridient;
+    public Ingredient getIngredient() {
+        return ingredient;
     }
 
-    public void setIngridient(Ingridient ingridient) {
-        this.ingridient = ingridient;
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
 
     public UnitOfMeasurement getUnitOfMeasurement() {

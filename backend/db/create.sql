@@ -3,7 +3,7 @@ CREATE TABLE algo_unit_of_measurement (
     name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE algo_ingridient (
+CREATE TABLE algo_ingredient (
     id   UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(100) NOT NULL
 );
@@ -29,14 +29,14 @@ CREATE TABLE algo_dish (
     cost      REAL          NOT NULL
 );
 
-CREATE TABLE algo_dish_ingridient (
+CREATE TABLE algo_dish_ingredient (
     id                     UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     dish_id                UUID NOT NULL,
-    ingridient_id          UUID NOT NULL,
+    ingredient_id          UUID NOT NULL,
     unit_of_measurement_id UUID NOT NULL,
     amount                 REAL NOT NULL,
     FOREIGN KEY (dish_id)                REFERENCES algo_dish (id),
-    FOREIGN KEY (ingridient_id)          REFERENCES algo_ingridient (id),
+    FOREIGN KEY (ingredient_id)          REFERENCES algo_ingredient (id),
     FOREIGN KEY (unit_of_measurement_id) REFERENCES algo_unit_of_measurement (id)
 );
 
