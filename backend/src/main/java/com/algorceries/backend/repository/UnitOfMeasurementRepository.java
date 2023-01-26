@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * {@link JpaRepository} for {@link UnitOfMeasurement}.
+ * {@link JpaRepository} for {@link UnitOfMeasurement units of measurement}.
  */
 @Repository
 public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasurement, UUID> {
