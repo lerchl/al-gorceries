@@ -42,6 +42,12 @@ mongoose.connect(url, {
     useUnifiedTopology: true
 });
 
+app.get("/test", (req, res) => {
+    Ingridient.find((err, data) => {
+        data.map(m => m.name).forEach(m => console.log(m));
+    });
+});
+
 // endpoints
 app.get("/", (_req, res) => {
     res.status(200).send("Hello World!");

@@ -18,7 +18,7 @@ export const AddDishDialog = () => {
     const [name, setName] = useState("");
     const [source, setSource] = useState("");
     const [sourceInformation, setSourceInformation] = useState("");
-    const [prepTime, setPrepTime] = useState("");
+    const [time, setTime] = useState("");
     const [cost, setCost] = useState("");
     const [dishIngridients, setDishIngrdients] = useState([]);
     const [seasons, setSeasons] = useState([]);
@@ -33,7 +33,7 @@ export const AddDishDialog = () => {
         setName("");
         setSource("");
         setSourceInformation("");
-        setPrepTime(0);
+        setTime(0);
         setCost(0);
         setDishIngrdients([]);
         setSeasons([]);
@@ -45,7 +45,7 @@ export const AddDishDialog = () => {
             "name": name,
             "source": source,
             "sourceInformation": sourceInformation,
-            "prepTime": prepTime,
+            "time": time,
             "cost": cost,
             "dishIngridients": dishIngridients,
             "seasons": seasons
@@ -72,7 +72,7 @@ export const AddDishDialog = () => {
                     <TextField value={sourceInformation} label={t("dish.attribute.sourceInformation")} onChange={event => onChange(event, setSourceInformation)} sx={{width: "47.5%"}} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField value={prepTime} label={t("dish.attribute.prepTime")} onChange={event => onChange(event, setPrepTime)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
+                    <TextField value={time} label={t("dish.attribute.prepTime")} onChange={event => onChange(event, setTime)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
                 </div>
                 <div className="row dialog-row">
                     <TextField value={cost} label={t("dish.attribute.cost")} onChange={event => onChange(event, setCost)} type="number" className="number-input" InputProps={{endAdornment: <CurrencyEuro color="white" />}} />

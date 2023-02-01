@@ -12,7 +12,7 @@ export const Step = ({ step, setSteps, dishId, last }) => {
 
     const moveStepUp = () => {
         step.index--;
-        let url = `${API_URL}/dishSteps/moveUp/${step._id}`;
+        let url = `${API_URL}/dishSteps/moveUp/${step.id}`;
         axios.put(url, step).then(res => {
             handleAnswer(res, 200);
             getEntitiesWithParam(DISH_STEPS, setSteps, dishId);
@@ -21,7 +21,7 @@ export const Step = ({ step, setSteps, dishId, last }) => {
 
     const moveStepDown = () => {
         step.index++;
-        let url = `${API_URL}/dishSteps/moveDown/${step._id}`;
+        let url = `${API_URL}/dishSteps/moveDown/${step.id}`;
         axios.put(url, step).then(res => {
             handleAnswer(res, 200);
             getEntitiesWithParam(DISH_STEPS, setSteps, dishId);
@@ -39,7 +39,7 @@ export const Step = ({ step, setSteps, dishId, last }) => {
                 <Col sm={8}>{step.content}</Col>
                 <Col sm={2} style={{ textAlign: "right" }}>
                     <button className="icon-button ml-2" onClick={() => setShowEditDialog(true)}><PencilFill color="white" /></button>
-                    <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_STEPS, step._id, setSteps, dishId)}><TrashFill color="white" /></button>
+                    <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_STEPS, step.id, setSteps, dishId)}><TrashFill color="white" /></button>
                 </Col>
             </Row>
             <EditStepDialog show={showEditDialog}

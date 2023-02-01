@@ -1,4 +1,5 @@
 import React from "react";
+import { INGREDIENTS } from "../../ApiUtils";
 import { Entity } from "../../Entity";
 import { OverviewPage } from "../../OverviewPage";
 import { AddIngridientDialog } from "./AddIngridientDialog";
@@ -9,7 +10,7 @@ export const Ingridients = () => {
     const getColumns = ingridient => [ingridient.name];
 
     return <OverviewPage headline="Zutaten" 
-                         entityApiEndpoint="ingridients" 
+                         entityApiEndpoint={INGREDIENTS} 
                          columns={columns}
                          entitiyComponent={<Entity getColumns={getColumns} />}
                          addDialog={<AddIngridientDialog />}

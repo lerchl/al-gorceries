@@ -9,7 +9,7 @@ export const DishIngridientsContainer = ({dishId, dishIngridients, setDishIngrid
         } else {
             return (
                 dishIngridients.map((dishIngridient, i) => {
-                    return <DishIngridient key={dishIngridient._id} dishIngridient={dishIngridient} setDishIngridients={setDishIngridients} dishId={dishId} last={i + 1 === dishIngridients.length} measurements={measurements} ingridients={ingridients} />;
+                    return <DishIngridient key={dishIngridient.id} dishIngridient={dishIngridient} setDishIngridients={setDishIngridients} dishId={dishId} last={i + 1 === dishIngridients.length} measurements={measurements} ingridients={ingridients} />;
                 })
             );
         }

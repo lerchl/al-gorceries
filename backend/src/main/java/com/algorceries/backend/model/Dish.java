@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -38,7 +39,9 @@ public class Dish {
     private Set<DishIngredient> dishIngredients;
 
     @ManyToMany
-    @JoinTable(name = "algo_dish_season")
+    @JoinTable(name = "algo_dish_season",
+               joinColumns = @JoinColumn(name = "dish_id"),
+               inverseJoinColumns = @JoinColumn(name = "season_id"))
     private Set<Season> seasons;
 
     // /////////////////////////////////////////////////////////////////////////

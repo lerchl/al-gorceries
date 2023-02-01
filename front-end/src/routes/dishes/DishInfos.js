@@ -14,7 +14,7 @@ export const DishInfos = ({ dish }) => {
             </Row>
             <Row sm={12}>
                 <Col>Zubereitungszeit</Col>
-                <Col className="bold">{dish?.prepTime} Minuten</Col>
+                <Col className="bold">{dish?.time} Minuten</Col>
             </Row>
             <Row sm={12}>
                 <Col>Kosten</Col>

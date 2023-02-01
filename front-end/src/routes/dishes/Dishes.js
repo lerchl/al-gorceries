@@ -36,7 +36,7 @@ export const Dishes = () => {
         if (isMobile) {
             return [dish.name];
         } else {
-            return [dish.name, dish.source, dish.prepTime + " Minuten", dish.cost + "€", dish.seasons.map(s => s.name).join(", ")];
+            return [dish.name, dish.source, dish.time + " Minuten", dish.cost + "€", dish.seasons.map(s => s.name).join(", ")];
         }
     }
 

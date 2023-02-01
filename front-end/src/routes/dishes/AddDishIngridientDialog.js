@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useState } from "react";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { createEntityAndGetEntitiesWithParam, DISH_INGRIDIENTS } from "../../ApiUtils";
+import { createEntityAndGetEntitiesWithParam, DISH_INGREDIENTS } from "../../ApiUtils";
 
 export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients, measurements, ingridients}) => {
 
@@ -26,7 +26,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
             "ingridient": ingridientId,
             "dish": dishId
         }
-        createEntityAndGetEntitiesWithParam(DISH_INGRIDIENTS, dishIngridient, setDishIngridients, dishId);
+        createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient, setDishIngridients, dishId);
         closeDialog();
     }
 
@@ -48,7 +48,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 <div className="row dialog-row">
                     <Autocomplete options={measurements}
                                   getOptionLabel={m => m.name}
-                                  onChange={(_event, value) => setMeasurementId(value?._id)}
+                                  onChange={(_event, value) => setMeasurementId(value?.id)}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("measurement.name")} />}
                                   openText={t("base.action.open")}
@@ -59,7 +59,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 <div className="row dialog-row">
                     <Autocomplete options={ingridients}
                                   getOptionLabel={i => i.name}
-                                  onChange={(_event, value) => setIngridientId(value?._id)}
+                                  onChange={(_event, value) => setIngridientId(value?.id)}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
                                   openText={t("base.action.open")}

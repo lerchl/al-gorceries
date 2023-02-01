@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const MEASUREMENTS = "unitsOfMeasurement";
-export const INGRIDIENTS = "ingredients";
+export const INGREDIENTS = "ingredients";
 export const DISHES = "dishes";
-export const DISH_INGRIDIENTS = "dishIngridients";
+export const DISH_INGREDIENTS = "dishIngredients";
 export const DISH_STEPS = "dishSteps";
 export const DISH_LIST = "dishList";
 export const SEASONS = "seasons";
@@ -91,10 +91,10 @@ export function createEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, s
  * @param {Function} setEntity setter for the stateful value
  */
 export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
-        getEntity(entityApiEndpoint, setEntity, entity._id);
+        getEntity(entityApiEndpoint, setEntity, entity.id);
     })
 }
 
@@ -105,7 +105,7 @@ export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
  * @param {Function} setEntities setter for the stateful value
  */
 export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntities(entityApiEndpoint, setEntities);
@@ -120,7 +120,7 @@ export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntitie
  * @param {*} param the parameter
  */
 export function updateEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, setEntities, param) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity._id}`;
+    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);

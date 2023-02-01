@@ -11,7 +11,7 @@ export const ShoppingListItem = ({item}) => {
                     {
                         item.measurements.map(m => {
                             return (
-                                <Fragment key={m.measurement._id}>
+                                <Fragment key={m.measurement.id}>
                                     {item.measurements.indexOf(m) > 0 ? ", " + m.factor : m.factor} {m.measurement.name}
                                 </Fragment>
                             );

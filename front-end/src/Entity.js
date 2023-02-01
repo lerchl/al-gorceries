@@ -29,18 +29,18 @@ export const Entity = ({getColumns, hasDetailPage = false}) => {
 
     return (
         <>
-            <tr key={entity._id}>
+            <tr key={entity.id}>
                 {
                     getColumns(entity).map(column => {
                         return <td key={v4()}>{column}</td>;
                     })
                 }
                 <td>
-                    { hasDetailPage && <Link to={entity._id}><BoxArrowUpRight color="white" /></Link> }
+                    { hasDetailPage && <Link to={entity.id}><BoxArrowUpRight color="white" /></Link> }
                     <button onClick={openEditDialog} className="icon-button ml-2">
                         <PencilFill color="white" />
                     </button>
-                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity._id, setEntities)} className="icon-button ml-2">
+                    <button onClick={() => deleteEntityAndGetEntities(entityApiEndpoint, entity.id, setEntities)} className="icon-button ml-2">
                         <TrashFill color="white" />
                     </button>
                 </td>

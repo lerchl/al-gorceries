@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PlusLg } from "react-bootstrap-icons";
-import { DISH_INGRIDIENTS, getEntities, getEntitiesWithParam, INGRIDIENTS, MEASUREMENTS } from "../../ApiUtils";
+import { DISH_INGREDIENTS, getEntities, getEntitiesWithParam, INGREDIENTS, MEASUREMENTS } from "../../ApiUtils";
 import { AddDishIngridientDialog } from "./AddDishIngridientDialog";
 import { DishIngridientsContainer } from "./DishIngridientsContainer";
 
@@ -12,9 +12,9 @@ export const DishIngridients = ({ dishId }) => {
 
     const [showAddDishIngridientDialog, setShowAddDishIngridientDialog] = useState(false);
 
-    useEffect(() => getEntitiesWithParam(DISH_INGRIDIENTS, setDishIngridients, dishId), []);
+    useEffect(() => getEntitiesWithParam(DISH_INGREDIENTS, setDishIngridients, dishId), []);
     useEffect(() => getEntities(MEASUREMENTS, setMeasurements), []);
-    useEffect(() => getEntities(INGRIDIENTS, setIngridients), []);
+    useEffect(() => getEntities(INGREDIENTS, setIngridients), []);
 
     return (
         <>

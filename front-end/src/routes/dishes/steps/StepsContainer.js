@@ -13,7 +13,7 @@ export const StepsContainer = ({ dishId, steps, setSteps }) => {
 
         return (
             steps.map((step, i) => {
-                return <Step key={step._id}
+                return <Step key={step.id}
                         step={step}
                         setSteps={setSteps}
                         dishId={dishId}

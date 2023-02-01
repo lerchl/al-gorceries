@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { DISH_INGRIDIENTS, updateEntityAndGetEntitiesWithParam } from "../../ApiUtils";
+import { DISH_INGREDIENTS, updateEntityAndGetEntitiesWithParam } from "../../ApiUtils";
 
 export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridients, dishIngridient, measurements, ingridients}) => {
 
@@ -23,7 +23,7 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
         dishIngridient.factor = factor;
         dishIngridient.measurement = measurement;
         dishIngridient.ingridient = ingridient;
-        updateEntityAndGetEntitiesWithParam(DISH_INGRIDIENTS, dishIngridient, setDishIngridients, dishId);
+        updateEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient, setDishIngridients, dishId);
         closeDialog();
     }
 
@@ -47,7 +47,7 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
                                   options={measurements}
                                   getOptionLabel={m => m.name}
                                   onChange={(_event, value) => setMeasurement(value)}
-                                  isOptionEqualToValue={(option, value) => option._id === value._id}
+                                  isOptionEqualToValue={(option, value) => option.id === value.id}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("measurement.name")} />}
                                   openText={t("base.action.open")}
@@ -60,7 +60,7 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
                                   options={ingridients}
                                   getOptionLabel={i => i.name}
                                   onChange={(_event, value) => setIngridient(value)}
-                                  isOptionEqualToValue={(option, value) => option._id === value._id}
+                                  isOptionEqualToValue={(option, value) => option.id === value.id}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
                                   openText={t("base.action.open")}

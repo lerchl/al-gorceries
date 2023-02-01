@@ -20,7 +20,7 @@ export const EditDishDialog = ({ seasonOptions }) => {
     const [name, setName] = useState(entity.name);
     const [source, setSource] = useState(entity.source);
     const [sourceInformation, setSourceInformation] = useState(entity.sourceInformation);
-    const [prepTime, setPrepTime] = useState(entity.prepTime);
+    const [time, setTime] = useState(entity.time);
     const [cost, setCost] = useState(entity.cost);
     const [seasons, setSeasons] = useState(entity.seasons);
 
@@ -28,7 +28,7 @@ export const EditDishDialog = ({ seasonOptions }) => {
         setName(entity.name);
         setSource(entity.source);
         setSourceInformation(entity.sourceInformation);
-        setPrepTime(entity.prepTime);
+        setTime(entity.time);
         setCost(entity.cost);
         setSeasons(entity.seasons);
         close();
@@ -38,7 +38,7 @@ export const EditDishDialog = ({ seasonOptions }) => {
         entity.name = name;
         entity.source = source;
         entity.sourceInformation = sourceInformation;
-        entity.prepTime = prepTime;
+        entity.time = time;
         entity.cost = cost;
         entity.seasons = seasons;
         updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities);
@@ -63,7 +63,7 @@ export const EditDishDialog = ({ seasonOptions }) => {
                     <TextField value={sourceInformation} label={t("dish.attribute.sourceInformation")} onChange={e => setSourceInformation(e.target.value)} sx={{width: "47.5%"}} />
                 </div>
                 <div className="row dialog-row">
-                    <TextField value={prepTime} label={t("dish.attribute.prepTime")} onChange={e => setPrepTime(e.target.value)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
+                    <TextField value={time} label={t("dish.attribute.prepTime")} onChange={e => setTime(e.target.value)} type="number" className="number-input" InputProps={{endAdornment: <InputAdornment position="end">min</InputAdornment>}} />
                 </div>
                 <div className="row dialog-row">
                     <TextField value={cost} label={t("dish.attribute.cost")} onChange={e => setCost(e.target.value)} type="number" className="number-input" InputProps={{endAdornment: <CurrencyEuro color="white" />}} />
@@ -73,7 +73,7 @@ export const EditDishDialog = ({ seasonOptions }) => {
                                   options={seasonOptions}
                                   getOptionLabel={s => s.name}
                                   onChange={(_event, value) => setSeasons(value)}
-                                  isOptionEqualToValue={(option, value) => option._id === value._id}
+                                  isOptionEqualToValue={(option, value) => option.id === value.id}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("dish.attribute.seasons")} />}
                                   openText={t("base.action.open")}

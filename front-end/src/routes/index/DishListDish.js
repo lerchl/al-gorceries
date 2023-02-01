@@ -10,7 +10,7 @@ export const DishListDish = ({ dishList, setDishList, dish, selected }) => {
     }
 
     const deselect = () => {
-        dishList.selectedDishes = dishList.selectedDishes.filter(d => d._id !== dish._id);
+        dishList.selectedDishes = dishList.selectedDishes.filter(d => d.id !== dish.id);
         update();
     }
 

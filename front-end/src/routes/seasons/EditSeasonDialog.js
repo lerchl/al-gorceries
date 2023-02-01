@@ -18,28 +18,28 @@ export const EditSeasonDialog = () => {
     const entity = useContext(EntityContext);
     const { show, close } = useContext(EditDialogContext);
 
-    const originalBegin = dayjs().date(entity.beginDay).month(entity.beginMonth);
-    const originalEnd = dayjs().date(entity.endDay).month(entity.endMonth);
+    const originalStart = dayjs().date(entity.start[2]).month(entity.start[1]);
+    const originalStop = dayjs().date(entity.stop[2]).month(entity.stop[1]);
 
     const [name, setName] = useState(entity.name);
-    const [begin, setBegin] = useState(originalBegin);
-    const [end, setEnd] = useState(originalEnd);
+    const [start, setStart] = useState(originalStart);
+    const [stop, setStop] = useState(originalStop);
 
     const closeDialog = () => {
         setName(entity.name);
-        setBegin(originalBegin);
-        setEnd(originalEnd);
+        setStart(originalStart);
+        setStop(originalStop);
         close();
     }
 
     const saveSeason = () => {
         const season = {
-            "_id": entity._id,
+            "id": entity.id,
             "name": name,
-            "beginDay": begin.$D,
-            "beginMonth": begin.$M,
-            "endDay": end.$D,
-            "endMonth": end.$M
+            "beginDay": start.$D,
+            "beginMonth": start.$M,
+            "endDay": stop.$D,
+            "endMonth": stop.$M
         }
         updateEntityAndGetEntities(entityApiEndpoint, season, setEntities);
         closeDialog();
@@ -57,15 +57,15 @@ export const EditSeasonDialog = () => {
                                onChange={e => defaultOnChange(e, setName)} />
                 </div>
                 <div className="row dialog-row">
-                    <DatePicker value={begin}
+                    <DatePicker value={start}
                                 label={t("season.attribute.begin")}
-                                onChange={value => setBegin(value)}
+                                onChange={value => setStart(value)}
                                 renderInput={params => <TextField {...params} />} />
                 </div>
                 <div className="row dialog-row">
-                    <DatePicker value={end}
+                    <DatePicker value={stop}
                                 label={t("season.attribute.end")}
-                                onChange={value => setEnd(value)}
+                                onChange={value => setStop(value)}
                                 renderInput={params => <TextField {...params} />} />
                 </div>
             </Modal.Body>
