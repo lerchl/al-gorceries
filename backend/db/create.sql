@@ -9,10 +9,12 @@ CREATE TABLE algo_ingredient (
 );
 
 CREATE TABLE algo_season (
-    id    UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
-    name  VARCHAR(100) NOT NULL,
-    start DATE         NOT NULL,
-    stop  DATE         NOT NULL
+    id          UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
+    name        VARCHAR(100) NOT NULL,
+    begin_day   INTEGER      NOT NULL,
+    begin_month INTEGER      NOT NULL,
+    end_day     INTEGER      NOT NULL,
+    end_month   INTEGER      NOT NULL
 );
 
 CREATE TABLE algo_dish_list (

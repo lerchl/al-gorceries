@@ -1,6 +1,5 @@
 package com.algorceries.backend.model;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -22,11 +21,17 @@ public class Season {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "start")
-    private LocalDate start;
+    @Column(name = "begin_day")
+    private int beginDay;
 
-    @Column(name = "stop")
-    private LocalDate stop;
+    @Column(name = "begin_month")
+    private int beginMonth;
+
+    @Column(name = "end_day")
+    private int endDay;
+
+    @Column(name = "end_month")
+    private int endMonth;
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
@@ -44,19 +49,35 @@ public class Season {
         this.name = name;
     }
 
-    public LocalDate getStart() {
-        return start;
+    public int getBeginDay() {
+        return beginDay;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
+    public void setBeginDay(int beginDay) {
+        this.beginDay = beginDay;
     }
 
-    public LocalDate getStop() {
-        return stop;
+    public int getBeginMonth() {
+        return beginMonth;
     }
 
-    public void setStop(LocalDate stop) {
-        this.stop = stop;
+    public void setBeginMonth(int beginMonth) {
+        this.beginMonth = beginMonth;
+    }
+
+    public int getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(int endDay) {
+        this.endDay = endDay;
+    }
+
+    public int getEndMonth() {
+        return endMonth;
+    }
+
+    public void setEndMonth(int endMonth) {
+        this.endMonth = endMonth;
     }
 }

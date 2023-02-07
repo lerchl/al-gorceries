@@ -18,8 +18,8 @@ export const EditSeasonDialog = () => {
     const entity = useContext(EntityContext);
     const { show, close } = useContext(EditDialogContext);
 
-    const originalStart = dayjs().date(entity.start[2]).month(entity.start[1]);
-    const originalStop = dayjs().date(entity.stop[2]).month(entity.stop[1]);
+    const originalStart = dayjs().date(entity.beginDay).month(entity.beginMonth);
+    const originalStop = dayjs().date(entity.endDay).month(entity.endMonth);
 
     const [name, setName] = useState(entity.name);
     const [start, setStart] = useState(originalStart);

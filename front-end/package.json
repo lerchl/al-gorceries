@@ -2,7 +2,6 @@
   "name": "front-end",
   "version": "0.2",
   "private": true,
-  "proxy": "http://localhost:2000",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",

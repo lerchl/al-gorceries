@@ -15,8 +15,8 @@ export const Seasons = () => {
 
     const getColumns = season => {
         console.log(season);
-        const start = dayjs().date(season.start[2]).month(season.start[1]);
-        const stop = dayjs().date(season.stop[2]).month(season.stop[1]);
+        const start = dayjs().date(season.beginDay).month(season.beginMonth);
+        const stop = dayjs().date(season.endDay).month(season.endMonth);
         // TODO: Localization for displaying day and month
         return [season.name, start.format("DD.MM"), stop.format("DD.MM")];
     }
