@@ -18,6 +18,7 @@ export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP
  */
 export async function getEntity(entityApiEndpoint, setEntity, id) {
     const res = await axios.get(`${API_URL}/${entityApiEndpoint}/${id}`)
+    console.log(res.data);
     setEntity(res.data);
 }
 

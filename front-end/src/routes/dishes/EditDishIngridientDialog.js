@@ -8,19 +8,19 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
 
     const { t } = useTranslation();
 
-    const [factor, setFactor] = useState(dishIngridient.factor);
-    const [measurement, setMeasurement] = useState(dishIngridient.measurement);
-    const [ingridient, setIngridient] = useState(dishIngridient.ingridient);
+    const [amount, setAmount] = useState(dishIngridient.amount);
+    const [measurement, setMeasurement] = useState(dishIngridient.unitOfMeasurement);
+    const [ingridient, setIngridient] = useState(dishIngridient.ingredient);
 
     const closeDialog = () => {
-        setFactor(dishIngridient.factor);
+        setAmount(dishIngridient.factor);
         setMeasurement(dishIngridient.measurement);
         setIngridient(dishIngridient.ingridient);
         close();
     }
 
     const saveDishIngridient = () => {
-        dishIngridient.factor = factor;
+        dishIngridient.factor = amount;
         dishIngridient.measurement = measurement;
         dishIngridient.ingridient = ingridient;
         updateEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient, setDishIngridients, dishId);
@@ -34,9 +34,9 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
             </Modal.Header>
             <ModalBody>
                 <div className="row dialog-row">
-                    <TextField label="Faktor"
-                               value={factor}
-                               onChange={e => setFactor(e.target.value)}
+                    <TextField label="Menge"
+                               value={amount}
+                               onChange={e => setAmount(e.target.value)}
                                type="number"
                                className="number-input"
                                inputProps={{ inputMode: "numeric" }}

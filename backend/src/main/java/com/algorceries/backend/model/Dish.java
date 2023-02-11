@@ -3,6 +3,7 @@ package com.algorceries.backend.model;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +37,7 @@ public class Dish {
     private double cost;
 
     @OneToMany(mappedBy = "dish")
+    @JsonManagedReference
     private Set<DishIngredient> dishIngredients;
 
     @ManyToMany

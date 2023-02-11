@@ -3,6 +3,8 @@ package com.algorceries.backend.dto;
 import java.util.UUID;
 
 import com.algorceries.backend.model.DishIngredient;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 /**
  * DTO for a {@link DishIngredient dish ingredient}.
@@ -10,9 +12,17 @@ import com.algorceries.backend.model.DishIngredient;
 public class DishIngredientDTO {
 
     private UUID id;
+
+	@NotNull
     private UUID dishId;
+
+	@NotNull
     private UUID ingredientId;
+
+	@NotNull
     private UUID unitOfMeasurementId;
+
+	@Positive
     private double amount;
 
     // /////////////////////////////////////////////////////////////////////////

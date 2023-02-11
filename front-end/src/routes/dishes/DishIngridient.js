@@ -12,9 +12,9 @@ export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, las
     return (
         <>
             <Row>
-                <Col sm={3}>{dishIngridient.factor}</Col>
-                <Col sm={3}>{dishIngridient.measurement.name}</Col>
-                <Col sm={4}>{dishIngridient.ingridient.name}</Col>
+                <Col sm={3}>{dishIngridient.amount}</Col>
+                <Col sm={3}>{dishIngridient.unitOfMeasurement.name}</Col>
+                <Col sm={4}>{dishIngridient.ingredient.name}</Col>
                 <Col sm={2} style={{ textAlign: "right" }}>
                     <button className="icon-button" onClick={() => setShowEditDialog(true)}><PencilFill color="white" /></button>
                     <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient.id, setDishIngridients, dishId)}><TrashFill color="white" /></button>

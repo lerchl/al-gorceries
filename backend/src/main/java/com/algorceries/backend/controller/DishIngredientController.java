@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import com.algorceries.backend.dto.DishIngredientDTO;
 import com.algorceries.backend.model.DishIngredient;
-import com.algorceries.backend.repository.DishIngredientRepository;
+import com.algorceries.backend.service.DishIngredientService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dishIngredients")
 public class DishIngredientController {
 
-    private final DishIngredientRepository dishIngredientRepository;
+    private final DishIngredientService dishIngredientService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public DishIngredientController(DishIngredientRepository dishIngredientRepository) {
-        this.dishIngredientRepository = dishIngredientRepository;
+    public DishIngredientController(DishIngredientService dishIngredientService) {
+        this.dishIngredientService = dishIngredientService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -32,15 +34,15 @@ public class DishIngredientController {
 
     @GetMapping("/{dishId}")
     public List<DishIngredient> findByDishId(@PathVariable UUID dishId) {
-        return dishIngredientRepository.findByDishId(dishId);
+        return dishIngredientService.findByDishId(dishId);
     }
 
     @PostMapping
-    public DishIngredient save(DishIngredientDTO dishIngredientDTO) {
-        return dishIngredientRepository.save(fromDTO(dishIngredientDTO),
-                                             dishIngredientDTO.getDishId(),
-                                             dishIngredientDTO.getIngredientId(),
-                                             dishIngredientDTO.getUnitOfMeasurementId());
+    public DishIngredient save(@RequestBody @Valid DishIngredientDTO dishIngredientDTO) {
+        return dishIngredientService.save(fromDTO(dishIngredientDTO),
+                                          dishIngredientDTO.getDishId(),
+                                          dishIngredientDTO.getIngredientId(),
+                                          dishIngredientDTO.getUnitOfMeasurementId());
     }
 
     // /////////////////////////////////////////////////////////////////////////

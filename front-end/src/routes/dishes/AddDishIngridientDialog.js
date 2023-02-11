@@ -8,9 +8,9 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
 
     const { t } = useTranslation();
 
-    const [factor, setFactor] = useState("");
-    const [measurementId, setMeasurementId] = useState("");
-    const [ingridientId, setIngridientId] = useState("");
+    const [amount, setFactor] = useState("");
+    const [unitOfMeasurementId, setMeasurementId] = useState("");
+    const [ingredientId, setIngridientId] = useState("");
 
     const closeDialog = () => {
         setFactor("");
@@ -20,13 +20,13 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
     }
 
     const addDishIngridient = () => {
-        const dishIngridient = {
-            "factor": factor,
-            "measurement": measurementId,
-            "ingridient": ingridientId,
-            "dish": dishId
+        const dishIngredient = {
+            "amount": amount,
+            "dishId": dishId,
+            "ingredientId": ingredientId,
+            "unitOfMeasurementId": unitOfMeasurementId
         }
-        createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient, setDishIngridients, dishId);
+        createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngredient, setDishIngridients, dishId);
         closeDialog();
     }
 
@@ -38,7 +38,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
             <ModalBody>
                 <div className="row dialog-row">
                     <TextField label="Faktor"
-                               value={factor}
+                               value={amount}
                                onChange={e => setFactor(e.target.value)}
                                type="number"
                                className="number-input"
