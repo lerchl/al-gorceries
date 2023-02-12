@@ -3,19 +3,20 @@ import { useState } from "react";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { createEntityAndGetEntitiesWithParam, DISH_INGREDIENTS } from "../../ApiUtils";
+import { compareEntities } from "../../Entity";
 
-export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients, measurements, ingridients}) => {
+export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients, dishIngredient, measurements, ingridients}) => {
 
     const { t } = useTranslation();
 
-    const [amount, setFactor] = useState("");
-    const [unitOfMeasurementId, setMeasurementId] = useState("");
-    const [ingredientId, setIngridientId] = useState("");
+    const [amount, setFactor] = useState(dishIngredient?.amount || "");
+    const [unitOfMeasurement, setMeasurement] = useState(dishIngredient?.unitOfMeasurement || "");
+    const [ingredient, setIngridient] = useState(dishIngredient?.ingredient || "");
 
     const closeDialog = () => {
         setFactor("");
-        setMeasurementId("");
-        setIngridientId("");
+        setMeasurement("");
+        setIngridient("");
         close();
     }
 
@@ -23,8 +24,8 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
         const dishIngredient = {
             "amount": amount,
             "dishId": dishId,
-            "ingredientId": ingredientId,
-            "unitOfMeasurementId": unitOfMeasurementId
+            "ingredientId": ingredient.id,
+            "unitOfMeasurementId": unitOfMeasurement.id
         }
         createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngredient, setDishIngridients, dishId);
         closeDialog();
@@ -48,7 +49,9 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 <div className="row dialog-row">
                     <Autocomplete options={measurements}
                                   getOptionLabel={m => m.name}
-                                  onChange={(_event, value) => setMeasurementId(value?.id)}
+                                  value={unitOfMeasurement}
+                                  isOptionEqualToValue={compareEntities}
+                                  onChange={(_event, value) => setMeasurement(value)}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("measurement.name")} />}
                                   openText={t("base.action.open")}
@@ -59,7 +62,9 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 <div className="row dialog-row">
                     <Autocomplete options={ingridients}
                                   getOptionLabel={i => i.name}
-                                  onChange={(_event, value) => setIngridientId(value?.id)}
+                                  value={ingredient}
+                                  isOptionEqualToValue={compareEntities}
+                                  onChange={(_event, value) => setIngridient(value)}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
                                   openText={t("base.action.open")}

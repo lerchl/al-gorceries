@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import { deleteEntityAndGetEntitiesWithParam, DISH_INGREDIENTS } from "../../ApiUtils";
+import { AddDishIngridientDialog } from "./AddDishIngridientDialog";
 import { EditDishIngridientDialog } from "./EditDishIngridientDialog";
 
 export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, last, measurements, ingridients }) => {
@@ -20,13 +21,20 @@ export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, las
                     <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient.id, setDishIngridients, dishId)}><TrashFill color="white" /></button>
                 </Col>
             </Row>
-            <EditDishIngridientDialog show={showEditDialog}
+            <AddDishIngridientDialog show={showEditDialog}
+                    close={() => setShowEditDialog(false)}
+                    dishId={dishId}
+                    setDishIngridients={setDishIngridients}
+                    dishIngredient={dishIngridient}
+                    measurements={measurements}
+                    ingridients={ingridients} />
+            {/* <EditDishIngridientDialog show={showEditDialog}
                     close={() => setShowEditDialog(false)}
                     dishId={dishId}
                     setDishIngridients={setDishIngridients}
                     dishIngridient={dishIngridient}
                     measurements={measurements}
-                    ingridients={ingridients} />
+                    ingridients={ingridients} /> */}
             { !last ? <Divider className="mt-2 mb-2" /> : "" }
         </>
     );

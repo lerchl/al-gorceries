@@ -51,3 +51,7 @@ export const Entity = ({getColumns, hasDetailPage = false}) => {
         </>
     );
 }
+
+export const compareEntities = (e1, e2) => {
+    return e1.id === e2.id;
+}

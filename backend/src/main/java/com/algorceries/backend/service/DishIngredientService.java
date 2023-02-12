@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.algorceries.backend.controller.exception.BadRequestException;
+import com.algorceries.backend.model.Dish;
 import com.algorceries.backend.model.DishIngredient;
+import com.algorceries.backend.model.Ingredient;
+import com.algorceries.backend.model.UnitOfMeasurement;
 import com.algorceries.backend.repository.DishIngredientRepository;
 import com.algorceries.backend.repository.DishRepository;
 import com.algorceries.backend.repository.IngredientRepository;
@@ -40,14 +43,34 @@ public class DishIngredientService {
     // Methods
     // /////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Finds all {@link DishIngredient dish ingredients} of a {@link Dish dish}.
+     * @param dishId the id of the {@link Dish dish}
+     * @return all found {@link DishIngredient dish ingredients}
+     */
     public List<DishIngredient> findByDishId(UUID dishId) {
         return dishIngredientRepository.findByDishId(dishId);
     }
 
+    /**
+     * Saves a {@link DishIngredient dish ingredient}.
+     * @param dishIngredient the {@link DishIngredient dish ingredient} to save
+     * @return the saved {@link DishIngredient dish ingredient}
+     */
     public DishIngredient save(DishIngredient dishIngredient) {
         return dishIngredientRepository.save(dishIngredient);
     }
 
+    /**
+     * Saves a {@link DishIngredient dish ingredient} after setting its
+     * {@link Dish dish}, {@link Ingredient ingredient} and {@link UnitOfMeasurement unit of measurement}.
+     *
+     * @param dishIngredient the {@link DishIngredient dish ingredient} to save
+     * @param dishId the id of the {@link Dish dish}
+     * @param ingredientId the id of the {@link Ingredient ingredient}
+     * @param unitOfMeasurementId the id of the {@link UnitOfMeasurement unit of measurement}
+     * @return the saved {@link DishIngredient dish ingredient}
+     */
     public DishIngredient save(DishIngredient dishIngredient,
                                UUID dishId,
                                UUID ingredientId,
@@ -69,5 +92,13 @@ public class DishIngredientService {
         dishIngredient.setUnitOfMeasurement(unitOfMeasurement.get());
 
         return save(dishIngredient);
+    }
+
+    /**
+     * Deletes a {@link DishIngredient dish ingredient}.
+     * @param dishIngredientId the id of the {@link DishIngredient dish ingredient}
+     */
+    public void delete(UUID dishIngredientId) {
+        dishIngredientRepository.deleteById(dishIngredientId);
     }
 }
