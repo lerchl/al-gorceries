@@ -1,7 +1,9 @@
-import React from 'react';
-import { Suspense } from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { React, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./localization/i18n";
 import Menubar from "./Menubar";
 import { Dish } from './routes/dishes/Dish';
 import { Dishes } from './routes/dishes/Dishes';
@@ -9,11 +11,8 @@ import { Index } from './routes/index/Index';
 import { Ingridients } from './routes/ingridients/Ingridients';
 import { Measurements } from "./routes/measurements/Measurements";
 import { Registration } from './routes/registration/Registration';
-import { Guard } from "./security/Guard";
-import "./localization/i18n";
 import { Seasons } from './routes/seasons/Seasons';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { Guard } from "./security/Guard";
 
 ReactDOM.render(
     <Suspense fallback="Loading...">

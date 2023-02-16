@@ -21,23 +21,25 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
 
     return (
         <div className="content">
-            <h1>{headline}</h1>
-            <Table className="custom-table">
-                <thead className="position-sticky">
-                    <TableHead columns={columns}
-                                openAddDialogButtonTitle={openAddDialogButtonHover}
-                                addDialog={addDialog}
-                                entities={entities}
-                                setEntities={setEntities}
-                                setFilteredAndSorted={setFilteredAndSorted}
-                                entityApiEndpoint={entityApiEndpoint} />
-                </thead>
-                <tbody>
-                    <TableContentContext.Provider value={context}>
-                        <TableContent entities={filteredAndSorted} entityComponent={entitiyComponent} />
-                    </TableContentContext.Provider>
-                </tbody>
-            </Table>
+            <div className="widget widget-pink-1">
+                <h1>{headline}</h1>
+                <Table className="custom-table">
+                    <thead className="position-sticky">
+                        <TableHead columns={columns}
+                                    openAddDialogButtonTitle={openAddDialogButtonHover}
+                                    addDialog={addDialog}
+                                    entities={entities}
+                                    setEntities={setEntities}
+                                    setFilteredAndSorted={setFilteredAndSorted}
+                                    entityApiEndpoint={entityApiEndpoint} />
+                    </thead>
+                    <tbody>
+                        <TableContentContext.Provider value={context}>
+                            <TableContent entities={filteredAndSorted} entityComponent={entitiyComponent} />
+                        </TableContentContext.Provider>
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 

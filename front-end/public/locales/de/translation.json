@@ -13,7 +13,8 @@
             "close": "Schließen",
             "open": "Öffnen",
             "save": "Speichern"
-        }
+        },
+        "pleaseSelect": "Bitte auswählen"
     },
     "dish": {
         "attribute": {

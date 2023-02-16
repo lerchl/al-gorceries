@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import { deleteEntityAndGetEntitiesWithParam, DISH_INGREDIENTS } from "../../ApiUtils";
-import { AddDishIngridientDialog } from "./AddDishIngridientDialog";
-import { EditDishIngridientDialog } from "./EditDishIngridientDialog";
+import { DishIngredientDialog } from "./DishIngridientDialog";
 
 export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, last, measurements, ingridients }) => {
 
@@ -13,28 +12,21 @@ export const DishIngridient = ({ dishIngridient, setDishIngridients, dishId, las
     return (
         <>
             <Row>
-                <Col sm={3}>{dishIngridient.amount}</Col>
-                <Col sm={3}>{dishIngridient.unitOfMeasurement.name}</Col>
-                <Col sm={4}>{dishIngridient.ingredient.name}</Col>
-                <Col sm={2} style={{ textAlign: "right" }}>
+                <Col xs={4} sm={3}>{dishIngridient.amount}</Col>
+                <Col xs={4} sm={3}>{dishIngridient.unitOfMeasurement.name}</Col>
+                <Col xs={4} sm={4}>{dishIngridient.ingredient.name}</Col>
+                <Col xs={12} sm={2}>
                     <button className="icon-button" onClick={() => setShowEditDialog(true)}><PencilFill color="white" /></button>
                     <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient.id, setDishIngridients, dishId)}><TrashFill color="white" /></button>
                 </Col>
             </Row>
-            <AddDishIngridientDialog show={showEditDialog}
+            <DishIngredientDialog show={showEditDialog}
                     close={() => setShowEditDialog(false)}
                     dishId={dishId}
-                    setDishIngridients={setDishIngridients}
+                    setDishIngredients={setDishIngridients}
                     dishIngredient={dishIngridient}
                     measurements={measurements}
-                    ingridients={ingridients} />
-            {/* <EditDishIngridientDialog show={showEditDialog}
-                    close={() => setShowEditDialog(false)}
-                    dishId={dishId}
-                    setDishIngridients={setDishIngridients}
-                    dishIngridient={dishIngridient}
-                    measurements={measurements}
-                    ingridients={ingridients} /> */}
+                    ingredients={ingridients} />
             { !last ? <Divider className="mt-2 mb-2" /> : "" }
         </>
     );

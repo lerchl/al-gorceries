@@ -21,19 +21,24 @@ export const Dish = () => {
             <div className="content">
 
                 {/* Headline */}
-                <h1 className="mb-4">{dish?.name}</h1>
+                {/* <h1 className="mb-4">{dish?.name}</h1> */}
 
                 <Container fluid="lg">
                     <Row>
                         <Col lg={6}>
                             {/* Base data */}
-                            <h2>Infos</h2>
-                            <DishInfos dish={dish} />
-                            <Steps dishId={id} />
+                            <div className="widget widget-pink-2">
+                                <DishInfos dish={dish} />
+                            </div>
+                            <div className="widget widget-pink-2">
+                                <Steps dishId={id} />
+                            </div>
                         </Col>
 
                         <Col lg={6}>
-                            <DishIngridients dishId={id} />
+                            <div className="widget widget-pink-2">
+                                <DishIngridients dishId={id} />
+                            </div>
                         </Col>
                     </Row>
                 </Container>

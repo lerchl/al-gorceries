@@ -5,36 +5,42 @@ import { useTranslation } from "react-i18next";
 import { createEntityAndGetEntitiesWithParam, DISH_INGREDIENTS } from "../../ApiUtils";
 import { compareEntities } from "../../Entity";
 
-export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients, dishIngredient, measurements, ingridients}) => {
+export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, dishIngredient, measurements, ingredients}) => {
 
     const { t } = useTranslation();
 
     const [amount, setFactor] = useState(dishIngredient?.amount || "");
-    const [unitOfMeasurement, setMeasurement] = useState(dishIngredient?.unitOfMeasurement || "");
-    const [ingredient, setIngridient] = useState(dishIngredient?.ingredient || "");
+    const [unitOfMeasurement, setMeasurement] = useState(dishIngredient?.unitOfMeasurement || null);
+    const [ingredient, setIngridient] = useState(dishIngredient?.ingredient || null);
+
+    const title = dishIngredient ? t("dish.ingridient.dialog.edit.title") : t("dish.ingridient.dialog.add.title");
 
     const closeDialog = () => {
-        setFactor("");
-        setMeasurement("");
-        setIngridient("");
+        if (!dishIngredient) {
+            setFactor("");
+            setMeasurement(null);
+            setIngridient(null);
+        }
+
         close();
     }
 
     const addDishIngridient = () => {
-        const dishIngredient = {
+        const data = {
+            "id": dishIngredient?.id,
             "amount": amount,
             "dishId": dishId,
             "ingredientId": ingredient.id,
             "unitOfMeasurementId": unitOfMeasurement.id
         }
-        createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngredient, setDishIngridients, dishId);
+        createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, data, setDishIngredients, dishId);
         closeDialog();
     }
 
     return (
         <Modal show={show} backdrop="static" onHide={closeDialog} keyboard={false}>
             <Modal.Header closeButton>
-                <Modal.Title>{t("dish.ingridient.dialog.add.title")}</Modal.Title>
+                <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <ModalBody>
                 <div className="row dialog-row">
@@ -48,7 +54,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 </div>
                 <div className="row dialog-row">
                     <Autocomplete options={measurements}
-                                  getOptionLabel={m => m.name}
+                                  getOptionLabel={m => m?.name}
                                   value={unitOfMeasurement}
                                   isOptionEqualToValue={compareEntities}
                                   onChange={(_event, value) => setMeasurement(value)}
@@ -60,7 +66,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                                   clearIcon={<></>} />
                 </div>
                 <div className="row dialog-row">
-                    <Autocomplete options={ingridients}
+                    <Autocomplete options={ingredients}
                                   getOptionLabel={i => i.name}
                                   value={ingredient}
                                   isOptionEqualToValue={compareEntities}
@@ -74,7 +80,7 @@ export const AddDishIngridientDialog = ({show, close, dishId, setDishIngridients
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" onClick={addDishIngridient} className="custom-button primary">{t("base.action.add")}</button>
+                <button type="button" onClick={addDishIngridient} className="custom-button primary">{dishIngredient ? t("base.action.save") : t("base.action.add")}</button>
                 <button type="button" onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </ModalFooter>
         </Modal>
