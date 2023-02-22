@@ -1,7 +1,5 @@
 package com.algorceries.backend.controller;
 
-import java.util.List;
-
 import com.algorceries.backend.model.DishList;
 import com.algorceries.backend.service.DishListService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +29,9 @@ public class DishListController {
     // Methods
     // /////////////////////////////////////////////////////////////////////////
 
-    @GetMapping
-    public List<DishList> findAll() {
-        return dishListService.findAll();
+    @GetMapping("/{year}/{calendarWeek}")
+    public DishList findByYearAndCalendarWeek(@PathVariable int year, @PathVariable int calendarWeek) {
+        return dishListService.findByYearAndCalendarWeek(year, calendarWeek);
     }
 
     @PostMapping("/{year}/{calendarWeek}")

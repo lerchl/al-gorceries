@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
@@ -28,7 +29,9 @@ public class DishList {
     private int calendarWeek;
 
     @ManyToMany
-    @JoinTable(name = "algo_dish_list_dish")
+    @JoinTable(name = "algo_dish_list_dish",
+               joinColumns = @JoinColumn(name = "dish_list_id"),
+               inverseJoinColumns = @JoinColumn(name = "dish_id"))
     private Set<Dish> dishes;
 
     // /////////////////////////////////////////////////////////////////////////

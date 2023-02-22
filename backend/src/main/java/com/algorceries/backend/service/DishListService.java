@@ -3,10 +3,10 @@ package com.algorceries.backend.service;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import com.algorceries.backend.controller.exception.ConflictException;
+import com.algorceries.backend.controller.exception.NotFoundException;
 import com.algorceries.backend.model.Dish;
 import com.algorceries.backend.model.DishList;
 import com.algorceries.backend.model.Season;
@@ -35,8 +35,9 @@ public class DishListService {
     // Methods
     // /////////////////////////////////////////////////////////////////////////
 
-    public List<DishList> findAll() {
-        return dishListRepository.findAll();
+    public DishList findByYearAndCalendarWeek(int year, int calendarWeek) {
+        return dishListRepository.findByYearAndCalendarWeek(year, calendarWeek)
+                .orElseThrow(() -> new NotFoundException("Dish list not found"));
     }
 
     /**
