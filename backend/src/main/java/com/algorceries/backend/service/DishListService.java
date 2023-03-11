@@ -9,6 +9,7 @@ import com.algorceries.backend.controller.exception.ConflictException;
 import com.algorceries.backend.controller.exception.NotFoundException;
 import com.algorceries.backend.model.Dish;
 import com.algorceries.backend.model.DishList;
+import com.algorceries.backend.model.DishListDish;
 import com.algorceries.backend.model.Season;
 import com.algorceries.backend.repository.DishListRepository;
 import com.algorceries.backend.repository.DishRepository;
@@ -53,12 +54,12 @@ public class DishListService {
         }
 
         var date = LocalDate.now().withYear(year).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, calendarWeek);
-        var dishList = dishRepository.findAll();
-        dishList.removeIf(dish -> dishIsOutOfSeason(dish, date));
-        Collections.shuffle(dishList);
-        var dishSet = dishList.stream().limit(DISHES_PER_LIST).collect(Collectors.toSet());
+        var allDishes = dishRepository.findAll();
+        allDishes.removeIf(dish -> dishIsOutOfSeason(dish, date));
+        Collections.shuffle(allDishes);
+        var selectedDishes = allDishes.stream().limit(DISHES_PER_LIST).map(DishListDish::new).collect(Collectors.toSet());
 
-        return dishListRepository.save(new DishList(year, calendarWeek, dishSet));
+        return dishListRepository.save(new DishList(year, calendarWeek, selectedDishes));
     }
 
     /**

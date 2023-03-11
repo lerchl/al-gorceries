@@ -3,12 +3,14 @@ import { DishListDish } from "./DishListDish";
 
 export const DishesOfDishList = ({ dishList, setDishList }) => {
 
+    console.log(dishList);
+
     return (
         <>
             {
-                dishList.dishes.map(dish => <DishListDish key={dish.id}
+                dishList.dishListDishes.map(dish => <DishListDish key={dish.id}
                         dishList={dishList} setDishList={setDishList} dish={dish}
-                        selected={dishList.selectedDishes.some(d => d.id === dish.id)} />)
+                        selected={dishList.selected} />)
             }
         </>
     );
