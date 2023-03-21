@@ -1,5 +1,6 @@
 package com.algorceries.backend.repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import com.algorceries.backend.model.User;
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-    // noop
+    
+    Optional<User> findByEmailAndPassword(String email, String password);
 }
