@@ -30,10 +30,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        // TODO: Change login dialog to login page and then send redirect to that page
         httpSecurity.csrf()
                     .disable()
                     .cors()
-                    .disable()
+                    .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
