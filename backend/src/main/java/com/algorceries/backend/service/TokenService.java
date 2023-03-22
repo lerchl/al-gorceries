@@ -2,6 +2,7 @@ package com.algorceries.backend.service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.crypto.SecretKey;
@@ -12,6 +13,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.stereotype.Service;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS256;
@@ -34,20 +36,28 @@ public class TokenService {
         return Jwts.builder()
                 .claim("id", user.getId())
                 .claim("sub", user.getEmail())
+                .claim("admin", user.isAdmin())
                 .setExpiration(expirationDate)
                 .signWith(key, HS256)
                 .compact();
     }
 
-    public UserPrincipal parseToken(String token) {
-        Jws<Claims> jwsClaims = Jwts.parserBuilder()
-                .setSigningKey(JWT_SECRET.getEncoded())
-                .build()
-                .parseClaimsJws(token);
+    public Optional<UserPrincipal> parseToken(String token) {
+        Jws<Claims> jwsClaims;
 
-        UUID userId = jwsClaims.getBody().get("id", UUID.class);
+        try {
+            jwsClaims = Jwts.parserBuilder()
+                    .setSigningKey(JWT_SECRET.getEncoded())
+                    .build()
+                    .parseClaimsJws(token);
+        } catch (SignatureException e) {
+            return Optional.empty();
+        }
+
+        UUID userId = UUID.fromString(jwsClaims.getBody().get("id", String.class));
         String sub = jwsClaims.getBody().getSubject();
+        boolean admin = jwsClaims.getBody().get("admin", Boolean.class);
 
-        return new UserPrincipal(userId, sub);
+        return Optional.of(new UserPrincipal(userId, sub, admin));
     }
 }

@@ -29,7 +29,7 @@ public class AuthenticationService {
     // /////////////////////////////////////////////////////////////////////////
 
     public boolean isLoggedIn(String token) {
-        return tokenService.parseToken(token) != null;
+        return tokenService.parseToken(token).isPresent();
     }
 
     public String login(String email, String password) {

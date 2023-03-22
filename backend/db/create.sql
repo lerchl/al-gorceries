@@ -69,5 +69,8 @@ CREATE TABLE algo_dish_list_dish (
 CREATE TABLE algo_user (
     id       UUID          PRIMARY KEY DEFAULT gen_random_uuid(),
     email    VARCHAR(100)  NOT NULL,
-    password VARCHAR(1000) NOT NULL
+    password VARCHAR(1000) NOT NULL,
+    admin    BOOLEAN       NOT NULL    DEFAULT FALSE
 );
+
+INSERT INTO algo_user (email, password, admin) VALUES ('admin', 'admin', TRUE);

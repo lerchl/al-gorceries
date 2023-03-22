@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
+    private static final String TOKEN_COOKIE_NAME = "jwt";
+
     private final AuthenticationService authenticationService;
 
     // /////////////////////////////////////////////////////////////////////////
@@ -43,7 +45,9 @@ public class AuthenticationController {
             return false;
         }
 
-        Optional<Cookie> tokenCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("jwt")).findFirst();
+        Optional<Cookie> tokenCookie = Arrays.stream(request.getCookies())
+                .filter(cookie -> cookie.getName().equals(TOKEN_COOKIE_NAME))
+                .findFirst();
 
         if (tokenCookie.isEmpty()) {
             return false;
@@ -54,8 +58,9 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
-        HttpCookie cookie = ResponseCookie.from("jwt", authenticationService.login(loginDTO.getEmail(), loginDTO.getPassword()))
-                                        //   .httpOnly(true)
+        HttpCookie cookie = ResponseCookie.from(TOKEN_COOKIE_NAME, authenticationService.login(loginDTO.getEmail(), loginDTO.getPassword()))
+                                          .httpOnly(true)
+                                          .path("/")
                                           .build();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
     }

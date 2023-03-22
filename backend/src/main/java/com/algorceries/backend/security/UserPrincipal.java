@@ -6,14 +6,16 @@ public class UserPrincipal {
 
     private final UUID userId;
     private final String email;
+    private final boolean admin;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public UserPrincipal(UUID userId, String email) {
+    public UserPrincipal(UUID userId, String email, boolean admin) {
         this.userId = userId;
         this.email = email;
+        this.admin = admin;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -26,5 +28,9 @@ public class UserPrincipal {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 }

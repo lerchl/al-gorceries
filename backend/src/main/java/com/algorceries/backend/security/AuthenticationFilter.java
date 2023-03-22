@@ -1,7 +1,9 @@
 package com.algorceries.backend.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.algorceries.backend.service.TokenService;
@@ -11,6 +13,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -46,14 +50,30 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        UsernamePasswordAuthenticationToken token = createToken(tokenCookie.get().getValue());
+        Optional<UsernamePasswordAuthenticationToken> optionalToken = createToken(tokenCookie.get().getValue());
 
-        SecurityContextHolder.getContext().setAuthentication(token);
+        if (optionalToken.isEmpty()) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(optionalToken.get());
         filterChain.doFilter(request, response);
     }
 
-    private UsernamePasswordAuthenticationToken createToken(String token) {
-        UserPrincipal userPrincipal = tokenService.parseToken(token);
-        return new UsernamePasswordAuthenticationToken(userPrincipal, null);
+    private Optional<UsernamePasswordAuthenticationToken> createToken(String token) {
+        Optional<UserPrincipal> userPrincipal = tokenService.parseToken(token);
+
+        if (userPrincipal.isEmpty()) {
+            return Optional.empty();
+        }
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if (userPrincipal.get().isAdmin()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+
+        return Optional.of(new UsernamePasswordAuthenticationToken(userPrincipal, null, authorities));
     }
 }

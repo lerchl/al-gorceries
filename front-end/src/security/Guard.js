@@ -15,6 +15,7 @@ export const Guard = ({ children }) => {
     }
 
     useEffect(() => isLoggedIn().then(res => {
+        console.log(res);
         setLoading(false);
         setLoggedIn(res.data);
         setShow(!res.data);

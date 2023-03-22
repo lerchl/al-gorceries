@@ -10,6 +10,8 @@ export const SEASONS = "seasons";
 
 export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
 
+axios.defaults.withCredentials = true;
+
 /**
  * Sends a request for fetching an entity via its id.
  * @param {string} entityApiEndpoint api endpoint of the entity
