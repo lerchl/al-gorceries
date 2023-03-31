@@ -2,6 +2,7 @@ package com.algorceries.backend.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class DishListDish {
 
     @ManyToOne
     @JoinColumn(name = "dish_list_id")
+    @JsonBackReference
     private DishList dishList;
 
     @ManyToOne
@@ -39,8 +41,9 @@ public class DishListDish {
         // default constructor for jpa
     }
 
-    public DishListDish(Dish dish) {
+    public DishListDish(Dish dish, DishList dishList) {
         this.dish = dish;
+        this.dishList = dishList;
     }
 
     // /////////////////////////////////////////////////////////////////////////

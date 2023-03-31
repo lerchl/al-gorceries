@@ -3,6 +3,7 @@ package com.algorceries.backend.model;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ public class DishList {
     private int calendarWeek;
 
     @OneToMany(mappedBy = "dishList", cascade = ALL)
+    @JsonManagedReference
     private Set<DishListDish> dishListDishes;
 
     // /////////////////////////////////////////////////////////////////////////
@@ -39,10 +41,9 @@ public class DishList {
         // default constructor for jpa
     }
 
-    public DishList(int year, int calendarWeek, Set<DishListDish> dishListDishes) {
+    public DishList(int year, int calendarWeek) {
         this.year = year;
         this.calendarWeek = calendarWeek;
-        this.dishListDishes = dishListDishes;
     }
 
     // /////////////////////////////////////////////////////////////////////////
