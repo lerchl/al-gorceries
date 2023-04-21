@@ -11,12 +11,13 @@ import { DishesOfDishList } from "./DishesOfDishList";
 import { GenerateDishListButton } from "./GenerateDishListButton";
 import { ShoppingList } from "./ShoppingList";
 
-async function getDishList(date, setDishList) {
+async function getDishList(date, setDishList, setDishListDishes) {
     const res = await axios.get(API_URL + "/" + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
     if (res.status === 204) {
         setDishList();
     } else {
         setDishList(res.data);
+        setDishListDishes(res.data.dishListDishes);
     }
 }
 
@@ -26,8 +27,9 @@ export const Index = () => {
 
     const [date, setDate] = useState(new Date());
     const [dishList, setDishList] = useState();
+    const [dishListDishes, setDishListDishes] = useState([]);
 
-    useEffect(() => getDishList(date, setDishList), []);
+    useEffect(() => getDishList(date, setDishList, setDishListDishes), []);
 
     function changeWeek(weeks) {
         setDate(new Date(date.setDate(date.getDate() + 7 * weeks)));
@@ -48,7 +50,7 @@ export const Index = () => {
     function content() {
         if (viewDishSelection) {
             if (dishList) {
-                return <DishesOfDishList dishList={dishList} setDishList={setDishList} />;
+                return <DishesOfDishList dishListDishes={dishListDishes} setDishListDishes={setDishListDishes} />;
             } else {
                 return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
             }

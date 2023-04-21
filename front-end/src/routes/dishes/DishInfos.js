@@ -1,10 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
-export const DishInfos = ({ dish }) => {
+export const DishInfos = ({ dish, showTitle = true }) => {
     return (
         <>
-            <h2>Infos</h2>
+            { showTitle ? <h2>Infos</h2> : "" }
             <Container fluid className="overlay">
                 <Row>
                     <Col xs={12} sm={4} md={4} lg={4}>Name</Col>

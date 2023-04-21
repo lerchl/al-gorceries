@@ -1,27 +1,40 @@
+import axios from 'axios';
 import React from 'react';
-import { DISH_LIST, updateEntityAndGetEntity } from "../../ApiUtils";
+import { API_URL, DISH_LIST_DISH } from "../../ApiUtils";
 import { DishInfos } from "../dishes/DishInfos";
 
-export const DishListDish = ({ dishList, setDishList, dish, selected }) => {
+export const DishListDish = ({ dishListDish, setDishListDishes }) => {
 
-    const select = () => {
-        dishList.selectedDishes.push(dish);
-        update();
+    const toggleSelection = () => {
+        axios.put(`${API_URL}/${DISH_LIST_DISH}/${dishListDish.id}`, { "selected": !dishListDish.selected }).then(res => {
+            setDishListDishes(dishListDishes => {
+                const newDishList = dishListDishes.map(dishListDish => {
+                    if (dishListDish.id === res.data.id) {
+                        return res.data;
+                    } else {
+                        return dishListDish;
+                    }
+                });
+
+                return newDishList;
+            });
+        });
     }
 
-    const deselect = () => {
-        dishList.selectedDishes = dishList.selectedDishes.filter(d => d.id !== dish.id);
-        update();
-    }
+    const getClasses = () => {
+        let classes = "selectable";
 
-    function update() {
-        updateEntityAndGetEntity(DISH_LIST, dishList, setDishList);
+        if (dishListDish.selected) {
+            classes += " selected";
+        }
+
+        return classes;
     }
 
     return (
-        <div onClick={() => selected ? deselect() : select()} className={selected ? "selectable selected" : "selectable"}>
-            <h2>{dish.name}</h2>
-            <DishInfos dish={dish} />
+        <div onClick={toggleSelection} className={getClasses()}>
+            <h2>{dishListDish.dish.name}</h2>
+            <DishInfos dish={dishListDish.dish} />
         </div>
     );
 }
