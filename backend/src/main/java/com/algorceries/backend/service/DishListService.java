@@ -3,13 +3,15 @@ package com.algorceries.backend.service;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.Collections;
-import java.util.stream.Collectors;
+import java.util.HashSet;
 
 import com.algorceries.backend.controller.exception.ConflictException;
 import com.algorceries.backend.controller.exception.NotFoundException;
 import com.algorceries.backend.model.Dish;
 import com.algorceries.backend.model.DishList;
+import com.algorceries.backend.model.DishListDish;
 import com.algorceries.backend.model.Season;
+import com.algorceries.backend.repository.DishListDishRepository;
 import com.algorceries.backend.repository.DishListRepository;
 import com.algorceries.backend.repository.DishRepository;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,18 @@ public class DishListService {
 
     private final DishListRepository dishListRepository;
     private final DishRepository dishRepository;
+    private final DishListDishRepository dishListDishRepository;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public DishListService(DishListRepository dishListRepository, DishRepository dishRepository) {
+    public DishListService(DishListRepository dishListRepository,
+                           DishRepository dishRepository,
+                           DishListDishRepository dishListDishRepository) {
         this.dishListRepository = dishListRepository;
         this.dishRepository = dishRepository;
+        this.dishListDishRepository = dishListDishRepository;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -52,13 +58,20 @@ public class DishListService {
             throw new ConflictException("Dish list for this week already exists");
         }
 
+        // TODO: Would be nice if the dish list could be created
+        // with the dishes already and then everything saved at once.
+        var dishList = dishListRepository.save(new DishList(year, calendarWeek));
         var date = LocalDate.now().withYear(year).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, calendarWeek);
-        var dishList = dishRepository.findAll();
-        dishList.removeIf(dish -> dishIsOutOfSeason(dish, date));
-        Collections.shuffle(dishList);
-        var dishSet = dishList.stream().limit(DISHES_PER_LIST).collect(Collectors.toSet());
+        var allDishes = dishRepository.findAll();
+        allDishes.removeIf(dish -> dishIsOutOfSeason(dish, date));
+        Collections.shuffle(allDishes);
+        var dishListDishes = allDishes.stream()
+                 .limit(DISHES_PER_LIST)
+                 .map(dish -> dishListDishRepository.save(new DishListDish(dish, dishList)))
+                 .toList();
 
-        return dishListRepository.save(new DishList(year, calendarWeek, dishSet));
+        dishList.setDishListDishes(new HashSet<>(dishListDishes));
+        return dishListRepository.save(dishList);
     }
 
     /**

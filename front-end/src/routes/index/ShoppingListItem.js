@@ -1,21 +1,19 @@
 import { React, Fragment } from "react";
 import { Container } from "react-bootstrap";
 
-export const ShoppingListItem = ({item}) => {
+export const ShoppingListItem = ({ item }) => {
 
     return (
         <>
-            <h2>{item.ingridient.name}</h2>
+            <h2>{item.ingredient.name}</h2>
             <Container fluid className="overlay">
                 <p className="mb-0">
                     {
-                        item.measurements.map(m => {
-                            return (
-                                <Fragment key={m.measurement.id}>
-                                    {item.measurements.indexOf(m) > 0 ? ", " + m.factor : m.factor} {m.measurement.name}
-                                </Fragment>
-                            );
-                        })
+                        item.unitsOfMeasurement.map(m => (
+                            <Fragment key={m.unitOfMeasurement.id}>
+                                {item.unitsOfMeasurement.indexOf(m) > 0 ? ", " + m.amount : m.amount} {m.unitOfMeasurement.name}
+                            </Fragment>
+                        ))
                     }
                 </p>
             </Container>

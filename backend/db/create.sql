@@ -1,15 +1,15 @@
 CREATE TABLE algo_unit_of_measurement (
-    id   UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
+    id   UUID         PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE algo_ingredient (
-    id   UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
+    id   UUID         PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE algo_season (
-    id          UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
+    id          UUID         PRIMARY KEY,
     name        VARCHAR(100) NOT NULL,
     begin_day   INTEGER      NOT NULL,
     begin_month INTEGER      NOT NULL,
@@ -18,13 +18,13 @@ CREATE TABLE algo_season (
 );
 
 CREATE TABLE algo_dish_list (
-    id            UUID    PRIMARY KEY DEFAULT gen_random_uuid(),
+    id            UUID    PRIMARY KEY,
     year          INTEGER NOT NULL,
     calendar_week INTEGER NOT NULL
 );
 
 CREATE TABLE algo_dish (
-    id        UUID          PRIMARY KEY DEFAULT gen_random_uuid(),
+    id        UUID          PRIMARY KEY,
     name      VARCHAR(100)  NOT NULL,
     source    VARCHAR(1000) NOT NULL,
     time      INTEGER       NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE algo_dish (
 );
 
 CREATE TABLE algo_dish_ingredient (
-    id                     UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id                     UUID PRIMARY KEY,
     dish_id                UUID NOT NULL,
     ingredient_id          UUID NOT NULL,
     unit_of_measurement_id UUID NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE algo_dish_ingredient (
 );
 
 CREATE TABLE algo_dish_season (
-    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id          UUID PRIMARY KEY,
     dish_id     UUID NOT NULL,
     season_id   UUID NOT NULL,
     FOREIGN KEY (dish_id)   REFERENCES algo_dish (id),
@@ -51,14 +51,14 @@ CREATE TABLE algo_dish_season (
 );
 
 CREATE TABLE algo_dish_step (
-    id          UUID          PRIMARY KEY DEFAULT gen_random_uuid(),
+    id          UUID          PRIMARY KEY,
     dish_id     UUID          NOT NULL,
     description VARCHAR(1000) NOT NULL,
     FOREIGN KEY (dish_id) REFERENCES algo_dish (id)
 );
 
 CREATE TABLE algo_dish_list_dish (
-    id              UUID    PRIMARY KEY DEFAULT gen_random_uuid(),
+    id              UUID    PRIMARY KEY,
     dish_list_id    UUID    NOT NULL,
     dish_id         UUID    NOT NULL,
     selected        BOOLEAN NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE algo_dish_list_dish (
 );
 
 CREATE TABLE algo_user (
-    id       UUID          PRIMARY KEY DEFAULT gen_random_uuid(),
+    id       UUID          PRIMARY KEY,
     email    VARCHAR(100)  NOT NULL,
     password VARCHAR(1000) NOT NULL,
     admin    BOOLEAN       NOT NULL    DEFAULT FALSE

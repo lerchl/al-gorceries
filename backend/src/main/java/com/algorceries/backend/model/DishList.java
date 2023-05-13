@@ -3,13 +3,14 @@ package com.algorceries.backend.model;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+
+import static jakarta.persistence.CascadeType.ALL;
 
 /**
  * {@link Entity} representing a dish list.
@@ -28,11 +29,9 @@ public class DishList {
     @Column(name = "calendar_week")
     private int calendarWeek;
 
-    @ManyToMany
-    @JoinTable(name = "algo_dish_list_dish",
-               joinColumns = @JoinColumn(name = "dish_list_id"),
-               inverseJoinColumns = @JoinColumn(name = "dish_id"))
-    private Set<Dish> dishes;
+    @OneToMany(mappedBy = "dishList", cascade = ALL)
+    @JsonManagedReference
+    private Set<DishListDish> dishListDishes;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
@@ -42,10 +41,9 @@ public class DishList {
         // default constructor for jpa
     }
 
-    public DishList(int year, int calendarWeek, Set<Dish> dishes) {
+    public DishList(int year, int calendarWeek) {
         this.year = year;
         this.calendarWeek = calendarWeek;
-        this.dishes = dishes;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -76,11 +74,11 @@ public class DishList {
         this.calendarWeek = calendarWeek;
     }
 
-    public Set<Dish> getDishes() {
-        return dishes;
+    public Set<DishListDish> getDishListDishes() {
+        return dishListDishes;
     }
 
-    public void setDishes(Set<Dish> dishes) {
-        this.dishes = dishes;
+    public void setDishListDishes(Set<DishListDish> dishListDishes) {
+        this.dishListDishes = dishListDishes;
     }
 }

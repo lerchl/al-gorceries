@@ -1,52 +1,50 @@
-import { React, useEffect, useState } from "react";
-import { DISH_INGREDIENTS, getEntitiesWithParam } from "../../ApiUtils";
+import { React } from "react";
 import { ShoppingListItem } from "./ShoppingListItem";
 
-export const ShoppingList = ({dishes}) => {
+export const ShoppingList = ({ dishListDishes }) => {
 
-    const [dishIngridients, setDishIngridients] = useState([]);
+    function groupByIngredients() {
+        let ingredients = [];
 
-    useEffect(() => {
-        dishes.forEach(dish => {
-            getEntitiesWithParam(DISH_INGREDIENTS, dis => setDishIngridients(old => [...old, ...dis]), dish.id);
-        });
-    }, []);
+        dishListDishes.flatMap(dld => dld.dish.dishIngredients).forEach(di => {
+            // find ingredient with same id in ingredients
+            let ingredient = ingredients.find(i => i.ingredient.id === di.ingredient.id);
 
-    function groupByIngridients() {
-        let ingridients = [];
-        dishIngridients.forEach(di => {
-            if (ingridients.some(i => i.ingridient.id === di.ingridient.id)) {
-                let ingridient = ingridients.find(i => i.ingridient.id === di.ingridient.id)
-                if (ingridient.measurements.some(m => m.measurement.id === di.measurement.id)) {
-                    let measurement = ingridient.measurements.find(m => m.measurement.id === di.measurement.id);
-                    measurement.factor += di.factor
+            if (ingredient) {
+                // ingredient already exists
+                // find unitOfMeasurement with same id in the ingredients units of measurement
+                let unitOfMeasurement = ingredient.unitsOfMeasurement.find(m => m.unitOfMeasurement.id === di.unitOfMeasurement.id);
+
+                if (unitOfMeasurement) {
+                    // unitOfMeasurement already exists, add amount
+                    unitOfMeasurement.amount += di.amount;
                 } else {
-                    ingridient.measurements.push({
-                        measurement: di.measurement,
-                        factor: di.factor
+                    // unitOfMeasurement does not exist, add it and it's amount
+                    ingredient.unitsOfMeasurement.push({
+                        unitOfMeasurement: di.unitOfMeasurement,
+                        amount: di.amount
                     });
                 }
             } else {
-                ingridients.push({
-                    ingridient: di.ingridient,
-                    measurements: [
-                        {
-                            measurement: di.measurement,
-                            factor: di.factor
-                        }
-                    ]
-                })
+                // ingredient does not exist, add it and it's unitOfMeasurement and amount
+                ingredients.push({
+                    ingredient: di.ingredient,
+                    unitsOfMeasurement: [{
+                        unitOfMeasurement: di.unitOfMeasurement,
+                        amount: di.amount
+                    }]
+                });
             }
         });
-        return ingridients;
+
+        return ingredients;
     }
 
     return (
         <>
             {
-                groupByIngridients().map(i => <ShoppingListItem key={i.ingridient.id} item={i} />)
+                groupByIngredients().map(i => <ShoppingListItem key={i.ingredient.id} item={i} />)
             }
         </>
     );
-
 }

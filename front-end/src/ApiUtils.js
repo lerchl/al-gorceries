@@ -6,6 +6,7 @@ export const DISHES = "dishes";
 export const DISH_INGREDIENTS = "dishIngredients";
 export const DISH_STEPS = "dishSteps";
 export const DISH_LIST = "dishLists";
+export const DISH_LIST_DISH = "dishListDishes";
 export const SEASONS = "seasons";
 
 export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
