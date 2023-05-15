@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
     private final TokenService tokenService;
 
     // /////////////////////////////////////////////////////////////////////////
@@ -31,19 +31,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // TODO: Change login dialog to login page and then send redirect to that page
-        httpSecurity.csrf()
-                    .disable()
+
+                    // Disable csrf
+        httpSecurity.csrf().disable()
+                    // Enable cors
                     .cors()
                     .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    // Set session management to stateless
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
-                    .authorizeHttpRequests()
-                    .requestMatchers("/login", "/register", "/loggedIn")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated()
+                    // Allow unauthorized requests to certain endpoints
+                    .authorizeHttpRequests().requestMatchers("/login", "/register", "/loggedIn").permitAll()
+                    // Authenticate all other requests
+                    .anyRequest().authenticated()
                     .and()
+                    // Add filter to validate tokens with every request
                     .addFilterBefore(new AuthenticationFilter(tokenService),
                                      UsernamePasswordAuthenticationFilter.class);
 
