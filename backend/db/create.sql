@@ -54,6 +54,7 @@ CREATE TABLE algo_dish_step (
     id          UUID          PRIMARY KEY,
     dish_id     UUID          NOT NULL,
     description VARCHAR(1000) NOT NULL,
+    index       INTEGER       NOT NULL,
     FOREIGN KEY (dish_id) REFERENCES algo_dish (id)
 );
 
@@ -73,4 +74,4 @@ CREATE TABLE algo_user (
     admin    BOOLEAN       NOT NULL    DEFAULT FALSE
 );
 
-INSERT INTO algo_user (email, password, admin) VALUES ('admin', 'admin', TRUE);
+INSERT INTO algo_user (id, email, password, admin) VALUES (gen_random_uuid(), 'admin', 'admin', TRUE);

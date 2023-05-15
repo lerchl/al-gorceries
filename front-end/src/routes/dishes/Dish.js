@@ -5,7 +5,6 @@ import { DISHES, getEntity } from "../../ApiUtils";
 import Menubar from "../../Menubar";
 import { DishInfos } from "./DishInfos";
 import { DishIngridients } from './DishIngridients';
-import { Steps } from "./steps/Steps";
 
 export const Dish = () => {
 
@@ -21,7 +20,7 @@ export const Dish = () => {
             <div className="content">
 
                 {/* Headline */}
-                {/* <h1 className="mb-4">{dish?.name}</h1> */}
+                <h1 className="mb-4">{dish?.name}</h1>
 
                 <Container fluid="lg">
                     <Row>
@@ -30,9 +29,9 @@ export const Dish = () => {
                             <div className="widget widget-pink-2">
                                 <DishInfos dish={dish} />
                             </div>
-                            <div className="widget widget-pink-2">
+                            {/* <div className="widget widget-pink-2">
                                 <Steps dishId={id} />
-                            </div>
+                            </div> */}
                         </Col>
 
                         <Col lg={6}>

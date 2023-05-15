@@ -45,9 +45,5 @@ public class DishListDishController {
         var dishListDish = optionalDishListDish.get();
         dishListDish.setSelected(selectionDto.isSelected());
         return dishListDishRepository.save(dishListDish);
-
-        // TODO: Move to logic and check whether DishListDish with that id even exists
-        // dishListDishRepository.updateSelectedById(selected, id);
-        // return dishListDishRepository.findById(id).get();
     }
 }
