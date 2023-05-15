@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { API_URL } from "./ApiUtils";
@@ -8,13 +7,13 @@ import { API_URL } from "./ApiUtils";
 function Menubar() {
 
     const { t } = useTranslation();
-    const [loggedIn, setLoggedIn] = useState(false);
+    // const [loggedIn, setLoggedIn] = useState(false);
 
-    async function isLoggedIn() {
-        return axios.get(API_URL + "/loggedIn");
-    }
+    // async function isLoggedIn() {
+    //     return axios.get(API_URL + "/loggedIn");
+    // }
 
-    useEffect(() => isLoggedIn().then(res => setLoggedIn(res.data)), []);
+    // useEffect(() => isLoggedIn().then(res => setLoggedIn(res.data)), []);
 
     const logout = () => {
         axios.post(API_URL + "/logout").finally(() => window.location.reload());
@@ -31,7 +30,7 @@ function Menubar() {
                         <Nav.Link href="/ingridients">{t("ingridient.headline")}</Nav.Link>
                         <Nav.Link href="/measurements">{t("measurement.headline")}</Nav.Link>
                         <Nav.Link href="/seasons">{t("season.headline")}</Nav.Link>
-                        { loggedIn ? <button type="button" onClick={logout} className="custom-button secondary">Logout</button> : <></> } 
+                        {/* { loggedIn ? <button type="button" onClick={logout} className="custom-button secondary">Logout</button> : <></> } */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
