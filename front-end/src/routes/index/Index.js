@@ -55,10 +55,10 @@ export const Index = () => {
                 return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
             }
         } else {
-            if (dishList.dishListDishes.length === 0) {
+            if (dishListDishes.length === 0) {
                 return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
             } else {
-                return <ShoppingList dishListDishes={dishList.dishListDishes} />;
+                return <ShoppingList dishListDishes={dishListDishes.filter(dld => dld.selected)} />;
             }
         }
     }
