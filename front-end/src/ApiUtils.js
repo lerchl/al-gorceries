@@ -31,6 +31,7 @@ export async function getEntity(entityApiEndpoint, setEntity, id) {
  */
 export async function getEntities(entityApiEndpoint, setEntities) {
     const res = await axios.get(`${API_URL}/${entityApiEndpoint}`);
+    console.log(res);
     setEntities(res.data);
 }
 
