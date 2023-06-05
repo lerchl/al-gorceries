@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 /**
@@ -35,6 +36,13 @@ public class Dish {
 
     @Column(name = "cost")
     private double cost;
+
+    @ManyToOne
+    @JoinColumn(name = "serving_unit_of_measurement_id")
+    private UnitOfMeasurement servingUnitOfMeasurement;
+
+    @Column(name = "serving_amount")
+    private double servingAmount;
 
     @OneToMany(mappedBy = "dish")
     @JsonManagedReference
