@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -96,6 +97,22 @@ public class Dish {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public UnitOfMeasurement getServingUnitOfMeasurement() {
+        return servingUnitOfMeasurement;
+    }
+
+    public void setServingUnitOfMeasurement(UnitOfMeasurement servingUnitOfMeasurement) {
+        this.servingUnitOfMeasurement = servingUnitOfMeasurement;
+    }
+
+    public double getServingAmount() {
+        return servingAmount;
+    }
+
+    public void setServingAmount(double servingAmount) {
+        this.servingAmount = servingAmount;
     }
 
     public Set<DishIngredient> getDishIngredients() {

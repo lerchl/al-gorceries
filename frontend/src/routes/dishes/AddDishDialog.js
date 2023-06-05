@@ -4,8 +4,9 @@ import { React, useContext, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
-import { createEntityAndGetEntities, getEntities, SEASONS } from "../../ApiUtils";
+import { createEntityAndGetEntities, getEntities, MEASUREMENTS, SEASONS } from "../../ApiUtils";
 import { AddEntityDialogContext } from "../../TableHead";
+import { compareEntities } from "../../Entity";
 
 export const AddDishDialog = () => {
 
@@ -13,9 +14,12 @@ export const AddDishDialog = () => {
 
     const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
 
+    const [unitOfMeasurementOptions, setUnitOfMeasurementOptions] = useState([]);
     const [seasonOptions, setSeasonOptions] = useState([]);
 
     const [name, setName] = useState("");
+    const [servingAmount, setServingAmount] = useState(1);
+    const [servingUnit, setServingUnit] = useState(null);
     const [source, setSource] = useState("");
     const [sourceInformation, setSourceInformation] = useState("");
     const [time, setTime] = useState("");
@@ -23,7 +27,9 @@ export const AddDishDialog = () => {
     const [dishIngridients, setDishIngrdients] = useState([]);
     const [seasons, setSeasons] = useState([]);
 
+    useEffect(() => getEntities(MEASUREMENTS, setUnitOfMeasurementOptions), []);
     useEffect(() => getEntities(SEASONS, setSeasonOptions), []);
+
 
     const onChange = (event, set) => {
         set(event.target.value);
@@ -31,6 +37,8 @@ export const AddDishDialog = () => {
 
     const closeDialog = () => {
         setName("");
+        setServingAmount(1);
+        setServingUnit(null);
         setSource("");
         setSourceInformation("");
         setTime(0);
@@ -43,6 +51,8 @@ export const AddDishDialog = () => {
     const saveEntitiy = () => {
         const dish = {
             "name": name,
+            "servingAmount": servingAmount,
+            "servingUnitOfMeasurement": servingUnit,
             "source": source,
             "sourceInformation": sourceInformation,
             "time": time,
@@ -50,6 +60,9 @@ export const AddDishDialog = () => {
             "dishIngridients": dishIngridients,
             "seasons": seasons
         }
+
+        console.log(dish);
+
         createEntityAndGetEntities(entityApiEndpoint, dish, setEntities);
         closeDialog();
     }
@@ -62,6 +75,21 @@ export const AddDishDialog = () => {
             <Modal.Body>
                 <div className="row dialog-row">
                     <TextField value={name} label={t("dish.attribute.name")} onChange={event => onChange(event, setName)} />
+                </div>
+                <div className="row dialog-row">
+                    <TextField value={servingAmount} label={t("dish.attribute.servingAmount")} onChange={event => onChange(event, setServingAmount)} type="number" className="number-input" sx={{width: "47.5%"}} />
+                    <Autocomplete options={unitOfMeasurementOptions}
+                                  getOptionLabel={m => m?.name}
+                                  value={servingUnit}
+                                  isOptionEqualToValue={compareEntities}
+                                  onChange={(_event, value) => setServingUnit(value)}
+                                  disablePortal
+                                  renderInput={params => <TextField {...params} label={t("dish.attribute.servingUnit")} />}
+                                  openText={t("base.action.open")}
+                                  closeText={t("base.action.close")}
+                                  noOptionsText={t("measurement.noOptions")}
+                                  clearIcon={<></>}
+                                  sx={{width: "47.5%"}} />
                 </div>
                 <div className="row dialog-row">
                     <TextField value={source} label={t("dish.attribute.source")} onChange={event => onChange(event, setSource)} select sx={{width: "47.5%"}}>

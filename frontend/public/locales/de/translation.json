@@ -19,6 +19,8 @@
     "dish": {
         "attribute": {
             "name": "Name",
+            "servingAmount": "Portionen",
+            "servingUnit": "Portionseinheit",
             "source": "Quelle",
             "sourceInformation": "Quellzusatz",
             "prepTime": "Zubereitungszeit",
