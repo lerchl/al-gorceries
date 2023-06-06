@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
  * {@link Entity} representing a user.
@@ -26,6 +28,10 @@ public class User {
 
     @Column(name = "admin")
     private boolean admin;
+
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    private Household household;
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
