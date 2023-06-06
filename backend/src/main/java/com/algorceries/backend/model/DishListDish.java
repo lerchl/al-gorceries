@@ -3,6 +3,7 @@ package com.algorceries.backend.model;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +31,8 @@ public class DishListDish {
     @JoinColumn(name = "dish_id")
     private Dish dish;
 
-    @Column(name = "selected")
-    private boolean selected = false;
+    @Column(name = "amount")
+    private double amount = 1;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
@@ -66,11 +67,11 @@ public class DishListDish {
         return dish;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

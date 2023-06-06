@@ -6,18 +6,20 @@
     margin-right: 10px;
 }
 
-.selectable > h2 {
-    transition: color 0.25s ease-in-out;
+
+.dish-list-dish .display, .dish-list-dish .buttons {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
 }
 
-.selectable > div {
-    transition: background-color 0.25s ease-in-out;
+.dish-list-dish .buttons {
+    justify-content: right;
 }
 
-.selected > h2 {
-    color: rgb(65, 144, 65);
-}
-
-.selected > div {
-    background-color: rgb(65, 144, 65);
+.dish-list-dish .buttons > button {
+    width: 40px;
+    background: none;
+    padding-left: 0;
+    padding-right: 0;
 }

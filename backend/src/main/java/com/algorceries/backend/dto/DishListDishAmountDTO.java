@@ -1,18 +1,18 @@
 package com.algorceries.backend.dto;
 
-public class DishListDishSelectionDTO {
+public class DishListDishAmountDTO {
 
-    private boolean selected;
+    private int amount;
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
 
-    public boolean isSelected() {
-        return selected;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

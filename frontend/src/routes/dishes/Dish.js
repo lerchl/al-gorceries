@@ -20,7 +20,7 @@ export const Dish = () => {
             <div className="content">
 
                 {/* Headline */}
-                <h1 className="mb-4">{dish?.name}</h1>
+                <h1 className="mb-4">{dish?.name} ({ dish?.servingAmount} { dish?.servingUnitOfMeasurement.name })</h1>
 
                 <Container fluid="lg">
                     <Row>

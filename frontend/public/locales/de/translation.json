@@ -19,8 +19,8 @@
     "dish": {
         "attribute": {
             "name": "Name",
-            "servingAmount": "Portionen",
-            "servingUnit": "Portionseinheit",
+            "servingAmount": "Serviermenge",
+            "servingUnit": "Serviereinheit",
             "source": "Quelle",
             "sourceInformation": "Quellzusatz",
             "prepTime": "Zubereitungszeit",
@@ -92,5 +92,10 @@
         },
         "headline": "Saison",
         "noOptions": "Keine Saisons vorhanden"
+    },
+    "dishList": {
+        "dish": {
+            "amount": "Menge"
+        }
     }
 }
