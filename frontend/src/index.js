@@ -13,6 +13,7 @@ import { Measurements } from "./routes/measurements/Measurements";
 import { Registration } from './routes/registration/Registration';
 import { Seasons } from './routes/seasons/Seasons';
 import { Guard } from "./security/Guard";
+import { Household } from './routes/household/Household';
 
 ReactDOM.render(
     <Suspense fallback="Loading...">
@@ -30,6 +31,7 @@ ReactDOM.render(
                     <Route path="ingridients" element={<Guard><Ingridients /></Guard>} />
                     <Route path="measurements" element={<Guard><Measurements /></Guard>} />
                     <Route path="seasons" element={<Guard><Seasons /></Guard>} />
+                    <Route path="household" element={<Guard><Household /></Guard>} />
                 </Routes>
             </BrowserRouter>
         </LocalizationProvider>

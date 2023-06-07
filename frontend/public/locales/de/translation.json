@@ -11,6 +11,7 @@
         "action": {
             "add": "Hinzufügen",
             "close": "Schließen",
+            "create": "Erstellen",
             "open": "Öffnen",
             "save": "Speichern"
         },
@@ -61,6 +62,13 @@
             },
             "empty": "Noch keine Schritte hinzugefügt..."
         }
+    },
+    "household": {
+        "attribute": {
+            "name": "Name"
+        },
+        "create": "Haushalt erstellen",
+        "headline": "Haushalt"
     },
     "ingridient": {
         "headline": "Zutaten",

@@ -30,6 +30,7 @@ function Menubar() {
                         <Nav.Link href="/ingridients">{t("ingridient.headline")}</Nav.Link>
                         <Nav.Link href="/measurements">{t("measurement.headline")}</Nav.Link>
                         <Nav.Link href="/seasons">{t("season.headline")}</Nav.Link>
+                        <Nav.Link href="/household">{t("household.headline")}</Nav.Link>
                         {/* { loggedIn ? <button type="button" onClick={logout} className="custom-button secondary">Logout</button> : <></> } */}
                     </Nav>
                 </Navbar.Collapse>
