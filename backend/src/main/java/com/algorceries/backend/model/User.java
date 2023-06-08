@@ -64,4 +64,12 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household household) {
+        this.household = household;
+    }
 }

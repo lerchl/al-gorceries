@@ -6,17 +6,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.algorceries.backend.service.TokenService;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.algorceries.backend.service.TokenService;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
@@ -74,6 +76,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-        return Optional.of(new UsernamePasswordAuthenticationToken(userPrincipal, null, authorities));
+        return Optional.of(new UsernamePasswordAuthenticationToken(userPrincipal.get(), null, authorities));
     }
 }

@@ -12,9 +12,10 @@ export const Household = () => {
     const [name, setName] = useState("");
 
     const createHousehold = async () => {
-        axios.post(`${API_URL}/${HOUSEHOLDS}`, { name: name }).catch(err => {
-            console.log(err)
-        });
+        const res = await axios.post(`${API_URL}/${HOUSEHOLDS}`, { name: name });
+        if (res.status === 201) {
+            setName("");
+        }
     }
 
     return (
