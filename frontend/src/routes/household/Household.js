@@ -23,7 +23,7 @@ export const Household = () => {
         <div className="content">
             <Container fluid>
                 <Row>
-                    <Col sm="12" md="6" xxl="4">
+                    <Col md="12" lg="6">
                         <div className="widget">
                             <h1>{ t("household.create") }</h1>
                             <Container fluid className="overlay">
@@ -36,7 +36,7 @@ export const Household = () => {
                             </Container>
                         </div>
                     </Col>
-                    <Col sm="12" md="6" xxl="4">
+                    <Col md="12" lg="6">
                         <JoinHousehold />
                     </Col>
                 </Row>

@@ -1,13 +1,15 @@
 package com.algorceries.backend.service.household;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.algorceries.backend.model.User;
+import com.algorceries.backend.model.household.Household;
 import com.algorceries.backend.model.household.HouseholdJoinRequest;
 import com.algorceries.backend.repository.household.HouseholdJoinRequestRepository;
-import com.algorceries.backend.service.UserService;
 
 /**
  * {@link Service} for {@link HouseholdJoinRequest household join requests}.
@@ -16,21 +18,13 @@ import com.algorceries.backend.service.UserService;
 public class HouseholdJoinRequestService {
 
     private final HouseholdJoinRequestRepository householdJoinRequestRepository;
-    private final HouseholdService householdService;
-    private final UserService userService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public HouseholdJoinRequestService(
-        HouseholdJoinRequestRepository householdJoinRequestRepository,
-        HouseholdService householdService,
-        UserService userService
-    ) {
+    public HouseholdJoinRequestService(HouseholdJoinRequestRepository householdJoinRequestRepository) {
         this.householdJoinRequestRepository = householdJoinRequestRepository;
-        this.householdService = householdService;
-        this.userService = userService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -41,18 +35,31 @@ public class HouseholdJoinRequestService {
         return householdJoinRequestRepository.findByHouseholdId(householdId);
     }
 
-    public HouseholdJoinRequest create(UUID householdId, UUID userId) {
-        var household = householdService.findById(householdId);
-        var user = userService.findById(userId);
+    public Optional<HouseholdJoinRequest> findByUserId(UUID userId) {
+        return householdJoinRequestRepository.findByUserId(userId);
+    }
 
-        if (household.isEmpty() || user.isEmpty()) {
-            throw new IllegalArgumentException("Household or user does not exist");
+    public HouseholdJoinRequest create(Household household, User user) {
+        if (user.getHousehold() != null) {
+            throw new IllegalStateException("User is already part of a household.");
         }
 
-        return save(new HouseholdJoinRequest(household.get(), user.get()));
+        if (householdJoinRequestRepository.existsByUser(user)) {
+            throw new IllegalStateException("User already has a pending join request.");
+        }
+
+        return save(new HouseholdJoinRequest(household, user));
     }
 
     public HouseholdJoinRequest save(HouseholdJoinRequest householdJoinRequest) {
         return householdJoinRequestRepository.save(householdJoinRequest);
+    }
+
+    public void delete(UUID joinRequestId) {
+        householdJoinRequestRepository.deleteById(joinRequestId);
+    }
+
+    public void deleteByUser(UUID userId) {
+        householdJoinRequestRepository.deleteByUserId(userId);
     }
 }

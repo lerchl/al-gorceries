@@ -71,8 +71,16 @@
         "create": "Haushalt erstellen",
         "headline": "Haushalt",
         "join": "Haushalt beitreten",
+        "joinRequest": {
+            "attribute": {
+                "createdAt": "Angefragt am"
+            },
+            "withdraw": "Beitrittsanfrage zurückziehen"
+        },
         "name": "Haushalt",
-        "noOptions": "Keine Haushalte vorhanden"
+        "newJoinRequest": "Neue Beitrittsanfrage",
+        "noOptions": "Keine Haushalte vorhanden",
+        "openJoinRequests": "Offene Beitrittsanfrage"
     },
     "ingridient": {
         "headline": "Zutaten",

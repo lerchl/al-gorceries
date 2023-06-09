@@ -105,6 +105,7 @@ a, a:hover, a:visited {
 }
 
 .icon-button {
+    color: var(--text-color);
     background-color: transparent;
     border: none;
     padding: 0;

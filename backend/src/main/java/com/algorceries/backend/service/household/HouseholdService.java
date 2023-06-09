@@ -20,14 +20,20 @@ import jakarta.transaction.Transactional;
 public class HouseholdService {
 
     private final HouseholdRepository householdRepository;
+    private final HouseholdJoinRequestService householdJoinRequestService;
     private final UserService userService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public HouseholdService(HouseholdRepository householdRepository, UserService userService) {
+    public HouseholdService(
+        HouseholdRepository householdRepository, 
+        HouseholdJoinRequestService householdJoinRequestService,
+        UserService userService
+    ) {
         this.householdRepository = householdRepository;
+        this.householdJoinRequestService = householdJoinRequestService;
         this.userService = userService;
     }
 
@@ -53,6 +59,7 @@ public class HouseholdService {
     public Household save(Household household, UUID userId) {
         household = householdRepository.save(household);
         userService.addUserToHousehold(userId, household);
+        householdJoinRequestService.deleteByUser(userId);
         return household;
     }
 }
