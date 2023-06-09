@@ -42,7 +42,7 @@ public class HouseholdJoinRequestController {
         return householdJoinRequestService.findByHouseholdId(householdId);
     }
 
-    @PostMapping("/households{householdId}/join-requests")
+    @PostMapping("/households/{householdId}/join-requests")
     @ResponseStatus(CREATED)
     public HouseholdJoinRequest create(@PathVariable UUID householdId, UsernamePasswordAuthenticationToken authToken) {
         var userPrincipal = (UserPrincipal) authToken.getPrincipal();
@@ -53,4 +53,6 @@ public class HouseholdJoinRequestController {
             throw new BadRequestException(e.getMessage());
         }
     }
+
+    @GetMapping("/users/{userId}/")
 }
