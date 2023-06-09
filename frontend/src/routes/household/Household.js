@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { API_URL, HOUSEHOLDS } from "../../ApiUtils";
+import { JoinHousehold } from "./JoinHousehold";
 
 export const Household = () => {
 
@@ -34,6 +35,9 @@ export const Household = () => {
                                 </Row>
                             </Container>
                         </div>
+                    </Col>
+                    <Col sm="12" md="6" xxl="4">
+                        <JoinHousehold />
                     </Col>
                 </Row>
             </Container>

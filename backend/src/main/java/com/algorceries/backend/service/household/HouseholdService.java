@@ -1,12 +1,15 @@
-package com.algorceries.backend.service;
+package com.algorceries.backend.service.household;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.algorceries.backend.model.Household;
 import com.algorceries.backend.model.User;
-import com.algorceries.backend.repository.HouseholdRepository;
+import com.algorceries.backend.model.household.Household;
+import com.algorceries.backend.repository.household.HouseholdRepository;
+import com.algorceries.backend.service.UserService;
 
 import jakarta.transaction.Transactional;
 
@@ -31,6 +34,14 @@ public class HouseholdService {
     // /////////////////////////////////////////////////////////////////////////
     // Methods
     // /////////////////////////////////////////////////////////////////////////
+
+    public List<Household> findAll() {
+        return householdRepository.findAll();
+    }
+
+    public Optional<Household> findById(UUID id) {
+        return householdRepository.findById(id);
+    }
 
     /**
      * Saves a {@link Household household} and sets a {@link User user's} {@link Household household}.

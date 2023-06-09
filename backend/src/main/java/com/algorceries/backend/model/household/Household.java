@@ -1,4 +1,4 @@
-package com.algorceries.backend.model;
+package com.algorceries.backend.model.household;
 
 import java.util.UUID;
 

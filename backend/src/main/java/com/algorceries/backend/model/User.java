@@ -2,6 +2,8 @@ package com.algorceries.backend.model;
 
 import java.util.UUID;
 
+import com.algorceries.backend.model.household.Household;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -12,6 +12,7 @@
             "add": "Hinzufügen",
             "close": "Schließen",
             "create": "Erstellen",
+            "join": "Beitreten",
             "open": "Öffnen",
             "save": "Speichern"
         },
@@ -68,7 +69,10 @@
             "name": "Name"
         },
         "create": "Haushalt erstellen",
-        "headline": "Haushalt"
+        "headline": "Haushalt",
+        "join": "Haushalt beitreten",
+        "name": "Haushalt",
+        "noOptions": "Keine Haushalte vorhanden"
     },
     "ingridient": {
         "headline": "Zutaten",

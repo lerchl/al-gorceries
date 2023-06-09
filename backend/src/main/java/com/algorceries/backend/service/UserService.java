@@ -1,11 +1,12 @@
 package com.algorceries.backend.service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.algorceries.backend.model.Household;
 import com.algorceries.backend.model.User;
+import com.algorceries.backend.model.household.Household;
 import com.algorceries.backend.repository.UserRepository;
 
 /**
@@ -27,6 +28,10 @@ public class UserService {
     // /////////////////////////////////////////////////////////////////////////
     // Methods
     // /////////////////////////////////////////////////////////////////////////
+
+    public Optional<User> findById(UUID id) {
+        return userRepository.findById(id);
+    }
 
     public User save(User user) {
         return userRepository.save(user);

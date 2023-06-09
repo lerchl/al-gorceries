@@ -9,6 +9,7 @@ export const DISH_LIST = "dishLists";
 export const DISH_LIST_DISH = "dishListDishes";
 export const SEASONS = "seasons";
 export const HOUSEHOLDS = "households";
+export const HOUSEHOLD_JOIN_REQUESTS = "join-requests";
 
 export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
 
@@ -32,7 +33,6 @@ export async function getEntity(entityApiEndpoint, setEntity, id) {
  */
 export async function getEntities(entityApiEndpoint, setEntities) {
     const res = await axios.get(`${API_URL}/${entityApiEndpoint}`);
-    console.log(res);
     setEntities(res.data);
 }
 

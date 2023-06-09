@@ -1,18 +1,20 @@
-package com.algorceries.backend.controller;
+package com.algorceries.backend.controller.household;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algorceries.backend.controller.exception.BadRequestException;
-import com.algorceries.backend.model.Household;
+import com.algorceries.backend.model.household.Household;
 import com.algorceries.backend.security.UserPrincipal;
-import com.algorceries.backend.service.HouseholdService;
+import com.algorceries.backend.service.household.HouseholdService;
 
 import jakarta.validation.Valid;
 
@@ -36,6 +38,11 @@ public class HouseholdController {
     // /////////////////////////////////////////////////////////////////////////
     // Methods
     // /////////////////////////////////////////////////////////////////////////
+
+    @GetMapping
+    public List<Household> findAll() {
+        return householdService.findAll();
+    }
 
     @PostMapping
     public ResponseEntity<Household> create(@RequestBody @Valid Household household, UsernamePasswordAuthenticationToken authToken) {
