@@ -1,5 +1,6 @@
 import axios from "axios";
 
+export const USERS = "users";
 export const MEASUREMENTS = "unitsOfMeasurement";
 export const INGREDIENTS = "ingredients";
 export const DISHES = "dishes";

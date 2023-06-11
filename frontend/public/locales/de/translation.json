@@ -79,6 +79,7 @@
             },
             "withdraw": "Beitrittsanfrage zurückziehen"
         },
+        "leave": "Haushalt verlassen",
         "members": "Bewohner",
         "name": "Haushalt",
         "newJoinRequest": "Neue Beitrittsanfrage",

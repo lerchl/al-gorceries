@@ -2,9 +2,9 @@ import { TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { CheckCircle, XCircle } from "react-bootstrap-icons";
+import { CheckCircle, DoorOpen, XCircle } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
-import { API_URL, HOUSEHOLDS, HOUSEHOLD_JOIN_REQUESTS } from "../../ApiUtils";
+import { API_URL, HOUSEHOLDS, HOUSEHOLD_JOIN_REQUESTS, USERS } from "../../ApiUtils";
 import { CustomSpinner } from "../../CustomSpinner";
 import { JoinHousehold } from "./JoinHousehold";
 
@@ -33,7 +33,7 @@ export const Household = () => {
         if (!loading) {
             console.log(household)
             if (household) {
-                return <WithHousehold household={household} />;
+                return <WithHousehold household={household} setHousehold={setHousehold} />;
             } else {
                 return <WithoutHousehold />;
             }
@@ -49,7 +49,7 @@ export const Household = () => {
     );
 }
 
-const WithHousehold = ({ household }) => {
+const WithHousehold = ({ household, setHousehold }) => {
 
     const { t } = useTranslation();
 
@@ -70,6 +70,11 @@ const WithHousehold = ({ household }) => {
     const rejectJoinRequest = async (request) => {
         await axios.post(`${API_URL}/${HOUSEHOLDS}/${HOUSEHOLD_JOIN_REQUESTS}/${request.id}/reject`);
         fetchJoinRequests();
+    }
+
+    const leaveHousehold = async () => {
+        await axios.post(`${API_URL}/${USERS}/household/current/leave`);
+        setHousehold(null);
     }
 
     return (
@@ -114,6 +119,7 @@ const WithHousehold = ({ household }) => {
                 </Container>
                 { console.log(joinRequests) }
             </div>
+            <button type="button" onClick={leaveHousehold} className="custom-button danger-button w-100"><DoorOpen /> { t("household.leave") }</button>
         </>
     );
 }

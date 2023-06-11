@@ -47,10 +47,21 @@ public class UserService {
         var user = userRepository.getReferenceById(userId);
 
         if (user.getHousehold() != null) {
-            throw new IllegalStateException("User already has a household");
+            throw new IllegalStateException("User already has a household.");
         }
 
         user.setHousehold(household);
         userRepository.save(user);
+    }
+
+    public void leaveHousehold(UUID userId) {
+        var user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User"));
+
+        if (user.getHousehold() == null) {
+            throw new IllegalStateException("User is not part of a household.");
+        }
+
+        user.setHousehold(null);
+        save(user);
     }
 }
