@@ -1,11 +1,16 @@
 package com.algorceries.backend.model.household;
 
+import java.util.List;
 import java.util.UUID;
+
+import com.algorceries.backend.model.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -24,6 +29,10 @@ public class Household {
     @Size(min = 3, max = 100)
     @NotNull
     private String name;
+
+    @OneToMany(mappedBy = "household")
+    @JsonManagedReference
+    private List<User> users;
 
     // /////////////////////////////////////////////////////////////////////////
     // Methods
@@ -53,5 +62,9 @@ public class Household {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }

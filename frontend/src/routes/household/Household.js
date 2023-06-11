@@ -1,12 +1,12 @@
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import { CheckCircle, XCircle } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import { API_URL, HOUSEHOLDS, HOUSEHOLD_JOIN_REQUESTS } from "../../ApiUtils";
-import { JoinHousehold } from "./JoinHousehold";
 import { CustomSpinner } from "../../CustomSpinner";
-import { CheckCircle, XCircle } from "react-bootstrap-icons";
+import { JoinHousehold } from "./JoinHousehold";
 
 export const Household = () => {
 
@@ -75,7 +75,23 @@ const WithHousehold = ({ household }) => {
     return (
         <>
             <h1>{ household.name }</h1>
-            <Container className="widget">
+            <div className="widget">
+                <h2>{ t("household.members") }</h2>
+                <Container fluid className="overlay">
+                    <Row>
+                        <Col xs="8" className="bold">{ t("user.attribute.email") }</Col>
+                        <Col xs="4"></Col>
+                    </Row>
+                    { household.users.map(member => {
+                        return (
+                            <Row key={member.id}>
+                                <Col xs="12" className="d-flex flex-wrap align-content-center">{ member.email }</Col>
+                            </Row>
+                        );
+                    }) }
+                </Container>
+            </div>
+            <div className="widget">
                 <h2>{ t("household.openJoinRequests") }</h2>
                 <Container fluid className="overlay">
                     <Row>
@@ -97,7 +113,7 @@ const WithHousehold = ({ household }) => {
                     }) }
                 </Container>
                 { console.log(joinRequests) }
-            </Container>
+            </div>
         </>
     );
 }

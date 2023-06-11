@@ -79,6 +79,7 @@
             },
             "withdraw": "Beitrittsanfrage zurückziehen"
         },
+        "members": "Bewohner",
         "name": "Haushalt",
         "newJoinRequest": "Neue Beitrittsanfrage",
         "noOptions": "Keine Haushalte vorhanden",

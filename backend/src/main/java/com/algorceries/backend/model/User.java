@@ -3,6 +3,7 @@ package com.algorceries.backend.model;
 import java.util.UUID;
 
 import com.algorceries.backend.model.household.Household;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -35,6 +36,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "household_id")
+    @JsonBackReference
     private Household household;
 
     // /////////////////////////////////////////////////////////////////////////
