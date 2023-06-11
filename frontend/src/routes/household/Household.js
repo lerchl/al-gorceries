@@ -1,12 +1,98 @@
 import { TextField } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { API_URL, HOUSEHOLDS } from "../../ApiUtils";
+import { API_URL, HOUSEHOLDS, HOUSEHOLD_JOIN_REQUESTS } from "../../ApiUtils";
 import { JoinHousehold } from "./JoinHousehold";
+import { CustomSpinner } from "../../CustomSpinner";
+import { CheckCircle, XCircle } from "react-bootstrap-icons";
 
 export const Household = () => {
+
+    const [loading, setLoading] = useState(true);
+    const [household, setHousehold] = useState(null);
+
+    const fetchHousehold = async () => {
+        setLoading(true);
+
+        try {
+            const res = await axios.get(`${API_URL}/${HOUSEHOLDS}/current`);
+            setHousehold(res.data);
+        } catch (e) {
+            // noop
+        }
+
+        setLoading(false);
+    }
+
+    useEffect(() => fetchHousehold(), []);
+
+    const content = () => {
+        console.log(loading);
+        if (!loading) {
+            console.log(household)
+            if (household) {
+                return <WithHousehold household={household} />;
+            } else {
+                return <WithoutHousehold />;
+            }
+        }
+
+        return <CustomSpinner />;
+    }
+
+    return (
+        <div className="content">
+            { content() }
+        </div>
+    );
+}
+
+const WithHousehold = ({ household }) => {
+
+    const { t } = useTranslation();
+
+    const [joinRequests, setJoinRequests] = useState([]);
+
+    const fetchJoinRequests = async () => {
+        const res = await axios.get(`${API_URL}/${HOUSEHOLDS}/${household.id}/${HOUSEHOLD_JOIN_REQUESTS}`);
+        setJoinRequests(res.data);
+    }
+
+    useEffect(() => fetchJoinRequests(), []);
+
+    return (
+        <>
+            <h1>{ household.name }</h1>
+            <Container className="widget">
+                <h2>{ t("household.openJoinRequests") }</h2>
+                <Container fluid className="overlay">
+                    <Row>
+                        <Col xs="8" className="bold">{ t("user.attribute.email") }</Col>
+                        <Col xs="4"></Col>
+                    </Row>
+                    { joinRequests.map(request => {
+                        return (
+                            <Row key={request.id}>
+                                <Col xs="8" className="d-flex flex-wrap align-content-center">
+                                    { request.user.email }
+                                </Col>
+                                <Col xs="4" className="d-flex flex-wrap align-content-center justify-content-end">
+                                    <button type="button" className="icon-button mr-2" title={t("base.action.accept")} style={{ fontSize: "28px" }}><CheckCircle /></button>
+                                    <button type="button" className="icon-button" title={t("base.action.reject")} style={{ fontSize: "28px" }}><XCircle /></button>
+                                </Col>
+                            </Row>
+                        );
+                    }) }
+                </Container>
+                { console.log(joinRequests) }
+            </Container>
+        </>
+    );
+}
+
+const WithoutHousehold = () => {
 
     const { t } = useTranslation();
 
@@ -20,27 +106,25 @@ export const Household = () => {
     }
 
     return (
-        <div className="content">
-            <Container fluid>
-                <Row>
-                    <Col md="12" lg="6">
-                        <div className="widget">
-                            <h1>{ t("household.create") }</h1>
-                            <Container fluid className="overlay">
-                                <Row>
-                                    <TextField value={name} label={t("household.attribute.name")} onChange={e => setName(e.target.value)} className="w-100 mb-2" />
-                                </Row>
-                                <Row>
-                                    <button type="button" onClick={createHousehold} className="custom-button primary w-100">{ t("base.action.create") }</button>
-                                </Row>
-                            </Container>
-                        </div>
-                    </Col>
-                    <Col md="12" lg="6">
-                        <JoinHousehold />
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <Container fluid>
+            <Row>
+                <Col md="12" lg="6">
+                    <div className="widget">
+                        <h1>{ t("household.create") }</h1>
+                        <Container fluid className="overlay">
+                            <Row>
+                                <TextField value={name} label={t("household.attribute.name")} onChange={e => setName(e.target.value)} className="w-100 mb-2" />
+                            </Row>
+                            <Row>
+                                <button type="button" onClick={createHousehold} className="custom-button primary w-100">{ t("base.action.create") }</button>
+                            </Row>
+                        </Container>
+                    </div>
+                </Col>
+                <Col md="12" lg="6">
+                    <JoinHousehold />
+                </Col>
+            </Row>
+        </Container>
     );
 }

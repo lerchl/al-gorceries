@@ -32,7 +32,7 @@ const OpenJoinRequest = ({ request, setRequest }) => {
     return (
         <>
             <Row>
-                <h2>{ t("household.openJoinRequests") }</h2>
+                <h2>{ t("household.openJoinRequest") }</h2>
             </Row>
             <Row className="mb-2">
                 <JoinHouseholdRequest request={request} setRequest={setRequest} />

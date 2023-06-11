@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algorceries.backend.controller.exception.BadRequestException;
+import com.algorceries.backend.controller.exception.NotFoundException;
 import com.algorceries.backend.model.household.Household;
 import com.algorceries.backend.security.UserPrincipal;
 import com.algorceries.backend.service.household.HouseholdService;
@@ -42,6 +43,12 @@ public class HouseholdController {
     @GetMapping
     public List<Household> findAll() {
         return householdService.findAll();
+    }
+
+    @GetMapping("/current")
+    public Household findByUserId(UsernamePasswordAuthenticationToken authToken) {
+        var userPrincipal = (UserPrincipal) authToken.getPrincipal();
+        return householdService.findByUserId(userPrincipal.getUserId()).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.algorceries.backend.model.User;
 import com.algorceries.backend.model.household.Household;
+import com.algorceries.backend.repository.UserRepository;
 import com.algorceries.backend.repository.household.HouseholdRepository;
 import com.algorceries.backend.service.UserService;
 
@@ -22,6 +23,7 @@ public class HouseholdService {
     private final HouseholdRepository householdRepository;
     private final HouseholdJoinRequestService householdJoinRequestService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
@@ -30,11 +32,13 @@ public class HouseholdService {
     public HouseholdService(
         HouseholdRepository householdRepository, 
         HouseholdJoinRequestService householdJoinRequestService,
-        UserService userService
+        UserService userService,
+        UserRepository userRepository
     ) {
         this.householdRepository = householdRepository;
         this.householdJoinRequestService = householdJoinRequestService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -47,6 +51,16 @@ public class HouseholdService {
 
     public Optional<Household> findById(UUID id) {
         return householdRepository.findById(id);
+    }
+
+    public Optional<Household> findByUserId(UUID userId) {
+        var user = userRepository.findById(userId);
+
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("User does not exist.");
+        }
+
+        return Optional.ofNullable(user.get().getHousehold());
     }
 
     /**

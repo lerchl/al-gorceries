@@ -9,11 +9,13 @@
 
     "base": {
         "action": {
+            "accept": "Annehmen",
             "add": "Hinzufügen",
             "close": "Schließen",
             "create": "Erstellen",
             "join": "Beitreten",
             "open": "Öffnen",
+            "reject": "Ablehnen",
             "save": "Speichern"
         },
         "pleaseSelect": "Bitte auswählen"
@@ -80,7 +82,8 @@
         "name": "Haushalt",
         "newJoinRequest": "Neue Beitrittsanfrage",
         "noOptions": "Keine Haushalte vorhanden",
-        "openJoinRequests": "Offene Beitrittsanfrage"
+        "openJoinRequest": "Offene Beitrittsanfrage",
+        "openJoinRequests": "Offene Beitrittsanfragen"
     },
     "ingridient": {
         "headline": "Zutaten",
@@ -112,6 +115,11 @@
         },
         "headline": "Saison",
         "noOptions": "Keine Saisons vorhanden"
+    },
+    "user": {
+        "attribute": {
+            "email": "E-Mail"
+        }
     },
     "dishList": {
         "dish": {
