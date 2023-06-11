@@ -62,6 +62,16 @@ const WithHousehold = ({ household }) => {
 
     useEffect(() => fetchJoinRequests(), []);
 
+    const acceptJoinRequest = async (request) => {
+        await axios.post(`${API_URL}/${HOUSEHOLDS}/${HOUSEHOLD_JOIN_REQUESTS}/${request.id}/accept`);
+        fetchJoinRequests();
+    }
+
+    const rejectJoinRequest = async (request) => {
+        await axios.post(`${API_URL}/${HOUSEHOLDS}/${HOUSEHOLD_JOIN_REQUESTS}/${request.id}/reject`);
+        fetchJoinRequests();
+    }
+
     return (
         <>
             <h1>{ household.name }</h1>
@@ -79,8 +89,8 @@ const WithHousehold = ({ household }) => {
                                     { request.user.email }
                                 </Col>
                                 <Col xs="4" className="d-flex flex-wrap align-content-center justify-content-end">
-                                    <button type="button" className="icon-button mr-2" title={t("base.action.accept")} style={{ fontSize: "28px" }}><CheckCircle /></button>
-                                    <button type="button" className="icon-button" title={t("base.action.reject")} style={{ fontSize: "28px" }}><XCircle /></button>
+                                    <button type="button" onClick={() => acceptJoinRequest(request)} className="icon-button mr-2" title={t("base.action.accept")} style={{ fontSize: "28px" }}><CheckCircle /></button>
+                                    <button type="button" onClick={() => rejectJoinRequest(request)} className="icon-button" title={t("base.action.reject")} style={{ fontSize: "28px" }}><XCircle /></button>
                                 </Col>
                             </Row>
                         );

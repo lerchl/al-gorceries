@@ -77,6 +77,20 @@ public class HouseholdJoinRequestController {
         }
     }
 
+    @PostMapping("/join-requests/{joinRequestId}/accept")
+    @ResponseStatus(NO_CONTENT)
+    public void accept(@PathVariable UUID joinRequestId, UsernamePasswordAuthenticationToken authToken) {
+        var userPrincipal = (UserPrincipal) authToken.getPrincipal();
+        householdJoinRequestService.accept(joinRequestId, userPrincipal.getUserId());
+    }
+
+    @PostMapping("/join-requests/{joinRequestId}/reject")
+    @ResponseStatus(NO_CONTENT)
+    public void reject(@PathVariable UUID joinRequestId, UsernamePasswordAuthenticationToken authToken) {
+        var userPrincipal = (UserPrincipal) authToken.getPrincipal();
+        householdJoinRequestService.reject(joinRequestId, userPrincipal.getUserId());
+    }
+
     @DeleteMapping("/join-requests/{joinRequestId}")
     @ResponseStatus(NO_CONTENT)
     public void delete(@PathVariable UUID joinRequestId) {
