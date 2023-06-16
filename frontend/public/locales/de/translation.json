@@ -15,6 +15,7 @@
             "create": "Erstellen",
             "join": "Beitreten",
             "open": "Öffnen",
+            "register": "Registrieren",
             "reject": "Ablehnen",
             "save": "Speichern"
         },
@@ -96,6 +97,13 @@
         "headline": "Maßeinheiten",
         "name": "Maßeinheit",
         "noOptions": "Keine Maßeinheiten vorhanden"
+    },
+    "registration": {
+        "attribute": {
+            "email": "E-Mail",
+            "password": "Passwort",
+            "passwordRepeat": "Passwort wiederholen"
+        }
     },
     "season": {
         "action": {

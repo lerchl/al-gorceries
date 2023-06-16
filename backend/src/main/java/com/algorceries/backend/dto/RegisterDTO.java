@@ -1,15 +1,20 @@
 package com.algorceries.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * DTO for registering a new user.
  */
 public class RegisterDTO {
-    
+
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String password;
 
-    private String repeatPassword;
+    @NotBlank
+    private String passwordRepeat;
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
@@ -31,11 +36,11 @@ public class RegisterDTO {
         this.password = password;
     }
 
-    public String getRepeatPassword() {
-        return repeatPassword;
+    public String getPasswordRepeat() {
+        return passwordRepeat;
     }
 
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
+    public void setPasswordRepeat(String repeatPassword) {
+        this.passwordRepeat = repeatPassword;
     }
 }

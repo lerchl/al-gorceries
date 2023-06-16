@@ -11,5 +11,6 @@ import com.algorceries.backend.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Optional<User> findByEmailAndPassword(String email, String password);
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
 }

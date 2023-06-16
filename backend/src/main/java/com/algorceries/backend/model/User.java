@@ -22,14 +22,19 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JsonIgnore
     private UUID id;
 
     @Column(name = "email")
     private String email;
 
-    @JsonIgnore
     @Column(name = "password")
+    @JsonIgnore
     private String password;
+
+    @Column(name = "salt")
+    @JsonIgnore
+    private String salt;
 
     @Column(name = "admin")
     private boolean admin;
@@ -38,6 +43,20 @@ public class User {
     @JoinColumn(name = "household_id")
     @JsonBackReference
     private Household household;
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Init
+    // /////////////////////////////////////////////////////////////////////////
+
+    public User() {
+        // default constructor for JPA
+    }
+
+    public User(String email, String password, String salt) {
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+    }
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
@@ -61,6 +80,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public boolean isAdmin() {

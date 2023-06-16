@@ -1,16 +1,10 @@
 package com.algorceries.backend.controller;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 import java.util.Arrays;
 import java.util.Optional;
 
-import com.algorceries.backend.dto.LoginDTO;
-import com.algorceries.backend.dto.RegisterDTO;
-import com.algorceries.backend.model.User;
-import com.algorceries.backend.service.AuthenticationService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -18,7 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.algorceries.backend.dto.LoginDTO;
+import com.algorceries.backend.dto.RegisterDTO;
+import com.algorceries.backend.service.AuthenticationService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RestController
 public class AuthenticationController {
@@ -66,8 +70,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public User register(RegisterDTO registerDTO) {
-        // TODO: Implement
-        throw new NotYetImplementedException();
+    @ResponseStatus(NO_CONTENT)
+    public void register(@RequestBody @Valid RegisterDTO registerDTO) {
+        authenticationService.register(registerDTO.getEmail(), registerDTO.getPassword(), registerDTO.getPasswordRepeat());
     }
 }
