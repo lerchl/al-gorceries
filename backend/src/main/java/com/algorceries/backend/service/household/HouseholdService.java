@@ -76,4 +76,12 @@ public class HouseholdService {
         householdJoinRequestService.deleteByUser(userId);
         return household;
     }
+
+    public void deleteIfEmpty(UUID id) {
+        var household = householdRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Household"));
+
+        if (household.getUsers().isEmpty()) {
+            householdRepository.delete(household);
+        }
+    }
 }

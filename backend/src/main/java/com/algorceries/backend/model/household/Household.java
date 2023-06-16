@@ -1,6 +1,6 @@
 package com.algorceries.backend.model.household;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.algorceries.backend.model.User;
@@ -32,7 +32,7 @@ public class Household {
 
     @OneToMany(mappedBy = "household")
     @JsonManagedReference
-    private List<User> users;
+    private Set<User> users;
 
     // /////////////////////////////////////////////////////////////////////////
     // Methods
@@ -64,7 +64,7 @@ public class Household {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 }

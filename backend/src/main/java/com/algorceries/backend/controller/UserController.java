@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algorceries.backend.controller.exception.BadRequestException;
 import com.algorceries.backend.security.UserPrincipal;
-import com.algorceries.backend.service.UserService;
+import com.algorceries.backend.service.UserHouseholdService;
 
 /**
  * {@link RestController} for {@link User users}.
@@ -18,14 +19,14 @@ import com.algorceries.backend.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserHouseholdService userHouseholdService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserHouseholdService userHouseholdService) {
+        this.userHouseholdService = userHouseholdService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,11 @@ public class UserController {
     @ResponseStatus(NO_CONTENT)
     public void leave(UsernamePasswordAuthenticationToken authToken) {
         var userPrincipal = (UserPrincipal) authToken.getPrincipal();
-        userService.leaveHousehold(userPrincipal.getUserId());
+
+        try {
+            userHouseholdService.leaveHousehold(userPrincipal.getUserId());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            throw new BadRequestException(e.getMessage());
+        }
     }
 }

@@ -54,14 +54,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void leaveHousehold(UUID userId) {
+    protected Household leaveHousehold(UUID userId) {
         var user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User"));
+        var household = user.getHousehold();
 
-        if (user.getHousehold() == null) {
+        if (household == null) {
             throw new IllegalStateException("User is not part of a household.");
         }
 
         user.setHousehold(null);
         save(user);
+        return household;
     }
 }
