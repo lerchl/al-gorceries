@@ -48,7 +48,7 @@ public class DishListController {
         var userPrincipal = (UserPrincipal) authToken.getPrincipal();
 
         try {
-            return dishListService.findByYearAndCalendarWeek(year, calendarWeek, userPrincipal.getHouseholdId());
+            return dishListService.findByYearAndCalendarWeekAndHouseholdId(year, calendarWeek, userPrincipal.getHouseholdId());
         } catch (EmptyOptionalException e) {
             throw new NotFoundException();
         }

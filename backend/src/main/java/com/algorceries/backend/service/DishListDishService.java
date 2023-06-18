@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.algorceries.backend.model.DishListDish;
 import com.algorceries.backend.repository.DishListDishRepository;
+import com.algorceries.backend.service.exception.EmptyOptionalException;
+import com.algorceries.backend.service.exception.WrongHouseholdException;
 
 @Service
 public class DishListDishService {
@@ -29,21 +31,24 @@ public class DishListDishService {
      * @param id the id of the {@link DishListDish dish list dish}
      * @param amount the new amount
      * @return the updated {@link DishListDish dish list dish}
+     * @throws EmptyOptionalException if the {@link DishListDish dish list dish} could not be found
+     * @throws WrongHouseholdException if the {@link DishListDish dish list dish} does not belong
+     * to the requesting user's household
      * @throws IllegalArgumentException if the amount is negative
-     * or the {@link DishListDish dish list dish} does not exist
      */
-    public DishListDish changeAmount(UUID id, int amount) {
+    public DishListDish changeAmount(UUID id, int amount, UUID householdId)
+            throws EmptyOptionalException, WrongHouseholdException {
         if (amount < 0) {
             throw new IllegalArgumentException("amount");
         }
 
-        var optionalDishListDish = dishListDishRepository.findById(id);
+        var dishListDish = dishListDishRepository.findById(id)
+                .orElseThrow(() -> new EmptyOptionalException(DishListDish.class));
 
-        if (optionalDishListDish.isEmpty()) {
-            throw new IllegalArgumentException("id");
+        if (!dishListDish.getDishList().getHousehold().getId().equals(householdId)) {
+            throw new WrongHouseholdException();
         }
 
-        var dishListDish = optionalDishListDish.get();
         dishListDish.setAmount(amount);
         return dishListDishRepository.save(dishListDish);
     }

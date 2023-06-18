@@ -21,6 +21,9 @@ import com.algorceries.backend.service.exception.DuplicateDishListException;
 import com.algorceries.backend.service.exception.EmptyOptionalException;
 import com.algorceries.backend.service.exception.NoHouseholdException;
 
+/**
+ * Service for {@link DishList dish lists}.
+ */
 @Service
 public class DishListService {
 
@@ -49,7 +52,9 @@ public class DishListService {
     // Methods
     // /////////////////////////////////////////////////////////////////////////
 
-    public DishList findByYearAndCalendarWeek(int year, int calendarWeek, UUID householdId) throws EmptyOptionalException {
+    public DishList findByYearAndCalendarWeekAndHouseholdId(int year,
+                                                            int calendarWeek,
+                                                            UUID householdId) throws EmptyOptionalException {
         return dishListRepository.findByYearAndCalendarWeekAndHouseholdId(year, calendarWeek, householdId)
                                  .orElseThrow(() -> new EmptyOptionalException(DishList.class));
     }
@@ -58,12 +63,14 @@ public class DishListService {
      * Creates a new {@link DishList dish list} for a week.
      * @param year the year
      * @param calendarWeek the calendar week
+     * @param householdId the id of the requesting user's {@link Household household}
      * @return the saved dish list
      * @throws DuplicateDishListException if a dish list for the given week already exists
      * @throws EmptyOptionalException if the {@link Household household} could not be found
      * @throws NoHouseholdException if householdId is null
      */
-    public DishList create(int year, int calendarWeek, UUID householdId) throws DuplicateDishListException, EmptyOptionalException, NoHouseholdException {
+    public DishList create(int year, int calendarWeek, UUID householdId)
+            throws DuplicateDishListException, EmptyOptionalException, NoHouseholdException {
         if (householdId == null) {
             throw new NoHouseholdException();
         }

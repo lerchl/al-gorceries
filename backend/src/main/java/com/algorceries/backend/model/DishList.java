@@ -92,4 +92,8 @@ public class DishList {
     public void setDishListDishes(Set<DishListDish> dishListDishes) {
         this.dishListDishes = dishListDishes;
     }
+
+    public Household getHousehold() {
+        return household;
+    }
 }
