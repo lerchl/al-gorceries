@@ -23,8 +23,11 @@ import io.jsonwebtoken.security.SignatureException;
 @Service
 public class TokenService {
 
+    /**
+     * 1 hour
+     */
     private static final int EXPIRES_IN = 3600000;
-    // TODO: Place into application.properties
+
     private static final SecretKey JWT_SECRET = Keys.secretKeyFor(HS256);
 
     // /////////////////////////////////////////////////////////////////////////

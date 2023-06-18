@@ -21,13 +21,12 @@ import com.algorceries.backend.service.AuthenticationService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
 public class AuthenticationController {
 
-    private static final String TOKEN_COOKIE_NAME = "jwt";
+    public static final String TOKEN_COOKIE_NAME = "jwt";
 
     private final AuthenticationService authenticationService;
 
@@ -61,7 +60,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
+    public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO) {
         HttpCookie cookie = ResponseCookie.from(TOKEN_COOKIE_NAME, authenticationService.login(loginDTO.getEmail(), loginDTO.getPassword()))
                                           .httpOnly(true)
                                           .path("/")

@@ -1,6 +1,5 @@
 package com.algorceries.backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.algorceries.backend.controller.exception.BadRequestException;
 import com.algorceries.backend.model.User;
 import com.algorceries.backend.repository.UserRepository;
+
+import io.jsonwebtoken.ExpiredJwtException;
 
 /**
  * {@link Service} for authentication.
@@ -25,7 +26,6 @@ public class AuthenticationService {
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    @Autowired
     public AuthenticationService(TokenService tokenService, UserRepository userRepository) {
         this.tokenService =  tokenService;
         this.userRepository = userRepository;
@@ -36,7 +36,11 @@ public class AuthenticationService {
     // /////////////////////////////////////////////////////////////////////////
 
     public boolean isLoggedIn(String token) {
-        return tokenService.parseToken(token).isPresent();
+        try {
+            return tokenService.parseToken(token).isPresent();
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
     }
 
     public String login(String email, String password) {
