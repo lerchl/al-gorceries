@@ -7,17 +7,16 @@ public class UserPrincipal {
     private final UUID userId;
     private final String email;
     private final boolean admin;
-    private final UUID householdId;
+    private UUID householdId;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public UserPrincipal(UUID userId, String email, boolean admin, UUID householdId) {
+    public UserPrincipal(UUID userId, String email, boolean admin) {
         this.userId = userId;
         this.email = email;
         this.admin = admin;
-        this.householdId = householdId;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -38,5 +37,9 @@ public class UserPrincipal {
 
     public UUID getHouseholdId() {
         return householdId;
+    }
+
+    public void setHouseholdId(UUID householdId) {
+        this.householdId = householdId;
     }
 }

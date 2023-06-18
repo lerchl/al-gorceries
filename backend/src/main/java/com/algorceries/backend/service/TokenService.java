@@ -35,13 +35,10 @@ public class TokenService {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRES_IN);
         Key key = Keys.hmacShaKeyFor(JWT_SECRET.getEncoded());
 
-        UUID householdId = user.getHousehold() == null ? null : user.getHousehold().getId();
-
         return Jwts.builder()
                 .claim("id", user.getId())
                 .claim("sub", user.getEmail())
                 .claim("admin", user.isAdmin())
-                .claim("householdId", householdId)
                 .setExpiration(expirationDate)
                 .signWith(key, HS256)
                 .compact();
@@ -62,9 +59,7 @@ public class TokenService {
         UUID userId = UUID.fromString(jwsClaims.getBody().get("id", String.class));
         String sub = jwsClaims.getBody().getSubject();
         boolean admin = jwsClaims.getBody().get("admin", Boolean.class);
-        String householdIdString = jwsClaims.getBody().get("householdId", String.class);
-        UUID householdId = householdIdString == null ? null : UUID.fromString(householdIdString);
 
-        return Optional.of(new UserPrincipal(userId, sub, admin, householdId));
+        return Optional.of(new UserPrincipal(userId, sub, admin));
     }
 }

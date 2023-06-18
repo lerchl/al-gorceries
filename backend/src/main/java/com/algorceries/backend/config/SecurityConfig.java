@@ -10,19 +10,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.algorceries.backend.security.AuthenticationFilter;
 import com.algorceries.backend.service.TokenService;
+import com.algorceries.backend.service.household.HouseholdService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final TokenService tokenService;
+    private final HouseholdService householdService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public SecurityConfig(TokenService tokenService) {
+    public SecurityConfig(TokenService tokenService, HouseholdService householdService) {
         this.tokenService = tokenService;
+        this.householdService = householdService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -47,7 +50,7 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
                     .and()
                     // Add filter to validate tokens with every request
-                    .addFilterBefore(new AuthenticationFilter(tokenService),
+                    .addFilterBefore(new AuthenticationFilter(tokenService, householdService),
                                      UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

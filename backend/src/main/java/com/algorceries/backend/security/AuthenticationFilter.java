@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.algorceries.backend.service.TokenService;
+import com.algorceries.backend.service.household.HouseholdService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,13 +24,15 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
+    private final HouseholdService householdService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
 
-    public AuthenticationFilter(TokenService tokenService) {
+    public AuthenticationFilter(TokenService tokenService, HouseholdService householdService) {
         this.tokenService = tokenService;
+        this.householdService = householdService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -59,7 +62,17 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        SecurityContextHolder.getContext().setAuthentication(optionalToken.get());
+        var token = optionalToken.get();
+        var userPrincipal = (UserPrincipal) token.getPrincipal();
+        var household = householdService.findByUserId(userPrincipal.getUserId());
+
+        if (household.isEmpty()) {
+            userPrincipal.setHouseholdId(null);
+        } else {
+            userPrincipal.setHouseholdId(household.get().getId());
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(token);
         filterChain.doFilter(request, response);
     }
 
