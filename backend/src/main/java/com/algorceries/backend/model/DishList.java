@@ -51,9 +51,10 @@ public class DishList {
         // default constructor for jpa
     }
 
-    public DishList(int year, int calendarWeek) {
+    public DishList(int year, int calendarWeek, Household household) {
         this.year = year;
         this.calendarWeek = calendarWeek;
+        this.household = household;
     }
 
     // /////////////////////////////////////////////////////////////////////////

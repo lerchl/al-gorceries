@@ -4,26 +4,32 @@ import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.UUID;
 
-import com.algorceries.backend.controller.exception.ConflictException;
-import com.algorceries.backend.controller.exception.NotFoundException;
+import org.springframework.stereotype.Service;
+
 import com.algorceries.backend.model.Dish;
 import com.algorceries.backend.model.DishList;
 import com.algorceries.backend.model.DishListDish;
 import com.algorceries.backend.model.Season;
+import com.algorceries.backend.model.household.Household;
 import com.algorceries.backend.repository.DishListDishRepository;
 import com.algorceries.backend.repository.DishListRepository;
 import com.algorceries.backend.repository.DishRepository;
-import org.springframework.stereotype.Service;
+import com.algorceries.backend.repository.household.HouseholdRepository;
+import com.algorceries.backend.service.exception.DuplicateDishListException;
+import com.algorceries.backend.service.exception.EmptyOptionalException;
+import com.algorceries.backend.service.exception.NoHouseholdException;
 
 @Service
 public class DishListService {
-    
+
     private static final int DISHES_PER_LIST = 10;
 
     private final DishListRepository dishListRepository;
     private final DishRepository dishRepository;
     private final DishListDishRepository dishListDishRepository;
+    private final HouseholdRepository householdRepository;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
@@ -31,19 +37,21 @@ public class DishListService {
 
     public DishListService(DishListRepository dishListRepository,
                            DishRepository dishRepository,
-                           DishListDishRepository dishListDishRepository) {
+                           DishListDishRepository dishListDishRepository,
+                           HouseholdRepository householdRepository) {
         this.dishListRepository = dishListRepository;
         this.dishRepository = dishRepository;
         this.dishListDishRepository = dishListDishRepository;
+        this.householdRepository = householdRepository;
     }
 
     // /////////////////////////////////////////////////////////////////////////
     // Methods
     // /////////////////////////////////////////////////////////////////////////
 
-    public DishList findByYearAndCalendarWeek(int year, int calendarWeek) {
-        return dishListRepository.findByYearAndCalendarWeek(year, calendarWeek)
-                .orElseThrow(() -> new NotFoundException("Dish list not found"));
+    public DishList findByYearAndCalendarWeek(int year, int calendarWeek, UUID householdId) throws EmptyOptionalException {
+        return dishListRepository.findByYearAndCalendarWeekAndHouseholdId(year, calendarWeek, householdId)
+                                 .orElseThrow(() -> new EmptyOptionalException(DishList.class));
     }
 
     /**
@@ -51,24 +59,32 @@ public class DishListService {
      * @param year the year
      * @param calendarWeek the calendar week
      * @return the saved dish list
-     * @throws ConflictException if a dish list for the given week already exists
+     * @throws DuplicateDishListException if a dish list for the given week already exists
+     * @throws EmptyOptionalException if the {@link Household household} could not be found
+     * @throws NoHouseholdException if householdId is null
      */
-    public DishList create(int year, int calendarWeek) {
-        if (dishListRepository.existsByYearAndCalendarWeek(year, calendarWeek)) {
-            throw new ConflictException("Dish list for this week already exists");
+    public DishList create(int year, int calendarWeek, UUID householdId) throws DuplicateDishListException, EmptyOptionalException, NoHouseholdException {
+        if (householdId == null) {
+            throw new NoHouseholdException();
         }
 
+        if (dishListRepository.existsByYearAndCalendarWeekAndHouseholdId(year, calendarWeek, householdId)) {
+            throw new DuplicateDishListException();
+        }
+
+        var household = householdRepository.findById(householdId)
+                                           .orElseThrow(() -> new EmptyOptionalException(Household.class));
         // TODO: Would be nice if the dish list could be created
         // with the dishes already and then everything saved at once.
-        var dishList = dishListRepository.save(new DishList(year, calendarWeek));
+        var dishList = dishListRepository.save(new DishList(year, calendarWeek, household));
         var date = LocalDate.now().withYear(year).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, calendarWeek);
         var allDishes = dishRepository.findAll();
         allDishes.removeIf(dish -> dishIsOutOfSeason(dish, date));
         Collections.shuffle(allDishes);
         var dishListDishes = allDishes.stream()
-                 .limit(DISHES_PER_LIST)
-                 .map(dish -> dishListDishRepository.save(new DishListDish(dish, dishList)))
-                 .toList();
+                .limit(DISHES_PER_LIST)
+                .map(dish -> dishListDishRepository.save(new DishListDish(dish, dishList)))
+                .toList();
 
         dishList.setDishListDishes(new HashSet<>(dishListDishes));
         return dishListRepository.save(dishList);
