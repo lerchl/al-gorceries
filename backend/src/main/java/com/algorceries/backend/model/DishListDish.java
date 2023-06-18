@@ -32,7 +32,7 @@ public class DishListDish {
     private Dish dish;
 
     @Column(name = "amount")
-    private double amount = 1;
+    private double amount = 0;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
