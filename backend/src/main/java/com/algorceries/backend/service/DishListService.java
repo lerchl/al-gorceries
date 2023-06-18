@@ -85,7 +85,7 @@ public class DishListService {
         // with the dishes already and then everything saved at once.
         var dishList = dishListRepository.save(new DishList(year, calendarWeek, household));
         var date = LocalDate.now().withYear(year).with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, calendarWeek);
-        var allDishes = dishRepository.findAll();
+        var allDishes = dishRepository.findAllByHouseholdId(householdId);
         allDishes.removeIf(dish -> dishIsOutOfSeason(dish, date));
         Collections.shuffle(allDishes);
         var dishListDishes = allDishes.stream()
