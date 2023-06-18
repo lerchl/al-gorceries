@@ -39,7 +39,7 @@ export const Index = () => {
 
     function navigationButton() {
         if (!dishList) {
-            return <GenerateDishListButton date={date} getDishList={getDishList} setDishList={setDishList} />;
+            return <GenerateDishListButton date={date} setDishList={setDishList} setDishListDishes={setDishListDishes} />;
         } else if (viewDishSelection) {
             return <button onClick={() => setViewDishSelection(false)} className="custom-button primary ml-2" style={{ width: "100%" }}>Einkaufsliste</button>;
         } else {
