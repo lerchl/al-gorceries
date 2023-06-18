@@ -13,6 +13,6 @@ export const GenerateDishListButton = ({ date, getDishList, setDishList }) => {
     }
 
     return (
-        <button onClick={generateDishList} className="custom-button primary mr-2">Gerichte generieren</button>
+        <button onClick={generateDishList} className="custom-button primary ml-2" style={{ width: "100%" }}>Gerichte generieren</button>
     );
 }
