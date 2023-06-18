@@ -2,16 +2,21 @@ package com.algorceries.backend.model;
 
 import java.util.UUID;
 
+import com.algorceries.backend.model.household.Household;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
- * {@link Entity} representing an ingredient.
+ * {@link HouseholdScopedEntity} representing an ingredient.
  */
 @Entity(name = "algo_ingredient")
-public class Ingredient {
+public class Ingredient implements HouseholdScopedEntity {
 
     @Id
     @GeneratedValue
@@ -21,10 +26,16 @@ public class Ingredient {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    @JsonIgnore
+    private Household household;
+
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
 
+    @Override
     public UUID getId() {
         return id;
     }
@@ -35,5 +46,15 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Household getHousehold() {
+        return household;
+    }
+
+    @Override
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 }

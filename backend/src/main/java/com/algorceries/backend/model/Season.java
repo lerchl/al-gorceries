@@ -2,16 +2,21 @@ package com.algorceries.backend.model;
 
 import java.util.UUID;
 
+import com.algorceries.backend.model.household.Household;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
- * {@link Entity} representing a season.
+ * {@link HouseholdScopedEntity} representing a season.
  */
 @Entity(name = "algo_season")
-public class Season {
+public class Season implements HouseholdScopedEntity {
 
     @Id
     @GeneratedValue
@@ -33,10 +38,16 @@ public class Season {
     @Column(name = "end_month")
     private int endMonth;
 
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    @JsonIgnore
+    private Household household;
+
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
 
+    @Override
     public UUID getId() {
         return id;
     }
@@ -79,5 +90,15 @@ public class Season {
 
     public void setEndMonth(int endMonth) {
         this.endMonth = endMonth;
+    }
+
+    @Override
+    public Household getHousehold() {
+        return household;
+    }
+
+    @Override
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 }

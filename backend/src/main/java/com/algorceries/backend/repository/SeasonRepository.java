@@ -1,15 +1,13 @@
 package com.algorceries.backend.repository;
 
-import java.util.UUID;
-
-import com.algorceries.backend.model.Season;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.algorceries.backend.model.Season;
+
 /**
- * {@link JpaRepository} for {@link Season seasons}.
+ * {@link HouseholdScopedRepository} for {@link Season seasons}.
  */
 @Repository
-public interface SeasonRepository extends JpaRepository<Season, UUID> {
+public interface SeasonRepository extends HouseholdScopedRepository<Season> {
     // noop
 }

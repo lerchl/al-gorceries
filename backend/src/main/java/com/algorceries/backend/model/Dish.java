@@ -3,6 +3,8 @@ package com.algorceries.backend.model;
 import java.util.Set;
 import java.util.UUID;
 
+import com.algorceries.backend.model.household.Household;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -19,7 +21,7 @@ import jakarta.persistence.OneToMany;
  * {@link Entity} representing a dish.
  */
 @Entity(name = "algo_dish")
-public class Dish {
+public class Dish implements HouseholdScopedEntity {
 
     @Id
     @GeneratedValue
@@ -55,10 +57,16 @@ public class Dish {
                inverseJoinColumns = @JoinColumn(name = "season_id"))
     private Set<Season> seasons;
 
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    @JsonIgnore
+    private Household household;
+
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
 
+    @Override
     public UUID getId() {
         return id;
     }
@@ -129,5 +137,15 @@ public class Dish {
 
     public void setSeasons(Set<Season> seasons) {
         this.seasons = seasons;
+    }
+
+    @Override
+    public Household getHousehold() {
+        return household;
+    }
+
+    @Override
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 }

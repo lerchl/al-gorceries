@@ -1,15 +1,13 @@
 package com.algorceries.backend.repository;
 
-import java.util.UUID;
-
-import com.algorceries.backend.model.Dish;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.algorceries.backend.model.Dish;
+
 /**
- * {@link JpaRepository} for {@link Dish dishes}.
+ * {@link HouseholdScopedRepository} for {@link Dish dishes}.
  */
 @Repository
-public interface DishRepository extends JpaRepository<Dish, UUID> {
+public interface DishRepository extends HouseholdScopedRepository<Dish> {
     // noop
 }

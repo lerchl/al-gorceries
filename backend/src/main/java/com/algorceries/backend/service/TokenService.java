@@ -1,5 +1,7 @@
 package com.algorceries.backend.service;
 
+import static io.jsonwebtoken.SignatureAlgorithm.HS256;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.Optional;
@@ -7,20 +9,20 @@ import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.stereotype.Service;
+
 import com.algorceries.backend.model.User;
 import com.algorceries.backend.security.UserPrincipal;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import org.springframework.stereotype.Service;
-
-import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 
 @Service
 public class TokenService {
-    
+
     private static final int EXPIRES_IN = 3600000;
     // TODO: Place into application.properties
     private static final SecretKey JWT_SECRET = Keys.secretKeyFor(HS256);
@@ -32,11 +34,14 @@ public class TokenService {
     public String generateToken(User user) {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRES_IN);
         Key key = Keys.hmacShaKeyFor(JWT_SECRET.getEncoded());
-        
+
+        UUID householdId = user.getHousehold() == null ? null : user.getHousehold().getId();
+
         return Jwts.builder()
                 .claim("id", user.getId())
                 .claim("sub", user.getEmail())
                 .claim("admin", user.isAdmin())
+                .claim("householdId", householdId)
                 .setExpiration(expirationDate)
                 .signWith(key, HS256)
                 .compact();
@@ -57,7 +62,9 @@ public class TokenService {
         UUID userId = UUID.fromString(jwsClaims.getBody().get("id", String.class));
         String sub = jwsClaims.getBody().getSubject();
         boolean admin = jwsClaims.getBody().get("admin", Boolean.class);
+        String householdIdString = jwsClaims.getBody().get("householdId", String.class);
+        UUID householdId = householdIdString == null ? null : UUID.fromString(householdIdString);
 
-        return Optional.of(new UserPrincipal(userId, sub, admin));
+        return Optional.of(new UserPrincipal(userId, sub, admin, householdId));
     }
 }
