@@ -13,7 +13,7 @@ import com.algorceries.backend.service.DishService;
 @RequestMapping(DishController.REQUEST_MAPPING)
 public class DishController extends HouseholdScopedController<Dish> {
 
-    private static final String REQUEST_MAPPING = "/dishes";
+    protected static final String REQUEST_MAPPING = "/dishes";
 
     // /////////////////////////////////////////////////////////////////////////
     // Init

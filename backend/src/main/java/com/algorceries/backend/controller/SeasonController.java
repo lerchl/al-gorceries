@@ -13,7 +13,7 @@ import com.algorceries.backend.service.SeasonService;
 @RequestMapping(SeasonController.REQUEST_MAPPING)
 public class SeasonController extends HouseholdScopedController<Season> {
 
-    private static final String REQUEST_MAPPING = "/seasons";
+    protected static final String REQUEST_MAPPING = "/seasons";
 
     // /////////////////////////////////////////////////////////////////////////
     // Init

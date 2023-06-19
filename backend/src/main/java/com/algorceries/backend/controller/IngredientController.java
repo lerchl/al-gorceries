@@ -13,7 +13,7 @@ import com.algorceries.backend.service.IngredientService;
 @RequestMapping(IngredientController.REQUEST_MAPPING)
 public class IngredientController extends HouseholdScopedController<Ingredient> {
 
-    private static final String REQUEST_MAPPING = "/ingredients";
+    protected static final String REQUEST_MAPPING = "/ingredients";
 
     // /////////////////////////////////////////////////////////////////////////
     // Init

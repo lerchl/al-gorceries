@@ -13,7 +13,7 @@ import com.algorceries.backend.service.UnitOfMeasurementService;
 @RequestMapping(UnitOfMeasurementController.REQUEST_MAPPING)
 public class UnitOfMeasurementController extends HouseholdScopedController<UnitOfMeasurement> {
 
-    private static final String REQUEST_MAPPING = "/unitsOfMeasurement";
+    protected static final String REQUEST_MAPPING = "/unitsOfMeasurement";
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
