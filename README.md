@@ -28,11 +28,11 @@ docker run -p 5432:5432 --name al-gorceries-postgres --network al-gorceries-netw
 Create a backend container:
 
 ```cmd
-docker run -p 8080:8080 --name al-gorceries-backend --network al-gorceries-network -e DB_URL=jdbc:postgresql://al-gorceries-postgres:5432/[USER] -e DB_USERNAME=[USER] -e DB_PASSWORD=[PASSWORD] -e PEPPER=[PEPPER] -d yustheyokai/al-gorceries-backend
+docker run -p 8080:8080 --name al-gorceries-backend --network al-gorceries-network -e DB_URL=jdbc:postgresql://al-gorceries-postgres:5432/[USER] -e DB_USERNAME=[USER] -e DB_PASSWORD=[PASSWORD] -e PEPPER=[PEPPER] -d yustheyokai/al-gorceries-backend:[VERSION]
 ```
 
 Create a frontend container:
 
 ```cmd
-docker run -p 80:80 --name al-gorceries-frontend --network al-gorceries-network -d yustheyokai/al-gorceries-frontend
+docker run -p 80:80 --name al-gorceries-frontend --network al-gorceries-network -d yustheyokai/al-gorceries-frontend:[VERSION]
 ```
