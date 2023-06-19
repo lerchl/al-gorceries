@@ -29,13 +29,11 @@ export const Household = () => {
     useEffect(() => fetchHousehold(), []);
 
     const content = () => {
-        console.log(loading);
         if (!loading) {
-            console.log(household)
             if (household) {
                 return <WithHousehold household={household} setHousehold={setHousehold} />;
             } else {
-                return <WithoutHousehold />;
+                return <WithoutHousehold fetchHousehold={fetchHousehold} />;
             }
         }
 
@@ -117,24 +115,21 @@ const WithHousehold = ({ household, setHousehold }) => {
                         );
                     }) }
                 </Container>
-                { console.log(joinRequests) }
             </div>
             <button type="button" onClick={leaveHousehold} className="custom-button danger-button w-100"><DoorOpen /> { t("household.leave") }</button>
         </>
     );
 }
 
-const WithoutHousehold = () => {
+const WithoutHousehold = ({ fetchHousehold }) => {
 
     const { t } = useTranslation();
 
     const [name, setName] = useState("");
 
     const createHousehold = async () => {
-        const res = await axios.post(`${API_URL}/${HOUSEHOLDS}`, { name: name });
-        if (res.status === 201) {
-            setName("");
-        }
+        await axios.post(`${API_URL}/${HOUSEHOLDS}`, { name: name });
+        fetchHousehold();
     }
 
     return (
