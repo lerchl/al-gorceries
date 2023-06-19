@@ -1,9 +1,17 @@
 package com.algorceries.backend.model.household;
 
+import static jakarta.persistence.CascadeType.REMOVE;
+
 import java.util.Set;
 import java.util.UUID;
 
+import com.algorceries.backend.model.Dish;
+import com.algorceries.backend.model.DishList;
+import com.algorceries.backend.model.Ingredient;
+import com.algorceries.backend.model.Season;
+import com.algorceries.backend.model.UnitOfMeasurement;
 import com.algorceries.backend.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -33,6 +41,26 @@ public class Household {
     @OneToMany(mappedBy = "household")
     @JsonManagedReference
     private Set<User> users;
+
+    @OneToMany(mappedBy = "household", cascade = REMOVE)
+    @JsonIgnore
+    private Set<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "household", cascade = REMOVE)
+    @JsonIgnore
+    private Set<UnitOfMeasurement> unitsOfMeasurement;
+
+    @OneToMany(mappedBy = "household", cascade = REMOVE)
+    @JsonIgnore
+    private Set<Season> seasons;
+
+    @OneToMany(mappedBy = "household", cascade = REMOVE)
+    @JsonIgnore
+    private Set<Dish> dishes;
+
+    @OneToMany(mappedBy = "household", cascade = REMOVE)
+    @JsonIgnore
+    private Set<DishList> dishLists;
 
     // /////////////////////////////////////////////////////////////////////////
     // Methods
