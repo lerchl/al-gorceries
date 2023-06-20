@@ -99,7 +99,7 @@ public class HouseholdScopedController<T extends HouseholdScopedEntity> {
         var userPrincipal = (UserPrincipal) authToken.getPrincipal();
 
         try {
-            service.findById(id, userPrincipal.getHouseholdId());
+            service.deleteById(id, userPrincipal.getHouseholdId());
         } catch (EmptyOptionalException | WrongHouseholdException e) {
             // also throw NotFoundException if the user does not belong to the household
             // to prevent leaking information

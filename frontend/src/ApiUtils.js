@@ -97,7 +97,7 @@ export function createEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, s
  * @param {Function} setEntity setter for the stateful value
  */
 export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntity(entityApiEndpoint, setEntity, entity.id);
@@ -111,7 +111,7 @@ export function updateEntityAndGetEntity(entityApiEndpoint, entity, setEntity) {
  * @param {Function} setEntities setter for the stateful value
  */
 export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntities) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntities(entityApiEndpoint, setEntities);
@@ -126,7 +126,7 @@ export function updateEntityAndGetEntities(entityApiEndpoint, entity, setEntitie
  * @param {*} param the parameter
  */
 export function updateEntityAndGetEntitiesWithParam(entityApiEndpoint, entity, setEntities, param) {
-    let url = `${API_URL}/${entityApiEndpoint}/${entity.id}`;
+    let url = `${API_URL}/${entityApiEndpoint}`;
     axios.put(url, entity).then(res => {
         handleAnswer(res, 200);
         getEntitiesWithParam(entityApiEndpoint, setEntities, param);

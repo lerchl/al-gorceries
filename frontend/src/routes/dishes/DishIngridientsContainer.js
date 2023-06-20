@@ -5,7 +5,7 @@ export const DishIngridientsContainer = ({dishId, dishIngridients, setDishIngrid
 
     function content() {
         if (dishIngridients.length === 0) {
-            return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
+            return <p style={{ textAlign: "center" }}>Noch keine Zutaten hinzugefügt...</p>;
         } else {
             return (
                 dishIngridients.map((dishIngridient, i) => {
