@@ -13,6 +13,10 @@ RUN npm install
 # Copy the source code
 COPY . .
 
+RUN touch .env
+RUN echo "REACT_APP_API_URL=http://yustheyokai.xyz" >> .env
+RUN echo "REACT_APP_API_PORT=8080" >> .env
+
 # Build the app
 RUN npm run build
 
