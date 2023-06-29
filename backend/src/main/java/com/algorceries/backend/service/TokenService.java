@@ -4,7 +4,9 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.crypto.SecretKey;
@@ -29,6 +31,8 @@ public class TokenService {
     private static final int EXPIRES_IN = 3600000;
 
     private static final SecretKey JWT_SECRET = Keys.secretKeyFor(HS256);
+
+    private Set<String> tokenBlocklist = new HashSet<>();
 
     // /////////////////////////////////////////////////////////////////////////
     // Methods
@@ -64,5 +68,13 @@ public class TokenService {
         boolean admin = jwsClaims.getBody().get("admin", Boolean.class);
 
         return Optional.of(new UserPrincipal(userId, sub, admin));
+    }
+
+    public void blockToken(String token) {
+        tokenBlocklist.add(token);
+    }
+
+    public boolean isTokenBlocked(String token) {
+        return tokenBlocklist.contains(token);
     }
 }

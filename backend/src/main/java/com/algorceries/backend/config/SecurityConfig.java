@@ -38,6 +38,10 @@ public class SecurityConfig {
 
                     // Disable csrf
         httpSecurity.csrf().disable()
+                    // Disable logout
+                    .logout().disable()
+                    // Disable form login
+                    .formLogin().disable()
                     // Enable cors
                     .cors()
                     .and()

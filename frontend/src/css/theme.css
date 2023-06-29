@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
     --background-gradient: linear-gradient(135deg, rgb(7 26 42) 0%, rgb(11 0 25) 100%);
     --background-gradient-dark: linear-gradient(135deg, rgb(20 28 34) 0%, rgb(22 23 31) 100%);
@@ -30,6 +32,7 @@ html {
     height: 100%;
 
     font-size: 18px;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 body {
@@ -202,16 +205,47 @@ label.Mui-focused {
 /* -MENUBAR-------------------- */
 
 .navbar {
-    background: var(--background-gradient-dark) !important;
+    background: #200054 !important;
+}
+
+.navbar button {
+    margin-right: 15px;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: var(--text-color) !important;
+}
+
+.navbar .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 1.3rem;
+    margin-left: 15px;
+}
+
+.logout-button {
+    margin-left: auto;
+}
+
+.navbar .nav-link {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-link > svg {
+    margin-right: 7px;
 }
 
 .navbar-toggler {
-        border: none;
+    border: none;
+    filter: invert(1);
 }
 
 .navbar-toggler:focus {
     box-shadow: none;
-    filter: brightness(0.5);
+    filter: invert(0.8);
 }
 
 /* -TABLE---------------------- */

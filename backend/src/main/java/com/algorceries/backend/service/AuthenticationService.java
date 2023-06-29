@@ -73,4 +73,8 @@ public class AuthenticationService {
 
         userRepository.save(new User(email, passwordHash, salt));
     }
+
+    public void logout(String token) {
+        tokenService.blockToken(token);
+    }
 }

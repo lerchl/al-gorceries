@@ -1,6 +1,7 @@
 package com.algorceries.backend.controller;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.RESET_CONTENT;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -44,13 +45,7 @@ public class AuthenticationController {
 
     @GetMapping("/loggedIn")
     public boolean isLoggedIn(HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            return false;
-        }
-
-        Optional<Cookie> tokenCookie = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equals(TOKEN_COOKIE_NAME))
-                .findFirst();
+        var tokenCookie = getTokenCookie(request);
 
         if (tokenCookie.isEmpty()) {
             return false;
@@ -72,5 +67,27 @@ public class AuthenticationController {
     @ResponseStatus(NO_CONTENT)
     public void register(@RequestBody @Valid RegisterDTO registerDTO) {
         authenticationService.register(registerDTO.getEmail(), registerDTO.getPassword(), registerDTO.getPasswordRepeat());
+    }
+
+    @PostMapping("/logout")
+    @ResponseStatus(RESET_CONTENT)
+    public void logout(HttpServletRequest request) {
+        var tokenCookie = getTokenCookie(request);
+
+        if (tokenCookie.isEmpty()) {
+            return;
+        }
+
+        authenticationService.logout(tokenCookie.get().getValue());
+    }
+
+    private Optional<Cookie> getTokenCookie(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return Optional.empty();
+        }
+
+        return Arrays.stream(request.getCookies())
+                .filter(cookie -> cookie.getName().equals(TOKEN_COOKIE_NAME))
+                .findFirst();
     }
 }

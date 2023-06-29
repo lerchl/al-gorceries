@@ -7,6 +7,9 @@
     "end": "Ende",
     "seasons": "Saisons",
 
+    "application": {
+        "name": "Al Gorceries"
+    },
     "base": {
         "action": {
             "accept": "Annehmen",
@@ -14,6 +17,7 @@
             "close": "Schließen",
             "create": "Erstellen",
             "join": "Beitreten",
+            "logout": "Ausloggen",
             "open": "Öffnen",
             "register": "Registrieren",
             "reject": "Ablehnen",
@@ -134,6 +138,7 @@
     "dishList": {
         "dish": {
             "amount": "Menge"
-        }
+        },
+        "headline": "Gerichtelisten"
     }
 }

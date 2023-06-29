@@ -61,11 +61,16 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        Optional<UsernamePasswordAuthenticationToken> optionalToken = Optional.empty();
+        Optional<UsernamePasswordAuthenticationToken> optionalAuthToken = Optional.empty();
+        boolean expired = false;
 
         try {
-            optionalToken = createToken(tokenCookie.get().getValue());
+            optionalAuthToken = createToken(tokenCookie.get().getValue());
         } catch (ExpiredJwtException e) {
+            expired = true;
+        }
+
+        if (expired || tokenService.isTokenBlocked(tokenCookie.get().getValue())) {
             HttpCookie cookie = ResponseCookie.from(TOKEN_COOKIE_NAME, "")
                                               .httpOnly(true)
                                               .path("/")
@@ -76,12 +81,12 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        if (optionalToken.isEmpty()) {
+        if (optionalAuthToken.isEmpty()) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        var token = optionalToken.get();
+        var token = optionalAuthToken.get();
         var userPrincipal = (UserPrincipal) token.getPrincipal();
         var household = householdService.findByUserId(userPrincipal.getUserId());
 
