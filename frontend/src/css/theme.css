@@ -2,25 +2,13 @@
 
 :root {
     --background: #020416;
-    --purple: #200054;
-    --monochromatic: #330087;
-    /* 322051 */
-
-    --background-gradient: linear-gradient(135deg, rgb(7 26 42) 0%, rgb(11 0 25) 100%);
-    --background-gradient-dark: linear-gradient(135deg, rgb(20 28 34) 0%, rgb(22 23 31) 100%);
-
-    --popup-background-color: rgb(24, 26, 34);
-
     --text-color: rgb(233, 233, 233);
 
-    --primary: rgb(49, 26, 78);
-    --primary-hover: rgb(69, 36, 109);
+    --primary: #200054;
+    --primary-hover: #330086;
 
-    --primary-gradient: linear-gradient(135deg, var(--primary) 0%, rgb(83, 70, 97) 100%);
-    --primary-gradient-hover: linear-gradient(135deg, var(--primary-hover) 0%, rgb(113, 95, 132) 100%);
-
-    --secondary: rgb(29, 29, 49);
-    --secondary-hover: rgb(46, 46, 78);
+    --secondary: #382d4a;
+    --secondary-hover: #4c415e;
 
     --danger: #ff2213;
     --danger-hover: #eb4034;
@@ -32,12 +20,18 @@
     --dark: #222;
 
     /* table */
-    --table-header-background: var(--dark);
+    --table-header-footer-background: var(--dark);
     --table-background: #111;
     --table-scrollbar-background: #151515;
     --table-scrollbar-thumb: #333;
     --table-scrollbar-thumb-hover: #555;
     --table-tablerow-background: #333;
+
+    /* modal */
+    --modal-background: #111;
+
+    /* input */
+    --input-background: #222;
 }
 
 html, body, #root {
@@ -117,11 +111,11 @@ a, a:hover, a:visited {
 .custom-button.primary:active,
 .custom-button.primary:focus,
 .custom-button.primary:active:focus {
-    background: var(--primary-gradient);
+    background: var(--primary);
 }
 
 .custom-button.primary:hover {
-    background: var(--primary-gradient-hover);
+    background: var(--primary-hover);
 }
 
 .custom-button.primary:hover, .custom-button.primary:active, .custom-button.primary:focus, .custom-button.primary:active:focus {
@@ -158,12 +152,12 @@ input:focus-visible {
 /* -MUI INPUT------------------ */
 
 .MuiTextField-root {
-    background-color: var(--dark);
-    border: 1px solid #141414 !important;
-    border-radius: 5px;
+    background-color: var(--input-background);
+    border-radius: 10px;
 }
 
 .MuiTextField-root input, .MuiTextField-root textarea, .MuiTextField-root > label, .MuiTextField-root > div, .MuiInputAdornment-root > p {
+    font-family: 'Montserrat', sans-serif !important;
     color: var(--text-color);
 }
 
@@ -172,12 +166,16 @@ input:focus-visible {
     filter: invert(100%);
 }
 
+div.Mui-focused {
+    border-radius: 10px;
+}
+
 div.Mui-focused > fieldset {
-    border-color: var(--primary) !important;
+    border-color: var(--text-color) !important;
 }
 
 label.Mui-focused {
-    color: var(--primary) !important;
+    color: var(--text-color) !important;
 }
 
 .number-input input {
@@ -226,7 +224,7 @@ label.Mui-focused {
 /* -MENUBAR-------------------- */
 
 .navbar {
-    background: var(--purple) !important;
+    background: var(--primary) !important;
 }
 
 .navbar button {
@@ -275,15 +273,19 @@ label.Mui-focused {
     height: calc(95vh - 80px - 34px);
     overflow: auto;
     background: var(--table-background);
+    border-radius: 10px;
+    position: relative;
 }
 
 .table-wrapper::-webkit-scrollbar {
     width: 10px;
-    background: linear-gradient(180deg, var(--table-header-background) 50px, var(--table-scrollbar-background) 50px);
+    background: linear-gradient(180deg, var(--table-header-footer-background) 50px, var(--table-scrollbar-background) 50px, var(--table-scrollbar-background) calc(100% - 2rem), var(--table-header-footer-background) calc(100% - 2rem));
+    border-radius: 0 10px 10px 0;
 }
 
 .table-wrapper::-webkit-scrollbar-track {
     margin-top: 50px;
+    margin-bottom: 2rem;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
@@ -301,12 +303,12 @@ label.Mui-focused {
 
 .custom-table th,
 .custom-table td {
-    padding: 5px 10px;
+    padding: 7px 14px;
     font-size: 1.25rem;
 }
 
 .custom-table th {
-    background: var(--table-header-background);
+    background: var(--table-header-footer-background);
     height: 50px;
     position: sticky;
     top: 0;
@@ -318,20 +320,17 @@ label.Mui-focused {
 
 .custom-table th > div > .MuiTextField-root {
     width: 100%;
-    background: rgb(var(--bs-dark-rgb));
 }
 
+.custom-table th > div .Mui-focused > fieldset,
 .custom-table th > div > .MuiTextField-root > .MuiOutlinedInput-root:hover > fieldset {
     border: none;
 }
 
 .custom-table th > div > .MuiTextField-root input {
+    background: #333;
     padding: 8px;
     height: 1rem;
-}
-
-.custom-table th > div .Mui-focused > fieldset {
-    border: none;
 }
 
 .custom-table th:last-child {
@@ -362,12 +361,29 @@ label.Mui-focused {
     min-width: 250px;
 }
 
+.custom-table-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    background: var(--table-header-footer-background);
+    font-style: italic;
+}
+
 /* -DIALOG--------------------- */
 
+.modal-header {
+    background: var(--primary);
+    border-radius: 10px 10px 0 0;
+}
+
 .modal-content {
-    background: var(--background-gradient-dark);
-    border-radius: 15px;
-    color: var(--text-color);
+    background: var(--modal-background);
+    border-radius: 10px;
 }
 
 .modal-footer, .modal-header {

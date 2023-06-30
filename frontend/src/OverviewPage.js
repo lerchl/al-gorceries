@@ -2,10 +2,14 @@ import { React, createContext, useEffect, useState } from "react";
 import { getEntities } from "./ApiUtils";
 import { TableContent } from "./TableContent";
 import { TableHead } from "./TableHead";
+import { useTranslation } from "react-i18next";
 
 export const TableContentContext = createContext();
 
 export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyComponent, addDialog, openAddDialogButtonHover, editDialog}) => {
+
+    const { t } = useTranslation();
+
     const [entities, setEntities] = useState([]);
     const [filteredAndSorted, setFilteredAndSorted] = useState([]);
 
@@ -38,6 +42,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                         </TableContentContext.Provider>
                     </tbody>
                 </table>
+                <div className="custom-table-footer">{ entities.length } {t("base.elements")}</div>
             </div>
         </div>
     );

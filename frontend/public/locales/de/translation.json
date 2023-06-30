@@ -26,7 +26,8 @@
             "save": "Speichern",
             "search": "Suchen"
         },
-        "pleaseSelect": "Bitte auswählen"
+        "pleaseSelect": "Bitte auswählen",
+        "elements": "Element(e)"
     },
     "dish": {
         "attribute": {
