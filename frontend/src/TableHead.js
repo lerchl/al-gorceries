@@ -37,7 +37,7 @@ export const TableHead = ({columns, openAddDialogButtonTitle, addDialog, entitie
                         <th key={column}>
                             <div>
                                 <span>{t(column)}</span>
-                                { column === "name" ? <TextField onChange={event => filter(event, column)} placeholder="Filter..." /> : <></> }
+                                { column === "name" ? <TextField onChange={event => filter(event, column)} placeholder={t("base.action.search")} className="ml-2" /> : <></> }
                             </div>
                         </th>
                     );

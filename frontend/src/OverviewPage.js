@@ -1,5 +1,4 @@
 import { React, createContext, useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
 import { getEntities } from "./ApiUtils";
 import { TableContent } from "./TableContent";
 import { TableHead } from "./TableHead";
@@ -21,9 +20,9 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
 
     return (
         <div className="content">
-            <div className="widget widget-pink-1">
-                <h1>{headline}</h1>
-                <Table className="custom-table">
+            <h1>{headline}</h1>
+            <div className="table-wrapper">
+                <table className="custom-table">
                     <thead className="position-sticky">
                         <TableHead columns={columns}
                                     openAddDialogButtonTitle={openAddDialogButtonHover}
@@ -38,7 +37,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                             <TableContent entities={filteredAndSorted} entityComponent={entitiyComponent} />
                         </TableContentContext.Provider>
                     </tbody>
-                </Table>
+                </table>
             </div>
         </div>
     );

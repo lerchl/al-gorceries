@@ -16,12 +16,15 @@
             "add": "Hinzufügen",
             "close": "Schließen",
             "create": "Erstellen",
+            "delete": "Löschen",
+            "edit": "Bearbeiten",
             "join": "Beitreten",
             "logout": "Ausloggen",
             "open": "Öffnen",
             "register": "Registrieren",
             "reject": "Ablehnen",
-            "save": "Speichern"
+            "save": "Speichern",
+            "search": "Suchen"
         },
         "pleaseSelect": "Bitte auswählen"
     },
