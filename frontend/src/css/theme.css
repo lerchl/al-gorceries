@@ -363,7 +363,8 @@ label.Mui-focused {
 
 .custom-table-footer {
     position: sticky;
-    bottom: 0;
+    bottom: -1px; /* -1px because otherwise you would be */
+                  /* able to the table body scroll past  */
     left: 0;
     right: 0;
     display: flex;
