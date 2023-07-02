@@ -20,11 +20,11 @@
     --dark: #222;
 
     /* table */
-    --table-header-footer-background: var(--dark);
-    --table-background: #111;
-    --table-scrollbar-background: #151515;
-    --table-scrollbar-thumb: #333;
-    --table-scrollbar-thumb-hover: #555;
+    --table-header-footer-background: var(--primary);
+    --table-background: #141821;
+    --table-scrollbar-background: var(--table-background);
+    --table-scrollbar-thumb: #222;
+    --table-scrollbar-thumb-hover: #444;
     --table-tablerow-background: #333;
 
     /* modal */
