@@ -42,7 +42,7 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
                         </TableContentContext.Provider>
                     </tbody>
                 </table>
-                <div className="custom-table-footer">{ entities.length } {t("base.elements")}</div>
+                <div className="custom-table-footer">{ filteredAndSorted.length } {t("base.elements")}</div>
             </div>
         </div>
     );
