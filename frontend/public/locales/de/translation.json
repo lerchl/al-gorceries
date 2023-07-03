@@ -93,8 +93,9 @@
         "name": "Haushalt",
         "newJoinRequest": "Neue Beitrittsanfrage",
         "noOptions": "Keine Haushalte vorhanden",
+        "noOpenJoinRequests": "Keine Beitrittsanfragen vorhanden",
         "openJoinRequest": "Offene Beitrittsanfrage",
-        "openJoinRequests": "Offene Beitrittsanfragen"
+        "openJoinRequests": "Beitrittsanfragen"
     },
     "ingridient": {
         "headline": "Zutaten",
@@ -131,7 +132,7 @@
                 "title": "Saison bearbeiten"
             }
         },
-        "headline": "Saison",
+        "headline": "Saisons",
         "noOptions": "Keine Saisons vorhanden"
     },
     "user": {

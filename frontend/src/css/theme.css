@@ -19,9 +19,12 @@
 
     --dark: #222;
 
+    /* widget */
+    --widget-background: #141821;
+
     /* table */
     --table-header-footer-background: var(--primary);
-    --table-background: #141821;
+    --table-background: var(--widget-background);
     --table-scrollbar-background: var(--table-background);
     --table-scrollbar-thumb: #222;
     --table-scrollbar-thumb-hover: #444;
@@ -430,17 +433,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .widget {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 25px;
-    padding-right: 25px;
-
-    border-radius: 10px;
-
     margin-bottom: 25px;
+}
 
-    background: rgb(0,125,161);
-    background: var(--primary-gradient);
+.widget > .container,
+.widget > .container-fluid {
+    background: var(--widget-background);
+    padding: 10px 25px 10px 25px;
+    border-radius: 10px;
 }
 
 .overlay {
@@ -480,6 +480,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .bold {
     font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .half-width {
