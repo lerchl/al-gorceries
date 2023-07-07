@@ -26,8 +26,9 @@
             "save": "Speichern",
             "search": "Suchen"
         },
-        "pleaseSelect": "Bitte auswählen",
-        "elements": "Element(e)"
+        "elements": "Element(e)",
+        "minutes": "Minuten",
+        "pleaseSelect": "Bitte auswählen"
     },
     "dish": {
         "attribute": {
@@ -39,6 +40,9 @@
             "prepTime": "Zubereitungszeit",
             "cost": "Kosten",
             "seasons": "Saisons"
+        },
+        "details": {
+            "headline": "Gericht"
         },
         "dialog": {
             "add": {
@@ -73,6 +77,11 @@
                 }
             },
             "empty": "Noch keine Schritte hinzugefügt..."
+        },
+        "widget": {
+            "info": {
+                "headline": "Informationen"
+            }
         }
     },
     "household": {

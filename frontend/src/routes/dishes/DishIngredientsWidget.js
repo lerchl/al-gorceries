@@ -4,17 +4,17 @@ import { DISH_INGREDIENTS, getEntities, getEntitiesWithParam, INGREDIENTS, MEASU
 import { DishIngredientDialog } from "./DishIngridientDialog";
 import { DishIngridientsContainer } from "./DishIngridientsContainer";
 
-export const DishIngridients = ({ dishId }) => {
+export const DishIngredientsWidget = ({ dishId }) => {
 
-    const [dishIngridients, setDishIngridients] = useState([]);
-    const [measurements, setMeasurements] = useState([]);
-    const [ingridients, setIngridients] = useState([]);
+    const [dishIngredients, setDishIngredients] = useState([]);
+    const [unitsOfMeasurement, setUnitsOfMeasurement] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
 
     const [showAddDialog, setShowAddDialog] = useState(false);
 
-    useEffect(() => getEntitiesWithParam(DISH_INGREDIENTS, setDishIngridients, dishId), []);
-    useEffect(() => getEntities(MEASUREMENTS, setMeasurements), []);
-    useEffect(() => getEntities(INGREDIENTS, setIngridients), []);
+    useEffect(() => getEntitiesWithParam(DISH_INGREDIENTS, setDishIngredients, dishId), [dishId]);
+    useEffect(() => getEntities(MEASUREMENTS, setUnitsOfMeasurement), []);
+    useEffect(() => getEntities(INGREDIENTS, setIngredients), []);
 
     return (
         <>
@@ -24,15 +24,15 @@ export const DishIngridients = ({ dishId }) => {
                     <PlusLg color="white" size={30} />
                 </button>
             </div>
-            <DishIngridientsContainer dishId={dishId} dishIngridients={dishIngridients}
-                    setDishIngridients={setDishIngridients}
-                    ingridients={ingridients} measurements={measurements} />
+            <DishIngridientsContainer dishId={dishId} dishIngridients={dishIngredients}
+                    setDishIngridients={setDishIngredients}
+                    ingridients={ingredients} measurements={unitsOfMeasurement} />
             <DishIngredientDialog show={showAddDialog}
                     close={() => setShowAddDialog(false)}
                     dishId={dishId}
-                    setDishIngredients={setDishIngridients}
-                    measurements={measurements}
-                    ingredients={ingridients} />
+                    setDishIngredients={setDishIngredients}
+                    measurements={unitsOfMeasurement}
+                    ingredients={ingredients} />
         </>
     );
 }

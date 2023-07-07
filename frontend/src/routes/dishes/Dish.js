@@ -2,9 +2,9 @@ import { React, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { DISHES, getEntity } from "../../ApiUtils";
-import Menubar from "../../Menubar";
-import { DishInfos } from "./DishInfos";
-import { DishIngridients } from './DishIngridients';
+import { DishInfoWidget } from "./DishInfoWidget";
+import { DishIngredientsWidget } from './DishIngredientsWidget';
+import { t } from "i18next";
 
 export const Dish = () => {
 
@@ -15,33 +15,22 @@ export const Dish = () => {
     useEffect(() => getEntity(DISHES, setDish, id), []);
 
     return (
-        <>
-            <Menubar />
-            <div className="content">
+        <div className="content">
+            <h1 className="mb-4">{ t("dish.details.headline") }: { dish?.name } ({ dish?.servingAmount} { dish?.servingUnitOfMeasurement.name })</h1>
 
-                {/* Headline */}
-                <h1 className="mb-4">{dish?.name} ({ dish?.servingAmount} { dish?.servingUnitOfMeasurement.name })</h1>
-
-                <Container fluid="lg">
-                    <Row>
-                        <Col lg={6}>
-                            {/* Base data */}
-                            <div className="widget widget-pink-2">
-                                <DishInfos dish={dish} />
-                            </div>
-                            {/* <div className="widget widget-pink-2">
-                                <Steps dishId={id} />
-                            </div> */}
-                        </Col>
-
-                        <Col lg={6}>
-                            <div className="widget widget-pink-2">
-                                <DishIngridients dishId={id} />
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-        </>
+            <Container>
+                <Row>
+                    <Col md="12" lg="6">
+                        <DishInfoWidget dish={dish} />
+                        {/* <div className="widget widget-pink-2">
+                            <Steps dishId={id} />
+                        </div> */}
+                    </Col>
+                    <Col md="12" lg="6">
+                        <DishIngredientsWidget dishId={id} />
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 }
