@@ -13,7 +13,7 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
     const [unitOfMeasurement, setMeasurement] = useState(dishIngredient?.unitOfMeasurement || null);
     const [ingredient, setIngridient] = useState(dishIngredient?.ingredient || null);
 
-    const title = dishIngredient ? t("dish.ingridient.dialog.edit.title") : t("dish.ingridient.dialog.add.title");
+    const title = dishIngredient ? t("dish.ingredients.dialog.edit.title") : t("dish.ingredients.dialog.add.title");
 
     const closeDialog = () => {
         if (!dishIngredient) {
