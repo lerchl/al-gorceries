@@ -63,10 +63,10 @@ const WithHousehold = ({ household, setHousehold }) => {
             <h1>{t("household.headline")}: { household.name }</h1>
             <Container fluid>
                 <Row>
-                    <Col lg="6" xl="12">
+                    <Col lg="6">
                         <HouseholdMembersWidget members={household.users} />
                     </Col>
-                    <Col lg="6" xl="12">
+                    <Col lg="6">
                         <OpenJoinRequestsWidget />
                     </Col>
                 </Row>
@@ -81,10 +81,10 @@ const WithoutHousehold = ({ fetchHousehold }) => {
     return (
         <Container fluid>
             <Row>
-                <Col lg="6" xl="12">
+                <Col lg="6">
                     <CreateHouseholdWidget fetchHousehold={fetchHousehold} />
                 </Col>
-                <Col lg="6" xl="12">
+                <Col lg="6">
                     <JoinHouseholdWidget />
                 </Col>
             </Row>
