@@ -12,10 +12,10 @@ export const DishIngredient = ({ dishIngridient, setDishIngridients, dishId, las
     return (
         <>
             <Row>
-                <Col xs={1}>{dishIngridient.amount}</Col>
-                <Col xs={4}>{dishIngridient.unitOfMeasurement.name}</Col>
-                <Col xs={4}>{dishIngridient.ingredient.name}</Col>
-                <Col xs={3}>
+                <Col xs="2">{dishIngridient.amount}</Col>
+                <Col xs="4" className="ellipsis">{dishIngridient.unitOfMeasurement.name}</Col>
+                <Col xs="4" className="ellipsis">{dishIngridient.ingredient.name}</Col>
+                <Col xs="2" className="d-flex justify-content-end">
                     <button className="icon-button" onClick={() => setShowEditDialog(true)}><PencilFill color="white" /></button>
                     <button className="icon-button ml-2" onClick={() => deleteEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient.id, setDishIngridients, dishId)}><TrashFill color="white" /></button>
                 </Col>
