@@ -1,5 +1,7 @@
 package com.algorceries.backend.model;
 
+import static jakarta.persistence.CascadeType.REMOVE;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -47,7 +49,7 @@ public class Dish implements HouseholdScopedEntity {
     @Column(name = "serving_amount")
     private double servingAmount;
 
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "dish", cascade = REMOVE)
     @JsonManagedReference
     private Set<DishIngredient> dishIngredients;
 
