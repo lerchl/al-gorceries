@@ -14,6 +14,7 @@ import { Registration } from './routes/registration/Registration';
 import { Seasons } from './routes/seasons/Seasons';
 import { Guard } from "./security/Guard";
 import { Household } from './routes/household/Household';
+import { Footer } from './Footer';
 
 ReactDOM.render(
     <Suspense fallback="Loading...">
@@ -34,6 +35,7 @@ ReactDOM.render(
                     <Route path="household" element={<Guard><Household /></Guard>} />
                 </Routes>
             </BrowserRouter>
+            <Footer />
         </LocalizationProvider>
     </Suspense>,
     document.getElementById('root')

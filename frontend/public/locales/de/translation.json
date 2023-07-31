@@ -86,6 +86,9 @@
             }
         }
     },
+    "footer": {
+        "issueOrFeedback": "Fehler oder Feedback?"
+    },
     "household": {
         "attribute": {
             "name": "Name"
