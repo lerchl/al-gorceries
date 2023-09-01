@@ -473,6 +473,10 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
 }
 
+.footer p {
+    text-align: center;
+}
+
 .space-between, .right, .center {
     display: flex;
 }
