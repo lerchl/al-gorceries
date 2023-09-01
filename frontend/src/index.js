@@ -17,7 +17,7 @@ import { Household } from './routes/household/Household';
 import { Footer } from './Footer';
 
 ReactDOM.render(
-    <Suspense fallback="Loading...">
+    <Suspense fallback="">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Menubar />
             <BrowserRouter>
