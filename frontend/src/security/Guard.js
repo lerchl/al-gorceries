@@ -1,7 +1,7 @@
-import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import { API_URL } from "../ApiUtils";
+import { FetchingIndicator } from "../FetchingIndicator";
 import { LoginDialog } from "../routes/login/LoginDialog";
 
 export const Guard = ({ children }) => {
@@ -22,7 +22,7 @@ export const Guard = ({ children }) => {
 
     return (
         <>
-            { loading ? <div className="loading-container"><CircularProgress /></div> : <></> }
+            { loading ? <FetchingIndicator /> : <></> }
             { loggedIn ? children : <></> }
             <LoginDialog show={show} close={() => setShow(false)} setLoggedIn={setLoggedIn} />
         </>

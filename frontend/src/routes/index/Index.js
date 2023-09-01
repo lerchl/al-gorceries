@@ -1,4 +1,4 @@
-import { Divider } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
@@ -11,29 +11,39 @@ import { DishesOfDishList } from "./DishesOfDishList";
 import { GenerateDishListButton } from "./GenerateDishListButton";
 import { ShoppingList } from "./ShoppingList";
 
-async function getDishList(date, setDishList, setDishListDishes) {
-    const res = await axios.get(API_URL + "/" + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
-    if (res.status === 204) {
+async function getDishList(date, setDishList, setDishListDishes, setFetching) {
+    setFetching(true);
+
+    try {
+        const res = await axios.get(API_URL + "/" + DISH_LIST + `/${date.getFullYear()}/${getWeekNumber(date)}`);
+        if (res.status === 204) {
+            setDishList();
+        } else {
+            setDishList(res.data);
+            setDishListDishes(res.data.dishListDishes);
+        }
+    } catch (_e) {
+        // Workaround because the backend returns 403
+        // if the dish list does not exist
         setDishList();
-    } else {
-        setDishList(res.data);
-        setDishListDishes(res.data.dishListDishes);
     }
+
+    setFetching(false);
 }
 
 export const Index = () => {
 
+    const [fetching, setFetching] = useState(false);
     const [viewDishSelection, setViewDishSelection] = useState(true);
 
     const [date, setDate] = useState(new Date());
     const [dishList, setDishList] = useState();
     const [dishListDishes, setDishListDishes] = useState([]);
 
-    useEffect(() => getDishList(date, setDishList, setDishListDishes), []);
+    useEffect(() => getDishList(date, setDishList, setDishListDishes, setFetching), [date]);
 
     function changeWeek(weeks) {
         setDate(new Date(date.setDate(date.getDate() + 7 * weeks)));
-        getDishList(date, setDishList);
         setViewDishSelection(true);
     }
 
@@ -49,17 +59,15 @@ export const Index = () => {
 
     function content() {
         if (viewDishSelection) {
-            if (dishList) {
-                return <DishesOfDishList dishListDishes={dishListDishes} setDishListDishes={setDishListDishes} />;
+            if (fetching || dishList) {
+                return <DishesOfDishList fetching={fetching} dishListDishes={dishListDishes} setDishListDishes={setDishListDishes} />;
             } else {
                 return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
             }
+        } else if (dishListDishes.every(dld => dld.amount === 0)) {
+            return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
         } else {
-            if (dishListDishes.length === 0) {
-                return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
-            } else {
-                return <ShoppingList dishListDishes={dishListDishes.filter(dld => dld.amount > 0)} />;
-            }
+            return <ShoppingList dishListDishes={dishListDishes.filter(dld => dld.amount > 0)} />;
         }
     }
 
