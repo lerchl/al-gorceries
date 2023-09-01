@@ -6,6 +6,27 @@
     margin-right: 10px;
 }
 
+.dish-list-wrapper {
+                  /* menubar          footer headline etc. */
+    height: calc(95vh - 80px - 34px - 20px - 40px);
+    overflow: auto;
+}
+
+@media only screen and (max-width: 992px) {
+    .dish-list-wrapper {
+                      /* menubar          footer headline etc. */
+                      /*                         (buttons in next line) */
+        height: calc(95vh - 80px - 34px - 20px - 80px);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .dish-list-wrapper {
+                      /* menubar          footer headline etc. */
+                      /*                         (buttons in next line) */
+        height: calc(95vh - 80px - 34px - 40px - 80px);
+    }
+}
 
 .dish-list-dish .display, .dish-list-dish .buttons {
     display: flex;
