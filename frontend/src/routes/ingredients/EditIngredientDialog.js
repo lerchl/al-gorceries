@@ -7,7 +7,7 @@ import { EditDialogContext } from "../../Entity";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 
-export const EditIngridientDialog = () => {
+export const EditIngredientDialog = () => {
     const {entityApiEndpoint, setEntities} = useContext(TableContentContext);
     const entity = useContext(EntityContext);
     const {show, close} = useContext(EditDialogContext);

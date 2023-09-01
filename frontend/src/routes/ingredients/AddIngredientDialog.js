@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { createEntityAndGetEntities } from "../../ApiUtils";
 import { AddEntityDialogContext } from "../../TableHead";
 
-export const AddIngridientDialog = () => {
+export const AddIngredientDialog = () => {
     const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
 
     const [name, setName] = useState("");
