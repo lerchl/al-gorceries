@@ -5,11 +5,11 @@ import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { CurrencyEuro } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import { updateEntityAndGetEntities } from "../../ApiUtils";
-import { EditDialogContext } from "../../Entity";
+import { EditDialogContext, compareEntities } from "../../Entity";
 import { TableContentContext } from "../../OverviewPage";
 import { EntityContext } from "../../TableContent";
 
-export const EditDishDialog = ({ seasonOptions }) => {
+export const EditDishDialog = ({ unitOfMeasurementOptions, seasonOptions }) => {
 
     const { t } = useTranslation();
 
@@ -18,6 +18,8 @@ export const EditDishDialog = ({ seasonOptions }) => {
     const {show, close} = useContext(EditDialogContext);
 
     const [name, setName] = useState(entity.name);
+    const [servingAmount, setServingAmount] = useState(entity.servingAmount);
+    const [servingUnit, setServingUnit] = useState(entity.servingUnitOfMeasurement);
     const [source, setSource] = useState(entity.source);
     const [sourceInformation, setSourceInformation] = useState(entity.sourceInformation);
     const [time, setTime] = useState(entity.time);
@@ -36,6 +38,8 @@ export const EditDishDialog = ({ seasonOptions }) => {
 
     const saveEntitiy = () => {
         entity.name = name;
+        entity.servingAmount = servingAmount;
+        entity.servingUnitOfMeasurement = servingUnit;
         entity.source = source;
         entity.sourceInformation = sourceInformation;
         entity.time = time;
@@ -53,6 +57,21 @@ export const EditDishDialog = ({ seasonOptions }) => {
             <ModalBody>
                 <div className="row dialog-row">
                     <TextField value={name} label={t("dish.attribute.name")} onChange={e => setName(e.target.value)} />
+                </div>
+                <div className="row dialog-row">
+                    <TextField value={servingAmount} label={t("dish.attribute.servingAmount")} onChange={e => setServingAmount(e.target.value)} type="number" className="number-input" sx={{width: "47.5%"}} />
+                    <Autocomplete options={unitOfMeasurementOptions}
+                                  getOptionLabel={m => m?.name}
+                                  value={servingUnit}
+                                  isOptionEqualToValue={compareEntities}
+                                  onChange={(_event, value) => setServingUnit(value)}
+                                  disablePortal
+                                  renderInput={params => <TextField {...params} label={t("dish.attribute.servingUnit")} />}
+                                  openText={t("base.action.open")}
+                                  closeText={t("base.action.close")}
+                                  noOptionsText={t("measurement.noOptions")}
+                                  clearIcon={<></>}
+                                  sx={{width: "47.5%"}} />
                 </div>
                 <div className="row dialog-row">
                     <TextField value={source} label={t("dish.attribute.source")} onChange={e => setSource(e.target.value)} select sx={{width: "47.5%"}}>

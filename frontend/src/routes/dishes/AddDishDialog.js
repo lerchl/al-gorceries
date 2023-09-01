@@ -19,7 +19,7 @@ export const AddDishDialog = () => {
 
     const [name, setName] = useState("");
     const [servingAmount, setServingAmount] = useState(1);
-    const [servingUnit, setServingUnit] = useState(null);
+    const [servingUnitOfMeasurement, setServingUnitOfMeasurement] = useState(null);
     const [source, setSource] = useState("");
     const [sourceInformation, setSourceInformation] = useState("");
     const [time, setTime] = useState("");
@@ -38,7 +38,7 @@ export const AddDishDialog = () => {
     const closeDialog = () => {
         setName("");
         setServingAmount(1);
-        setServingUnit(null);
+        setServingUnitOfMeasurement(null);
         setSource("");
         setSourceInformation("");
         setTime(0);
@@ -52,7 +52,7 @@ export const AddDishDialog = () => {
         const dish = {
             "name": name,
             "servingAmount": servingAmount,
-            "servingUnitOfMeasurement": servingUnit,
+            "servingUnitOfMeasurement": servingUnitOfMeasurement,
             "source": source,
             "sourceInformation": sourceInformation,
             "time": time,
@@ -80,9 +80,9 @@ export const AddDishDialog = () => {
                     <TextField value={servingAmount} label={t("dish.attribute.servingAmount")} onChange={event => onChange(event, setServingAmount)} type="number" className="number-input" sx={{width: "47.5%"}} />
                     <Autocomplete options={unitOfMeasurementOptions}
                                   getOptionLabel={m => m?.name}
-                                  value={servingUnit}
+                                  value={servingUnitOfMeasurement}
                                   isOptionEqualToValue={compareEntities}
-                                  onChange={(_event, value) => setServingUnit(value)}
+                                  onChange={(_event, value) => setServingUnitOfMeasurement(value)}
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("dish.attribute.servingUnit")} />}
                                   openText={t("base.action.open")}
