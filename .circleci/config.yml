@@ -11,11 +11,13 @@ jobs:
           name: Prepare Maven
           command: |
             cd backend
+            ls
             mvn -v
 
       - run:
           name: Lint
           command: |
+            ls
             mvn checkstyle:checkstyle
 
       - run:
