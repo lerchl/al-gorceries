@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Prepare Maven
           command: |
-            cd ~/backend
+            cd backend
             mvn -v
 
       - run:
