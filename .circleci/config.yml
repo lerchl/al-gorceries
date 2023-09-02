@@ -8,6 +8,12 @@ jobs:
       - checkout
 
       - run:
+          name: Prepare Maven
+          command: |
+            cd ~/backend
+            mvn -v
+
+      - run:
           name: Lint
           command: |
             mvn checkstyle:checkstyle
