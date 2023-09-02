@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   lint_and_test:
     docker:
-      - image: circleci/openjdk:17-jdk
+      - image: cimg/openjdk:17.0.8
     steps:
       - checkout
 
