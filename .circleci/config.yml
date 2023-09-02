@@ -8,21 +8,15 @@ jobs:
       - checkout
 
       - run:
-          name: Prepare Maven
-          command: |
-            cd backend
-            ls
-            mvn -v
-
-      - run:
           name: Lint
           command: |
-            ls
+            cd backend
             mvn checkstyle:checkstyle
 
       - run:
           name: Test
           command: |
+            cd backend
             mvn clean test
 
 workflows:
