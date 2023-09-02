@@ -19,6 +19,15 @@ jobs:
             cd backend
             mvn clean test
 
+      - store_test_results:
+          path: backend/target/surefire-reports
+
+      - store_artifacts:
+          path: backend/target/my-reports
+
+      - store_artifacts:
+          path: backend/target/site
+
 workflows:
   backend:
     jobs:
