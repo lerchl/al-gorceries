@@ -1,17 +1,18 @@
-import { TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { React, useContext, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { createEntityAndGetEntities } from "../../ApiUtils";
 import { AddEntityDialogContext } from "../../TableHead";
 
 export const AddMeasurementDialog = () => {
+	
+	const { t } = useTranslation();
+
     const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
 
     const [name, setName] = useState("");
-
-    const onChangeName = event => {
-        setName(event.target.value);
-    }
+	const [countable, setCountable] = useState(true);
 
     const closeDialog = () => {
         setName("");
@@ -19,7 +20,7 @@ export const AddMeasurementDialog = () => {
     }
 
     const saveEntity = () => {
-        createEntityAndGetEntities(entityApiEndpoint, { "name": name }, setEntities);
+        createEntityAndGetEntities(entityApiEndpoint, { "name": name, "countable": countable }, setEntities);
         closeDialog();
     }
 
@@ -33,8 +34,11 @@ export const AddMeasurementDialog = () => {
             </Modal.Header>
             <ModalBody>
                 <div className="row dialog-row">
-                    <TextField value={name} label="Bezeichnung" onChange={onChangeName} />
+                    <TextField value={name} label={ t("measurement.attribute.name") } onChange={ event => setName(event.target.value) } />
                 </div>
+				<div className="row dialog-row">
+					<FormControlLabel label={ t("measurement.attribute.countable") } control={ <Checkbox checked={countable} onChange={ event => setCountable(event.target.checked) } />} /> 
+				</div>
             </ModalBody>
             <ModalFooter>
                 <button onClick={saveEntity} className="custom-button primary">Hinzufügen</button>

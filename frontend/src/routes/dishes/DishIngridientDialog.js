@@ -15,24 +15,40 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
 
     const title = dishIngredient ? t("dish.ingredients.dialog.edit.title") : t("dish.ingredients.dialog.add.title");
 
+	const updateUnitOfMeasurement = unitOfMeasurement => {
+		setMeasurement(unitOfMeasurement);
+
+		if (!unitOfMeasurement.countable) {
+			setFactor("");			
+		}
+	}
+
     const closeDialog = () => {
         if (!dishIngredient) {
             setFactor("");
             setMeasurement(null);
             setIngridient(null);
-        }
+        } else {
+			setFactor(dishIngredient.amount);
+			setMeasurement(dishIngredient.unitOfMeasurement);
+			setIngridient(dishIngredient.ingredient);
+		}
 
         close();
     }
 
     const addDishIngridient = () => {
-        const data = {
+        let data = {
             "id": dishIngredient?.id,
-            "amount": amount,
             "dishId": dishId,
             "ingredientId": ingredient.id,
             "unitOfMeasurementId": unitOfMeasurement.id
         }
+		
+		if (unitOfMeasurement?.countable) {
+			data["amount"] = amount;
+		}
+
         createEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, data, setDishIngredients, dishId);
         closeDialog();
     }
@@ -43,21 +59,22 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <ModalBody>
-                <div className="row dialog-row">
-                    <TextField label="Faktor"
-                               value={amount}
-                               onChange={e => setFactor(e.target.value)}
-                               type="number"
-                               className="number-input"
-                               inputProps={{ inputMode: "numeric" }}
-                               autoComplete="off" />
-                </div>
+				<div className="row dialog-row">
+					<TextField label="Faktor"
+							   value={amount}
+							   onChange={e => setFactor(e.target.value)}
+							   type="number"
+							   className="number-input"
+							   inputProps={{ inputMode: "numeric" }}
+							   autoComplete="off"
+							   disabled={ !unitOfMeasurement?.countable } />
+				</div>
                 <div className="row dialog-row">
                     <Autocomplete options={measurements}
                                   getOptionLabel={m => m?.name}
                                   value={unitOfMeasurement}
                                   isOptionEqualToValue={compareEntities}
-                                  onChange={(_event, value) => setMeasurement(value)}
+                                  onChange={(_event, value) => updateUnitOfMeasurement(value) }
                                   disablePortal
                                   renderInput={params => <TextField {...params} label={t("measurement.name")} />}
                                   openText={t("base.action.open")}

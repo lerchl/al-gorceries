@@ -26,6 +26,9 @@ public class UnitOfMeasurement implements HouseholdScopedEntity {
     @Column(name = "name")
     private String name;
 
+	@Column(name = "countable")
+	private boolean countable;
+
     @ManyToOne
     @JoinColumn(name = "household_id")
     @JsonIgnore
@@ -47,6 +50,14 @@ public class UnitOfMeasurement implements HouseholdScopedEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+	public boolean isCountable() {
+	    return countable;
+	}
+
+	public void setCountable(boolean countable) {
+	    this.countable = countable;
+	}
 
     @Override
     public Household getHousehold() {

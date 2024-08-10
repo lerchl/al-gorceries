@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.algorceries.backend.model.DishIngredient;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 /**
  * DTO for a {@link DishIngredient dish ingredient}.
@@ -22,8 +21,7 @@ public class DishIngredientDTO {
 	@NotNull
     private UUID unitOfMeasurementId;
 
-	@Positive
-    private double amount;
+    private Double amount;
 
     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
@@ -61,11 +59,11 @@ public class DishIngredientDTO {
 		this.unitOfMeasurementId = unitOfMeasurementId;
 	}
 
-	public double getAmount() {
-		return amount;
+	public Double getAmount() {
+	    return amount;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setAmount(Double amount) {
+	    this.amount = amount;
 	}
 }

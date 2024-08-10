@@ -36,7 +36,7 @@ public class DishIngredient {
     private UnitOfMeasurement unitOfMeasurement;
 
     @Column(name = "amount")
-    private double amount;
+    private Double amount;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
@@ -46,7 +46,7 @@ public class DishIngredient {
         // empty constructor for jpa
     }
 
-    public DishIngredient(UUID id, double amount) {
+    public DishIngredient(UUID id, Double amount) {
         this.id = id;
         this.amount = amount;
     }
@@ -83,11 +83,11 @@ public class DishIngredient {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

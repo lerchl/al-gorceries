@@ -30,7 +30,6 @@ export const AddDishDialog = () => {
     useEffect(() => getEntities(MEASUREMENTS, setUnitOfMeasurementOptions), []);
     useEffect(() => getEntities(SEASONS, setSeasonOptions), []);
 
-
     const onChange = (event, set) => {
         set(event.target.value);
     }

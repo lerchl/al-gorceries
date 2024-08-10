@@ -11,7 +11,7 @@ export const ShoppingListItem = ({ item }) => {
                     {
                         item.unitsOfMeasurement.map(m => (
                             <Fragment key={m.unitOfMeasurement.id}>
-                                {item.unitsOfMeasurement.indexOf(m) > 0 ? ", " + m.amount : m.amount} {m.unitOfMeasurement.name}
+                                {item.unitsOfMeasurement.indexOf(m) > 0 && ", "} {m.unitOfMeasurement.countable && m.amount} {m.unitOfMeasurement.name}
                             </Fragment>
                         ))
                     }

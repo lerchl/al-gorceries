@@ -185,6 +185,16 @@ label.Mui-focused {
     text-align: right;
 }
 
+/* -MUI CHECKBOX--------------- */
+
+.MuiCheckbox-root > svg {
+	color: var(--dark);
+}
+
+.MuiCheckbox-root.Mui-checked > svg {
+	color: var(--primary);
+}
+
 /* -MUI AUTOCOMPLETE----------- */
 
 .MuiAutocomplete-listbox {

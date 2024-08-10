@@ -6,6 +6,7 @@
     "begin": "Anfang",
     "end": "Ende",
     "seasons": "Saisons",
+	"countable": "Zählbar",
 
     "application": {
         "name": "Al Gorceries"
@@ -119,7 +120,19 @@
     "measurement": {
         "headline": "Maßeinheiten",
         "name": "Maßeinheit",
-        "noOptions": "Keine Maßeinheiten vorhanden"
+        "noOptions": "Keine Maßeinheiten vorhanden",
+		"attribute": {
+			"name": "Name",
+			"countable": "Zählbar"
+		},
+		"dialog": {
+			"add": {
+				"title": "Maßeinheit hinzufügen"
+			},
+			"edit": {
+				"title": "Maßeinheit bearbeiten"
+			}
+		}
     },
     "registration": {
         "attribute": {
