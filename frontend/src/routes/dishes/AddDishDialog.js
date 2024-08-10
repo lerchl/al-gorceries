@@ -24,7 +24,7 @@ export const AddDishDialog = () => {
     const [sourceInformation, setSourceInformation] = useState("");
     const [time, setTime] = useState("");
     const [cost, setCost] = useState("");
-    const [dishIngridients, setDishIngrdients] = useState([]);
+    const [dishIngredients, setDishIngrdients] = useState([]);
     const [seasons, setSeasons] = useState([]);
 
     useEffect(() => getEntities(MEASUREMENTS, setUnitOfMeasurementOptions), []);
@@ -56,7 +56,7 @@ export const AddDishDialog = () => {
             "sourceInformation": sourceInformation,
             "time": time,
             "cost": cost,
-            "dishIngridients": dishIngridients,
+            "dishIngredients": dishIngredients,
             "seasons": seasons
         }
 

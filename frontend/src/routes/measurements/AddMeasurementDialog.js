@@ -9,7 +9,7 @@ export const AddMeasurementDialog = () => {
 	
 	const { t } = useTranslation();
 
-    const {show, close, setEntities, entityApiEndpoint} = useContext(AddEntityDialogContext);
+    const { show, close, setEntities, entityApiEndpoint } = useContext(AddEntityDialogContext);
 
     const [name, setName] = useState("");
 	const [countable, setCountable] = useState(true);
@@ -37,12 +37,13 @@ export const AddMeasurementDialog = () => {
                     <TextField value={name} label={ t("measurement.attribute.name") } onChange={ event => setName(event.target.value) } />
                 </div>
 				<div className="row dialog-row">
-					<FormControlLabel label={ t("measurement.attribute.countable") } control={ <Checkbox checked={countable} onChange={ event => setCountable(event.target.checked) } />} /> 
+					<FormControlLabel label={ t("measurement.attribute.countable") }
+									  control={ <Checkbox checked={countable} onChange={ event => setCountable(event.target.checked) } />} /> 
 				</div>
             </ModalBody>
             <ModalFooter>
-                <button onClick={saveEntity} className="custom-button primary">Hinzufügen</button>
-                <button onClick={closeDialog} className="custom-button">Schließen</button>
+                <button onClick={saveEntity} className="custom-button primary">{ t("base.action.add") }</button>
+                <button onClick={closeDialog} className="custom-button">{ t("base.action.close") }</button>
             </ModalFooter>
         </Modal>
     );

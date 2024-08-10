@@ -26,6 +26,9 @@ public class Ingredient implements HouseholdScopedEntity {
     @Column(name = "name")
     private String name;
 
+	@Column(name = "pantry_staple")
+	private boolean pantryStaple;
+
     @ManyToOne
     @JoinColumn(name = "household_id")
     @JsonIgnore
@@ -47,6 +50,14 @@ public class Ingredient implements HouseholdScopedEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+	public boolean isPantryStaple() {
+	    return pantryStaple;
+	}
+
+	public void setPantryStaple(boolean pantryStaple) {
+	    this.pantryStaple = pantryStaple;
+	}
 
     @Override
     public Household getHousehold() {

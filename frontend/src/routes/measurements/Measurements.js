@@ -19,5 +19,5 @@ export const Measurements = () => {
                          entitiyComponent={<Entity getColumns={getColumns} />}
                          addDialog={<AddMeasurementDialog />}
                          openAddDialogButtonHover={ t("measurement.dialog.add.title") }
-                         editDialog={<EditMeasurementDialog />} />
+                         editDialog={<EditMeasurementDialog />} />;
 }

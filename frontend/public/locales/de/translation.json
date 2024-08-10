@@ -7,6 +7,7 @@
     "end": "Ende",
     "seasons": "Saisons",
 	"countable": "Zählbar",
+	"pantryStaple": "Immer daheim",
 
     "application": {
         "name": "Al Gorceries"
@@ -112,7 +113,16 @@
         "openJoinRequest": "Offene Beitrittsanfrage",
         "openJoinRequests": "Beitrittsanfragen"
     },
-    "ingridient": {
+    "ingredient": {
+		"attribute": {
+			"name": "Name",
+			"pantryStaple": "Immer daheim"
+		},
+		"dialog": {
+			"add": {
+				"title": "Zutat hinzufügen"
+			}
+		},
         "headline": "Zutaten",
         "name": "Zutat",
         "noOptions": "Keine Zutaten vorhanden"

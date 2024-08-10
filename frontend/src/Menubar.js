@@ -24,7 +24,7 @@ function Menubar() {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav.Link href="/"><CalendarWeek /> {t("dishList.headline")}</Nav.Link>
                 <Nav.Link href="/dishes"><Book /> {t("dish.headline")}</Nav.Link>
-                <Nav.Link href="/ingredients"><Basket3 /> {t("ingridient.headline")}</Nav.Link>
+                <Nav.Link href="/ingredients"><Basket3 /> {t("ingredient.headline")}</Nav.Link>
                 <Nav.Link href="/measurements"><Rulers /> {t("measurement.headline")}</Nav.Link>
                 <Nav.Link href="/seasons"><ThermometerHalf /> {t("season.headline")}</Nav.Link>
                 <Nav.Link href="/household"><House /> {t("household.headline")}</Nav.Link>

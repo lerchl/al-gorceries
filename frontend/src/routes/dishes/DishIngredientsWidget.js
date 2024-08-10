@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { PlusLg } from "react-bootstrap-icons";
 import { DISH_INGREDIENTS, getEntities, getEntitiesWithParam, INGREDIENTS, MEASUREMENTS } from "../../ApiUtils";
-import { DishIngredientDialog } from "./DishIngridientDialog";
+import { DishIngredientDialog } from "./DishIngredientDialog";
 import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { DishIngredient } from "./DishIngredient";
@@ -59,8 +59,8 @@ const EmptyMessage = () => {
 
 const Ingredients = ({ dishIngredients, setDishIngredients, ingredients, unitsOfMeasurement, dishId }) => {
     return (
-        dishIngredients.map((dishIngridient, i) => {
-            return <DishIngredient key={dishIngridient.id} dishIngridient={dishIngridient} setDishIngridients={setDishIngredients} dishId={dishId} last={i + 1 === dishIngredients.length} measurements={unitsOfMeasurement} ingridients={ingredients} />;
+        dishIngredients.map((dishIngredient, i) => {
+            return <DishIngredient key={dishIngredient.id} dishIngredient={dishIngredient} setDishIngredients={setDishIngredients} dishId={dishId} last={i + 1 === dishIngredients.length} measurements={unitsOfMeasurement} ingredients={ingredients} />;
         })
     );
 }

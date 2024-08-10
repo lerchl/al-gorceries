@@ -4,26 +4,26 @@ import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { DISH_INGREDIENTS, updateEntityAndGetEntitiesWithParam } from "../../ApiUtils";
 
-export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridients, dishIngridient, measurements, ingridients}) => {
+export const EditDishIngredientDialog = ({show, close, dishId, setDishIngredients, dishIngredient, measurements, ingredients}) => {
 
     const { t } = useTranslation();
 
-    const [amount, setAmount] = useState(dishIngridient.amount);
-    const [measurement, setMeasurement] = useState(dishIngridient.unitOfMeasurement);
-    const [ingridient, setIngridient] = useState(dishIngridient.ingredient);
+    const [amount, setAmount] = useState(dishIngredient.amount);
+    const [measurement, setMeasurement] = useState(dishIngredient.unitOfMeasurement);
+    const [ingredient, setIngredient] = useState(dishIngredient.ingredient);
 
     const closeDialog = () => {
-        setAmount(dishIngridient.factor);
-        setMeasurement(dishIngridient.measurement);
-        setIngridient(dishIngridient.ingridient);
+        setAmount(dishIngredient.factor);
+        setMeasurement(dishIngredient.measurement);
+        setIngredient(dishIngredient.ingredient);
         close();
     }
 
-    const saveDishIngridient = () => {
-        dishIngridient.factor = amount;
-        dishIngridient.measurement = measurement;
-        dishIngridient.ingridient = ingridient;
-        updateEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngridient, setDishIngridients, dishId);
+    const saveDishIngredient = () => {
+        dishIngredient.factor = amount;
+        dishIngredient.measurement = measurement;
+        dishIngredient.ingredient = ingredient;
+        updateEntityAndGetEntitiesWithParam(DISH_INGREDIENTS, dishIngredient, setDishIngredients, dishId);
         closeDialog();
     }
 
@@ -56,21 +56,21 @@ export const EditDishIngridientDialog = ({show, close, dishId, setDishIngridient
                                   clearIcon={<></>} />
                 </div>
                 <div className="row dialog-row">
-                    <Autocomplete value={ingridient}
-                                  options={ingridients}
+                    <Autocomplete value={ingredient}
+                                  options={ingredients}
                                   getOptionLabel={i => i.name}
-                                  onChange={(_event, value) => setIngridient(value)}
+                                  onChange={(_event, value) => setIngredient(value)}
                                   isOptionEqualToValue={(option, value) => option.id === value.id}
                                   disablePortal
-                                  renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
+                                  renderInput={params => <TextField {...params} label={t("ingredient.name")} />}
                                   openText={t("base.action.open")}
                                   closeText={t("base.action.close")}
-                                  noOptionsText={t("ingridient.noOptions")}
+                                  noOptionsText={t("ingredient.noOptions")}
                                   clearIcon={<></>} />
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" onClick={saveDishIngridient} className="custom-button primary">{t("base.action.save")}</button>
+                <button type="button" onClick={saveDishIngredient} className="custom-button primary">{t("base.action.save")}</button>
                 <button type="button" onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </ModalFooter>
         </Modal>

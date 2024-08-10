@@ -8,6 +8,11 @@ export const ShoppingList = ({ dishListDishes }) => {
 
         dishListDishes.forEach(dld => {
             dld.dish.dishIngredients.forEach(di => {
+				// pantry staples should not show up on the shopping list
+				if (di.ingredient.pantryStaple) {
+					return;
+				}
+
                 // calculate the needed amount of the ingredient for the selected amount of the dish
                 const amount = dld.amount * di.amount;
                 // find ingredient with same id in ingredients

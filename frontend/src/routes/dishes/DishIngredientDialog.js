@@ -11,7 +11,7 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
 
     const [amount, setFactor] = useState(dishIngredient?.amount || "");
     const [unitOfMeasurement, setMeasurement] = useState(dishIngredient?.unitOfMeasurement || null);
-    const [ingredient, setIngridient] = useState(dishIngredient?.ingredient || null);
+    const [ingredient, setIngredient] = useState(dishIngredient?.ingredient || null);
 
     const title = dishIngredient ? t("dish.ingredients.dialog.edit.title") : t("dish.ingredients.dialog.add.title");
 
@@ -27,17 +27,17 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
         if (!dishIngredient) {
             setFactor("");
             setMeasurement(null);
-            setIngridient(null);
+            setIngredient(null);
         } else {
 			setFactor(dishIngredient.amount);
 			setMeasurement(dishIngredient.unitOfMeasurement);
-			setIngridient(dishIngredient.ingredient);
+			setIngredient(dishIngredient.ingredient);
 		}
 
         close();
     }
 
-    const addDishIngridient = () => {
+    const addDishIngredient = () => {
         let data = {
             "id": dishIngredient?.id,
             "dishId": dishId,
@@ -87,20 +87,19 @@ export const DishIngredientDialog = ({show, close, dishId, setDishIngredients, d
                                   getOptionLabel={i => i.name}
                                   value={ingredient}
                                   isOptionEqualToValue={compareEntities}
-                                  onChange={(_event, value) => setIngridient(value)}
+                                  onChange={(_event, value) => setIngredient(value)}
                                   disablePortal
-                                  renderInput={params => <TextField {...params} label={t("ingridient.name")} />}
+                                  renderInput={params => <TextField {...params} label={t("ingredient.name")} />}
                                   openText={t("base.action.open")}
                                   closeText={t("base.action.close")}
-                                  noOptionsText={t("ingridient.noOptions")}
+                                  noOptionsText={t("ingredient.noOptions")}
                                   clearIcon={<></>} />
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" onClick={addDishIngridient} className="custom-button primary">{dishIngredient ? t("base.action.save") : t("base.action.add")}</button>
+                <button type="button" onClick={addDishIngredient} className="custom-button primary">{dishIngredient ? t("base.action.save") : t("base.action.add")}</button>
                 <button type="button" onClick={closeDialog} className="custom-button">{t("base.action.close")}</button>
             </ModalFooter>
         </Modal>
     );
-
 }
