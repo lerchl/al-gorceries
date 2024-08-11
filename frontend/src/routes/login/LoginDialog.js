@@ -35,10 +35,10 @@ export const LoginDialog = ({show, close, setLoggedIn}) => {
             <Modal.Body>
                 <form>
                     <div className="row dialog-row">
-                        <TextField value={email} label={ t("index.attribute.email") } onChange={event => onChange(event, setEmail)} />
+                        <TextField value={email} label={ t("login.attribute.email") } onChange={event => onChange(event, setEmail)} />
                     </div>
                     <div className="row dialog-row">
-                        <TextField type="password" value={password} label={ t("index.attribute.password") } onChange={event => onChange(event, setPassword)} />
+                        <TextField type="password" value={password} label={ t("login.attribute.password") } onChange={event => onChange(event, setPassword)} />
                     </div>
                     <div className="row dialog-row">
                         { showError && <p className="error">{ t("login.wrongLogin") }</p> }
