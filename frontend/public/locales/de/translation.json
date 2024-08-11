@@ -59,7 +59,8 @@
         "ingredients": {
             "dialog": {
                 "add": {
-                    "title": "Zutat hinzufügen"
+                    "title": "Zutat hinzufügen",
+					"buttonHover": "Neue Zutat hinzufügen"
                 },
                 "edit": {
                     "title": "Zutat bearbeiten"
@@ -113,6 +114,19 @@
         "openJoinRequest": "Offene Beitrittsanfrage",
         "openJoinRequests": "Beitrittsanfragen"
     },
+	"index": {
+		"dishList": {
+			"notYetGenerated": "Noch keine Gerichte generiert...",
+			"title": "Gerichtsauswahl"
+		},
+		"generateDishes": "Gerichte generieren",
+		"headline": "Gerichte diese Woche",
+		"CW": "KW",
+		"shoppingList": {
+			"notYetSelected": "Noch keine Gerichte ausgewählt...",
+			"title": "Einkaufsliste"
+		}
+	},
     "ingredient": {
 		"attribute": {
 			"name": "Name",
@@ -127,6 +141,16 @@
         "name": "Zutat",
         "noOptions": "Keine Zutaten vorhanden"
     },
+	"login": {
+		"attribute": {
+			"email": "E-Mail",
+			"password": "Passwort"
+		},
+		"login": "Einloggen",
+		"notYetRegistered": "Noch nicht registriert?",
+		"title": "Login",
+		"wrongLogin": "E-Mail und/oder Passwort falsch!"
+	},
     "measurement": {
         "headline": "Maßeinheiten",
         "name": "Maßeinheit",

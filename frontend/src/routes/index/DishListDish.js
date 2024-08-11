@@ -45,9 +45,9 @@ export const DishListDish = ({ dishListDish, setDishListDishes }) => {
                     { dish.name } ({ dish.servingAmount } { dish.servingUnitOfMeasurement.name })
                 </Col>
                 <Col xs="5" sm="1" className="buttons">
-                    <button type="button" onClick={e => changeAmount(-1)} className="custom-button mr-2"><DashLg /></button>
+                    <button type="button" onClick={() => changeAmount(-1)} className="custom-button mr-2"><DashLg /></button>
                     { dishListDish.amount }
-                    <button type="button" onClick={e => changeAmount(1)} className="custom-button ml-2"><PlusLg /></button>
+                    <button type="button" onClick={() => changeAmount(1)} className="custom-button ml-2"><PlusLg /></button>
                 </Col>
             </Row>
         </Container>

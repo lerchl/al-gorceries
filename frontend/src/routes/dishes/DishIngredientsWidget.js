@@ -24,7 +24,7 @@ export const DishIngredientsWidget = ({ dishId }) => {
         <div className="widget">
             <div className="space-between">
                 <h2>{ t("dish.ingredients.headline") }</h2>
-                <button className="icon-button mb-2" title="Zutat hinzufügen" onClick={() => setShowAddDialog(true)}>
+                <button className="icon-button mb-2" title={ t("ingredient.dialog.add.buttonHover") } onClick={() => setShowAddDialog(true)}>
                     <PlusLg color="white" size={30} />
                 </button>
             </div>

@@ -1,8 +1,9 @@
-import { CircularProgress, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 import { API_URL, DISH_LIST } from "../../ApiUtils";
 import "../../css/index.css";
 import "../../css/theme.css";
@@ -33,6 +34,8 @@ async function getDishList(date, setDishList, setDishListDishes, setFetching) {
 
 export const Index = () => {
 
+	const { t } = useTranslation();
+
     const [fetching, setFetching] = useState(false);
     const [viewDishSelection, setViewDishSelection] = useState(true);
 
@@ -51,9 +54,9 @@ export const Index = () => {
         if (!dishList) {
             return <GenerateDishListButton date={date} setDishList={setDishList} setDishListDishes={setDishListDishes} />;
         } else if (viewDishSelection) {
-            return <button onClick={() => setViewDishSelection(false)} className="custom-button primary ml-2" style={{ width: "100%" }}>Einkaufsliste</button>;
+            return <button onClick={() => setViewDishSelection(false)} className="custom-button primary ml-2" style={{ width: "100%" }}>{ t("index.shoppingList.title") }</button>;
         } else {
-            return <button onClick={() => setViewDishSelection(true)} className="custom-button primary ml-2" style={{ width: "100%" }}>Gerichteauswahl</button>;
+            return <button onClick={() => setViewDishSelection(true)} className="custom-button primary ml-2" style={{ width: "100%" }}>{ t("index.dishList.title") }</button>;
         }
     }
 
@@ -62,10 +65,10 @@ export const Index = () => {
             if (fetching || dishList) {
                 return <DishesOfDishList fetching={fetching} dishListDishes={dishListDishes} setDishListDishes={setDishListDishes} />;
             } else {
-                return <p style={{ textAlign: "center" }}>Noch keine Gerichte generiert...</p>;
+                return <p style={{ textAlign: "center" }}>{ t("index.dishList.notYetGenerated") }</p>;
             }
         } else if (dishListDishes.every(dld => dld.amount === 0)) {
-            return <p style={{ textAlign: "center" }}>Noch keine Gerichte ausgewählt...</p>;
+            return <p style={{ textAlign: "center" }}>{ t("index.shoppingList.notYetSelected") }</p>;
         } else {
             return <ShoppingList dishListDishes={dishListDishes.filter(dld => dld.amount > 0)} />;
         }
@@ -76,12 +79,12 @@ export const Index = () => {
             <Container fluid>
                 <Row>
                     <Col lg={8}>
-                        <h1>Gerichte diese Woche</h1>
+                        <h1>{ t("index.headline") }</h1>
                     </Col>
                     <Col lg={4} className="space-between">
                         <ButtonGroup>
                             <Button className="custom-button" title="Woche zurück" onClick={() => changeWeek(-1)}><ChevronLeft /></Button>
-                            <Button className="custom-button custom-button-no-hover">KW{formatWeekNumber(getWeekNumber(date))}</Button>
+                            <Button className="custom-button custom-button-no-hover">{ t("index.CW") }{ formatWeekNumber(getWeekNumber(date)) }</Button>
                             <Button className="custom-button" title="Woche vor" onClick={() => changeWeek(1)}><ChevronRight /></Button>
                         </ButtonGroup>
                         { navigationButton() }
