@@ -1,3 +1,210 @@
 {
-    
+	"name": "Name",
+	"source": "Source",
+	"prepTime": "Preparation Time",
+	"cost": "Cost",
+	"begin": "Start",
+	"end": "End",
+	"seasons": "Seasons",
+	"countable": "Countable",
+	"pantryStaple": "Always at Home",
+
+	"application": {
+		"name": "Al Groceries"
+	},
+	"base": {
+		"action": {
+			"accept": "Accept",
+			"add": "Add",
+			"close": "Close",
+			"create": "Create",
+			"delete": "Delete",
+			"edit": "Edit",
+			"join": "Join",
+			"logout": "Logout",
+			"open": "Open",
+			"register": "Register",
+			"reject": "Reject",
+			"save": "Save",
+			"search": "Search"
+		},
+		"elements": "Element(s)",
+		"minutes": "Minutes",
+		"pleaseSelect": "Please Select"
+	},
+	"dish": {
+		"attribute": {
+			"name": "Name",
+			"servingAmount": "Serving Amount",
+			"servingUnit": "Serving Unit",
+			"source": "Source",
+			"sourceInformation": "Source Information",
+			"prepTime": "Preparation Time",
+			"cost": "Cost",
+			"seasons": "Seasons"
+		},
+		"details": {
+			"headline": "Dish"
+		},
+		"dialog": {
+			"add": {
+				"title": "Add Dish",
+				"buttonHover": "Add New Dish"
+			},
+			"edit": {
+				"title": "Edit Dish"
+			}
+		},
+		"headline": "Dishes",
+		"ingredients": {
+			"dialog": {
+				"add": {
+					"title": "Add Ingredient",
+					"buttonHover": "Add New Ingredient"
+				},
+				"edit": {
+					"title": "Edit Ingredient"
+				}
+			},
+			"headline": "Ingredients",
+			"noIngredients": "No ingredients added yet..."
+		},
+		"step": {
+			"attribute": {
+				"content": "Content"
+			},
+			"dialog": {
+				"add": {
+					"title": "Add Step"
+				},
+				"edit": {
+					"title": "Edit Step"
+				}
+			},
+			"empty": "No steps added yet..."
+		},
+		"widget": {
+			"info": {
+				"headline": "Information"
+			}
+		}
+	},
+	"footer": {
+		"issueOrFeedback": "Issue or Feedback?"
+	},
+	"household": {
+		"attribute": {
+			"name": "Name"
+		},
+		"create": "Create Household",
+		"headline": "Household",
+		"join": "Join Household",
+		"joinRequest": {
+			"attribute": {
+				"createdAt": "Requested on"
+			},
+			"withdraw": "Withdraw Join Request"
+		},
+		"leave": "Leave Household",
+		"members": "Members",
+		"name": "Household",
+		"newJoinRequest": "New Join Request",
+		"noOptions": "No Households Available",
+		"noOpenJoinRequests": "No Join Requests Available",
+		"openJoinRequest": "Open Join Request",
+		"openJoinRequests": "Join Requests"
+	},
+	"index": {
+		"dishList": {
+			"notYetGenerated": "No dishes generated yet...",
+			"title": "Dish Selection"
+		},
+		"generateDishes": "Generate Dishes",
+		"headline": "Dishes This Week",
+		"CW": "CW",
+		"shoppingList": {
+			"notYetSelected": "No dishes selected yet...",
+			"title": "Shopping List"
+		}
+	},
+	"ingredient": {
+		"attribute": {
+			"name": "Name",
+			"pantryStaple": "Always at Home"
+		},
+		"dialog": {
+			"add": {
+				"title": "Add Ingredient"
+			}
+		},
+		"headline": "Ingredients",
+		"name": "Ingredient",
+		"noOptions": "No Ingredients Available"
+	},
+	"login": {
+		"attribute": {
+			"email": "Email",
+			"password": "Password"
+		},
+		"login": "Login",
+		"notYetRegistered": "Not Registered Yet?",
+		"title": "Login",
+		"wrongLogin": "Incorrect Email and/or Password!"
+	},
+	"measurement": {
+		"headline": "Units of Measurement",
+		"name": "Unit",
+		"noOptions": "No Units Available",
+		"attribute": {
+			"name": "Name",
+			"countable": "Countable"
+		},
+		"dialog": {
+			"add": {
+				"title": "Add Unit"
+			},
+			"edit": {
+				"title": "Edit Unit"
+			}
+		}
+	},
+	"registration": {
+		"attribute": {
+			"email": "Email",
+			"password": "Password",
+			"passwordRepeat": "Repeat Password"
+		}
+	},
+	"season": {
+		"action": {
+			"add": "Add Season",
+			"edit": "Edit Season"
+		},
+		"attribute": {
+			"name": "Name",
+			"begin": "Start",
+			"end": "End"
+		},
+		"dialog": {
+			"add": {
+				"title": "Add Season"
+			},
+			"edit": {
+				"title": "Edit Season"
+			}
+		},
+		"headline": "Seasons",
+		"noOptions": "No Seasons Available"
+	},
+	"user": {
+		"attribute": {
+			"email": "Email"
+		}
+	},
+	"dishList": {
+		"dish": {
+			"amount": "Amount"
+		},
+		"headline": "Dish Lists"
+	}
 }
