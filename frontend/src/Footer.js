@@ -12,7 +12,7 @@ export const Footer = () => {
                     <p><a target="_blank" rel="noreferrer" href="https://github.com/YusTheYokai/al-gorceries">{t("footer.issueOrFeedback")}</a></p>
                 </Col>
                 <Col xs="6" className="d-flex justify-content-center">
-                    <p>Copyright (c) 2023 <a href="mailto:nico@lerchl.one">Nico Lerchl</a></p>
+                    <p>Copyright (c) 2024 <a href="mailto:nico@lerchl.one">Nico Lerchl</a></p>
                 </Col>
             </Row>
         </Container>
