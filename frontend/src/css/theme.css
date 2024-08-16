@@ -145,6 +145,10 @@ a, a:hover, a:visited {
     padding: 0;
 }
 
+.toggle-button {
+	color: var(--text-color) !important;
+}
+
 /* -INPUT---------------------- */
 
 input:focus-visible {
@@ -242,6 +246,10 @@ label.Mui-focused {
 
 .navbar button {
     margin-right: 15px;
+}
+
+.navbar .toggle-button {
+	margin-right: 0px;
 }
 
 .navbar .navbar-brand,
