@@ -4,6 +4,7 @@ export const USERS = "users";
 export const MEASUREMENTS = "unitsOfMeasurement";
 export const INGREDIENTS = "ingredients";
 export const DISHES = "dishes";
+export const DISH_GROUPS = "dishGroups";
 export const DISH_INGREDIENTS = "dishIngredients";
 export const DISH_STEPS = "dishSteps";
 export const DISH_LIST = "dishLists";

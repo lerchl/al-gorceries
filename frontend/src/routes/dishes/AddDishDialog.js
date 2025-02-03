@@ -60,8 +60,6 @@ export const AddDishDialog = () => {
             "seasons": seasons
         }
 
-        console.log(dish);
-
         createEntityAndGetEntities(entityApiEndpoint, dish, setEntities);
         closeDialog();
     }

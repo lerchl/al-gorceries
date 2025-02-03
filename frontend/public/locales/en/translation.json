@@ -8,6 +8,7 @@
 	"seasons": "Seasons",
 	"countable": "Countable",
 	"pantryStaple": "Always at Home",
+	"dishes": "Dishes",
 
 	"application": {
 		"name": "Al Gorceries"
@@ -69,6 +70,7 @@
 			"headline": "Ingredients",
 			"noIngredients": "No ingredients added yet..."
 		},
+		"noOptions": "No dishes available",
 		"step": {
 			"attribute": {
 				"content": "Content"
@@ -88,6 +90,18 @@
 				"headline": "Information"
 			}
 		}
+	},
+	"dishGroup": {
+		"attribute": {
+			"dishes": "Dishes",
+			"name": "Name"
+		},
+		"dialog": {
+			"add": {
+				"title": "Add Dish Group"
+			}
+		},
+		"headline": "Dish Groups"
 	},
 	"footer": {
 		"issueOrFeedback": "Issue or Feedback?"

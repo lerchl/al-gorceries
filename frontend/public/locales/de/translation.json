@@ -8,6 +8,7 @@
     "seasons": "Saisons",
 	"countable": "Zählbar",
 	"pantryStaple": "Immer daheim",
+	"dishes": "Gerichte",
 
     "application": {
         "name": "Al Gorceries"
@@ -69,6 +70,7 @@
             "headline": "Zutaten",
             "noIngredients": "Noch keine Zutaten hinzugefügt..."
         },
+		"noOptions": "Keine Gerichte vorhanden",
         "step": {
             "attribute": {
                 "content": "Inhalt"
@@ -89,6 +91,18 @@
             }
         }
     },
+	"dishGroup": {
+		"attribute": {
+			"dishes": "Gerichte",
+			"name": "Name"
+		},
+		"dialog": {
+			"add": {
+				"title": "Gerichtegruppe hinzufügen"
+			}
+		},
+		"headline": "Gerichtegruppen"
+	},
     "footer": {
         "issueOrFeedback": "Fehler oder Feedback?"
     },
