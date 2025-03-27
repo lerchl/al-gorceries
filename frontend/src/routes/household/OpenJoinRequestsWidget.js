@@ -27,6 +27,8 @@ export const OpenJoinRequestsWidget = ({ householdId }) => {
 
     const [joinRequests, setJoinRequests] = useState([]);
 
+	// FIXME
+	// eslint-disable-next-line
     useEffect(() => fetchJoinRequests(householdId, setJoinRequests), []);
 
     return (

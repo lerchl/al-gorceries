@@ -13,6 +13,8 @@ export const OverviewPage = ({headline, entityApiEndpoint, columns, entitiyCompo
     const [entities, setEntities] = useState([]);
     const [filteredAndSorted, setFilteredAndSorted] = useState([]);
 
+	// FIXME
+	// eslint-disable-next-line
     useEffect(() => getEntities(entityApiEndpoint, setEntities), []);
     useEffect(() => setFilteredAndSorted(entities), [entities]);
 

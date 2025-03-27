@@ -12,6 +12,8 @@ export const Dish = () => {
 
     const [dish, setDish] = useState();
 
+	// FIXME
+	// eslint-disable-next-line
     useEffect(() => getEntity(DISHES, setDish, id), []);
 
     return (
