@@ -111,6 +111,10 @@
 			"name": "Name"
 		},
 		"create": "Create Household",
+		"dishListConfig": {
+			"dishCount": "Amount of dishes in a dish list",
+			"title": "Dish List Configuration"
+		},
 		"headline": "Household",
 		"join": "Join Household",
 		"joinRequest": {

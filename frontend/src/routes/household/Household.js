@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { API_URL, HOUSEHOLDS, USERS } from "../../ApiUtils";
 import { CustomSpinner } from "../../CustomSpinner";
 import { CreateHouseholdWidget } from "./CreateHouseholdWidget";
+import { DishListConfigWidget } from "./DishListConfigWidget";
 import { HouseholdMembersWidget } from "./HouseholdMembersWidget";
 import { JoinHouseholdWidget } from "./JoinHouseholdWidget";
 import { OpenJoinRequestsWidget } from "./OpenJoinRequestsWidget";
@@ -70,6 +71,11 @@ const WithHousehold = ({ household, setHousehold }) => {
                         <OpenJoinRequestsWidget />
                     </Col>
                 </Row>
+				<Row>
+					<Col lg="6">
+						<DishListConfigWidget />
+					</Col>
+				</Row>
             </Container>
             <button type="button" onClick={leaveHousehold} className="custom-button danger-button w-100"><DoorOpen /> { t("household.leave") }</button>
         </>
