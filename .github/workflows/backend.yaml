@@ -17,21 +17,18 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          # aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Login to public AWS ECR
-        uses: docker/login-action@v1
-        with:
-          registry: public.ecr.aws
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          ECR_REPOSITORY: lerchl/al-gorceries-backend
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         working-directory: ./backend
         run: |
-          docker build -t public.ecr.aws/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push public.ecr.aws/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=public.ecr.aws/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
