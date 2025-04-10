@@ -16,22 +16,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: us-east-1
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+      - name: Login to Amazon ECR Public
+        run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build, tag, and push image to Amazon ECR Public
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         working-directory: ./backend
         run: |
-          docker build -t public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend:$IMAGE_TAG .
+          docker build -t public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend .
+          docker tag public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend:$IMAGE_TAG
+          docker push public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend
           docker push public.ecr.aws/h7b5b3a1/lerchl/al-gorceries-backend:$IMAGE_TAG
