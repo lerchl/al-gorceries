@@ -2,14 +2,11 @@ name: backend ci/cd
 
 on:
   push:
+    branches:
+      - main
     paths:
-    - ".github/workflows/backend.yaml"
-    - "backend/**"
-
-# on:
-#   push:
-#     branches:
-#       - main
+      - ".github/workflows/backend.yaml"
+      - "backend/**"
 
 jobs:
   deploy:

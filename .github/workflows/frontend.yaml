@@ -2,9 +2,11 @@ name: frontend ci/cd
 
 on:
   push:
+    branches:
+      - main
     paths:
-    - ".github/workflows/frontend.yaml"
-    - "frontend/**"
+      - ".github/workflows/frontend.yaml"
+      - "frontend/**"
 
 jobs:
   build:
