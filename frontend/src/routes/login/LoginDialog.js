@@ -3,6 +3,7 @@ import axios from 'axios';
 import { React, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from "./../../ApiUtils";
 
 export const LoginDialog = ({show, close, setLoggedIn}) => {
 	
@@ -18,7 +19,7 @@ export const LoginDialog = ({show, close, setLoggedIn}) => {
 
     const login = () => {
         const data = { email: email, password: password }
-        axios.post(`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/login`, data).then(_res => {
+		axios.post(API_URL + "/login", data).then(_res => {
             setLoggedIn(true);
             close();
         }).catch(_err => {
