@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "./config.json"
 
 export const USERS = "users";
 export const MEASUREMENTS = "unitsOfMeasurement";
@@ -12,8 +13,7 @@ export const DISH_LIST_DISH = "dishListDishes";
 export const SEASONS = "seasons";
 export const HOUSEHOLDS = "households";
 export const HOUSEHOLD_JOIN_REQUESTS = "join-requests";
-
-export const API_URL = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}`;
+export const API_URL = config.API_URL;
 
 axios.defaults.withCredentials = true;
 
